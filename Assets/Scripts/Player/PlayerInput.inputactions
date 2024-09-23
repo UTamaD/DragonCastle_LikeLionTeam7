@@ -34,9 +34,9 @@
                 },
                 {
                     "name": "IFrame",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "d5a1009c-6f3c-4485-a54c-2c13148d9eac",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

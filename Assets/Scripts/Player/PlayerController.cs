@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
     private int _animIDJump;
     private int _animIDFreeFall;
     private int _animIDMotionSpeed;
+    private int _animIDIFrame;
     
     private PlayerInput _playerInput;
     private Animator _animator;
@@ -102,7 +103,10 @@ public class PlayerController : MonoBehaviour
 
     private const float _threshold = 0.01f;
 
+    // bool 변수
     private bool _hasAnimator;
+    private bool _isSprint;
+    private bool _isInvincible;
 
 //     private bool IsCurrentDeviceMouse
 //     {
@@ -145,10 +149,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _hasAnimator = TryGetComponent(out _animator);
-
         JumpAndGravity();
         GroundedCheck();
         Move();
+        IFrame();
     }
 
     private void LateUpdate()
@@ -163,6 +167,7 @@ public class PlayerController : MonoBehaviour
         _animIDJump = Animator.StringToHash("Jump");
         _animIDFreeFall = Animator.StringToHash("FreeFall");
         _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+        _animIDIFrame = Animator.StringToHash("IFrame");
     }
 
     private void GroundedCheck()
@@ -203,8 +208,11 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        if (_isInvincible)
+            return;
+        
         // set target speed based on move speed, sprint speed and if sprint is pressed
-        float targetSpeed = _input.iFrame ? SprintSpeed : MoveSpeed;
+        float targetSpeed = _isSprint? SprintSpeed : MoveSpeed;
 
         // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -252,6 +260,10 @@ public class PlayerController : MonoBehaviour
 
             // rotate to face input direction relative to camera position
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+        }
+        else
+        {
+            _isSprint = false;
         }
 
 
@@ -338,6 +350,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void IFrame()
+    {
+        // 프레임 회피
+        if(_input.iFrame)
+        {
+            _input.iFrame = false;
+            
+            // 애니메이션 실행
+            _animator.SetTrigger(_animIDIFrame);
+            // 무적 ON
+            _isInvincible = true;
+        }
+    }
+    
     private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
     {
         if (lfAngle < -360f) lfAngle += 360f;
@@ -357,6 +383,15 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawSphere(
             new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
             GroundedRadius);
+    }
+    
+    private void EndIFrame(AnimationEvent animationEvent)
+    {
+        // 무적 OFF
+        _isInvincible = false;
+        //회피한 뒤 speed가 0이 아니면 sprint 모드로
+        if(_input.move != Vector2.zero)
+            _isSprint = true;
     }
 
     private void OnFootstep(AnimationEvent animationEvent)
