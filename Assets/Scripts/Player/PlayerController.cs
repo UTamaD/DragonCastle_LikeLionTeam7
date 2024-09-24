@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     private float _cinemachineTargetPitch;
 
     // player
-    private float _speed;
+    public float _speed;
     private float _animationBlend;
     private float _targetRotation = 0.0f;
     private float _rotationVelocity;
@@ -211,6 +211,9 @@ public class PlayerController : MonoBehaviour
         if (_isInvincible)
             return;
         
+        if(_input.move == Vector2.zero)
+            _controller.Move(Vector3.zero);
+        
         // set target speed based on move speed, sprint speed and if sprint is pressed
         float targetSpeed = _isSprint? SprintSpeed : MoveSpeed;
 
@@ -222,10 +225,10 @@ public class PlayerController : MonoBehaviour
 
         // a reference to the players current horizontal velocity
         float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-
+        
         float speedOffset = 0.1f;
         float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-
+        
         // accelerate or decelerate to target speed
         if (currentHorizontalSpeed < targetSpeed - speedOffset ||
             currentHorizontalSpeed > targetSpeed + speedOffset)
@@ -234,7 +237,7 @@ public class PlayerController : MonoBehaviour
             // note T in Lerp is clamped, so we don't need to clamp our speed
             _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
                 Time.deltaTime * SpeedChangeRate);
-
+        
             // round speed to 3 decimal places
             _speed = Mathf.Round(_speed * 1000f) / 1000f;
         }
@@ -248,7 +251,7 @@ public class PlayerController : MonoBehaviour
 
         // normalise input direction
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
+        
         // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is a move input rotate player when the player is moving
         if (_input.move != Vector2.zero)
@@ -265,13 +268,13 @@ public class PlayerController : MonoBehaviour
         {
             _isSprint = false;
         }
-
-
+        
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
         // move the player
         _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                          new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        
 
         // update animator if using character
         if (_hasAnimator)
@@ -302,7 +305,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Jump
-            if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+            if (_input.jump && _jumpTimeoutDelta <= 0.0f && !_isInvincible)
             {
                 // the square root of H * -2 * G = how much velocity needed to reach desired height
                 _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
@@ -351,7 +354,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void IFrame()
-    {
+    {   
         // 프레임 회피
         if(_input.iFrame)
         {
@@ -361,6 +364,8 @@ public class PlayerController : MonoBehaviour
             _animator.SetTrigger(_animIDIFrame);
             // 무적 ON
             _isInvincible = true;
+            
+            //StartCoroutine(MoveForDistanceAndTime(5f, 0.2f));
         }
     }
     
@@ -387,11 +392,11 @@ public class PlayerController : MonoBehaviour
     
     private void EndIFrame(AnimationEvent animationEvent)
     {
+        //회피한 뒤 speed가 0이 아니면 sprint 모드로
+        _isSprint = _input.move != Vector2.zero;
+        
         // 무적 OFF
         _isInvincible = false;
-        //회피한 뒤 speed가 0이 아니면 sprint 모드로
-        if(_input.move != Vector2.zero)
-            _isSprint = true;
     }
 
     private void OnFootstep(AnimationEvent animationEvent)
@@ -412,5 +417,46 @@ public class PlayerController : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
         }
+    }
+
+    private void OnDash(AnimationEvent animationEvent)
+    {
+        object info = animationEvent.objectReferenceParameter;
+        DashInfo dashInfo = info.ConvertTo<DashInfo>();
+        if (!dashInfo)
+        {
+            Debug.LogWarning("fail to object type cast to " + dashInfo.name);
+            return;
+        }
+
+        StartCoroutine(MoveForDistanceAndTime(dashInfo.dashDis, dashInfo.dashTime));
+    }
+
+    private IEnumerator MoveForDistanceAndTime(float distance, float duration)
+    {
+        Vector3 direction = transform.forward;  // 이동 방향
+        
+        Vector3 startPos = transform.position; // 시작 위치
+        Vector3 targetPos = startPos + direction * distance; // 목표 위치
+        
+        // 일정한 속도로 이동하기 위한 거리
+        float speed = distance / duration;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            // 현재 시간에 따른 이동 거리 계산
+            float currentDistance = speed * Time.deltaTime;
+            //transform.Translate(direction * currentDistance, Space.World); // 균일한 속도로 이동
+            _controller.Move(direction * currentDistance); // 균일한 속도로 이동
+
+            elapsedTime += Time.deltaTime; // 경과 시간 증가
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        //EndIFrame(null);
+
+        // 최종 위치 보정
+        //transform.position = targetPos; // 최종 목표 위치로 이동
     }
 }
