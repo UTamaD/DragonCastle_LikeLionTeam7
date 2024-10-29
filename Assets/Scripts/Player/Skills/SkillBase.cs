@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class WeaponBase
+public abstract class SkillBase
 {
     public PlayerController Owner { get; private set; }
     
-    public WeaponBase(PlayerController owner)
+    public DamageType Type;
+    public float AttackMultiplier;
+
+    public SkillBase(PlayerController owner)
     {
         Owner = owner;
     }
-    
+
     public abstract void Attack();
-    public abstract void DashAttack();
-    public abstract void Skill();
-    public abstract void OnFixedUpdateState();
 }

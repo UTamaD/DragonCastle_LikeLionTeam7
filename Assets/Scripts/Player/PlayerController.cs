@@ -55,7 +55,9 @@ public class PlayerController : MonoBehaviour
     private int _animIDFreeFall;
     
     public StateMachine StateMachine { get; private set; }
-    public WeaponManager WeaponManager { get; private set; }
+    public SkillManager SkillManager { get; private set; }
+    public LivingEntity LivingEntity { get; private set; }
+    public CombatSystem CombatSystem { get; private set; }
     public CharacterController Controller  { get; private set; }
     public PlayerInputs Inputs { get; private set; }
     public GameObject MainCamera { get; private set; }
@@ -78,7 +80,9 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        WeaponManager = GetComponent<WeaponManager>();
+        SkillManager = GetComponent<SkillManager>();
+        LivingEntity = GetComponent<LivingEntity>();
+        CombatSystem = GetComponent<CombatSystem>();
         Controller = GetComponent<CharacterController>();
         Inputs = GetComponent<PlayerInputs>();
         Animator = GetComponentInChildren<Animator>();
@@ -94,6 +98,7 @@ public class PlayerController : MonoBehaviour
         Inputs.OnMeleeInput += Melee;
         
         InitStateMachine();
+        InitSkills();
     }
     
     private void InitStateMachine()
@@ -101,6 +106,11 @@ public class PlayerController : MonoBehaviour
         StateMachine = new StateMachine(StateName.Move, new MoveState(this));
         StateMachine.AddState(StateName.IFrame, new IFrameState(this));
         StateMachine.AddState(StateName.Melee, new MeleeState(this));
+    }
+    
+    private void InitSkills()
+    {
+        SkillManager.AddSkill(PlayerSkillName.Melee, new Melee(this));
     }
     
     private void AssignAnimationIDs()
@@ -206,11 +216,6 @@ public class PlayerController : MonoBehaviour
             StateMachine.ChangeState(StateName.Melee);
     }
 
-    private void EndMelee()
-    {
-        StateMachine.ChangeState(StateName.Move);
-    }
-
     #endregion
 
     #region IFrame
@@ -312,6 +317,24 @@ public class PlayerController : MonoBehaviour
         }
 
         StartCoroutine(MoveForDistanceAndTime(dashInfo.dashDis, dashInfo.dashTime));
+    }
+    
+    private void OnEndMelee()
+    {
+        StateMachine.ChangeState(StateName.Move);
+    }
+
+    private void OnCreateDamageField(AnimationEvent animationEvent)
+    {
+        object info = animationEvent.objectReferenceParameter;
+        SkillInfo skillInfo = info.ConvertTo<SkillInfo>();
+        if (!skillInfo)
+        {
+            Debug.LogWarning("fail to object type cast to " + skillInfo.name);
+            return;
+        }
+        
+        CombatSystem.ActiveDamageField(skillInfo.skillName, skillInfo.dist);
     }
 
     #endregion
