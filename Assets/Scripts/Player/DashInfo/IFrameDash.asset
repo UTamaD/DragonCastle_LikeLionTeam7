@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 603a7595af396b5459681f68f31ce3db, type: 3}
-  m_Name: IFrameDash_player
+  m_Name: IFrameDash
   m_EditorClassIdentifier: 
   dashDis: 5
   dashTime: 0.2

@@ -10,164 +10,121 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
+    #region Public Variable
+
     [Header("Player")]
-    [Tooltip("Move speed of the character in m/s")]
     public float MoveSpeed = 2.0f;
-
-    [Tooltip("Sprint speed of the character in m/s")]
     public float SprintSpeed = 5.335f;
-
-    [Tooltip("How fast the character turns to face movement direction")]
+    
     [Range(0.0f, 0.3f)]
     public float RotationSmoothTime = 0.12f;
-
-    [Tooltip("Acceleration and deceleration")]
-    public float SpeedChangeRate = 10.0f;
 
     public AudioClip LandingAudioClip;
     public AudioClip[] FootstepAudioClips;
     [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
     [Space(10)]
-    [Tooltip("The height the player can jump")]
     public float JumpHeight = 1.2f;
-
-    [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
     public float Gravity = -15.0f;
 
     [Space(10)]
-    [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
     public float JumpTimeout = 0.50f;
-
-    [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
     public float FallTimeout = 0.15f;
 
     [Header("Player Grounded")]
-    [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
     public bool Grounded = true;
-
-    [Tooltip("Useful for rough ground")]
     public float GroundedOffset = -0.14f;
-
-    [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
     public float GroundedRadius = 0.28f;
-
-    [Tooltip("What layers the character uses as ground")]
     public LayerMask GroundLayers;
-
-    [Header("Cinemachine")]
-    [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
-    public GameObject CinemachineCameraTarget;
-
-    [Tooltip("How far in degrees can you move the camera up")]
-    public float TopClamp = 70.0f;
-
-    [Tooltip("How far in degrees can you move the camera down")]
-    public float BottomClamp = -30.0f;
-
-    [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
-    public float CameraAngleOverride = 0.0f;
-
-    [Tooltip("For locking the camera position on all axis")]
-    public bool LockCameraPosition = false;
-
-    // cinemachine
-    private float _cinemachineTargetYaw;
-    private float _cinemachineTargetPitch;
+    
+    #endregion
 
     // player
-    public float _speed;
-    private float _animationBlend;
-    private float _targetRotation = 0.0f;
-    private float _rotationVelocity;
-    private float _verticalVelocity;
+    public float _verticalVelocity;
     private float _terminalVelocity = 53.0f;
+    
+    private int _comboNum = 0;
 
     // timeout deltatime
     private float _jumpTimeoutDelta;
     private float _fallTimeoutDelta;
 
     // animation IDs
-    private int _animIDSpeed;
     private int _animIDGrounded;
     private int _animIDJump;
     private int _animIDFreeFall;
-    private int _animIDMotionSpeed;
-    private int _animIDIFrame;
     
-    private PlayerInput _playerInput;
-    private Animator _animator;
-    private CharacterController _controller;
-    private PlayerInputs _input;
-    private GameObject _mainCamera;
-
-    private const float _threshold = 0.01f;
+    public StateMachine StateMachine { get; private set; }
+    public WeaponManager WeaponManager { get; private set; }
+    public CharacterController Controller  { get; private set; }
+    public PlayerInputs Inputs { get; private set; }
+    public GameObject MainCamera { get; private set; }
+    public Animator Animator { get; private set; }
 
     // bool 변수
-    private bool _hasAnimator;
-    private bool _isSprint;
+    public bool IsSprint;
     private bool _isInvincible;
-
-//     private bool IsCurrentDeviceMouse
-//     {
-//         get
-//         {
-// #if ENABLE_INPUT_SYSTEM
-//             return _playerInput.currentControlScheme == "KeyboardMouse";
-// #else
-// 			return false;
-// #endif
-//         }
-//     }
-
+    private bool _isMelee;
+    private bool _isCombo;
 
     private void Awake()
     {
         // get a reference to our main camera
-        if (_mainCamera == null)
+        if (MainCamera == null)
         {
-            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         }
     }
 
     private void Start()
     {
-        _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-        
-        _hasAnimator = TryGetComponent(out _animator);
-        _controller = GetComponent<CharacterController>();
-        _input = GetComponent<PlayerInputs>();
-        _playerInput = GetComponent<PlayerInput>();
+        WeaponManager = GetComponent<WeaponManager>();
+        Controller = GetComponent<CharacterController>();
+        Inputs = GetComponent<PlayerInputs>();
+        Animator = GetComponentInChildren<Animator>();
 
         AssignAnimationIDs();
 
         // reset our timeouts on start
         _jumpTimeoutDelta = JumpTimeout;
         _fallTimeoutDelta = FallTimeout;
+        
+        // Input Event
+        Inputs.OnIFrameInput += IFrame;
+        Inputs.OnMeleeInput += Melee;
+        
+        InitStateMachine();
+    }
+    
+    private void InitStateMachine()
+    {
+        StateMachine = new StateMachine(StateName.Move, new MoveState(this));
+        StateMachine.AddState(StateName.IFrame, new IFrameState(this));
+        StateMachine.AddState(StateName.Melee, new MeleeState(this));
+    }
+    
+    private void AssignAnimationIDs()
+    {
+        _animIDGrounded = Animator.StringToHash("Grounded");
+        _animIDJump = Animator.StringToHash("Jump");
+        _animIDFreeFall = Animator.StringToHash("FreeFall");
     }
 
     private void Update()
     {
-        _hasAnimator = TryGetComponent(out _animator);
+        StateMachine?.UpdateState();
         JumpAndGravity();
         GroundedCheck();
-        Move();
-        IFrame();
     }
-
+    
     private void LateUpdate()
     {
-        CameraRotation();
+        StateMachine?.LateUpdateState();
     }
 
-    private void AssignAnimationIDs()
+    private void FixedUpdate()
     {
-        _animIDSpeed = Animator.StringToHash("Speed");
-        _animIDGrounded = Animator.StringToHash("Grounded");
-        _animIDJump = Animator.StringToHash("Jump");
-        _animIDFreeFall = Animator.StringToHash("FreeFall");
-        _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-        _animIDIFrame = Animator.StringToHash("IFrame");
+        StateMachine?.FixedUpdateState();
     }
 
     private void GroundedCheck()
@@ -177,111 +134,8 @@ public class PlayerController : MonoBehaviour
             transform.position.z);
         Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
             QueryTriggerInteraction.Ignore);
-
-        // update animator if using character
-        if (_hasAnimator)
-        {
-            _animator.SetBool(_animIDGrounded, Grounded);
-        }
-    }
-
-    private void CameraRotation()
-    {
-        // if there is an input and camera position is not fixed
-        if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
-        {
-            //Don't multiply mouse input by Time.deltaTime;
-            //float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-
-            _cinemachineTargetYaw += _input.look.x /** deltaTimeMultiplier*/;
-            _cinemachineTargetPitch += _input.look.y /** deltaTimeMultiplier*/;
-        }
-
-        // clamp our rotations so our values are limited 360 degrees
-        _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-        _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
-        // Cinemachine will follow this target
-        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-            _cinemachineTargetYaw, 0.0f);
-    }
-
-    private void Move()
-    {
-        if (_isInvincible)
-            return;
         
-        if(_input.move == Vector2.zero)
-            _controller.Move(Vector3.zero);
-        
-        // set target speed based on move speed, sprint speed and if sprint is pressed
-        float targetSpeed = _isSprint? SprintSpeed : MoveSpeed;
-
-        // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
-
-        // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-        // if there is no input, set the target speed to 0
-        if (_input.move == Vector2.zero) targetSpeed = 0.0f;
-
-        // a reference to the players current horizontal velocity
-        float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-        
-        float speedOffset = 0.1f;
-        float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-        
-        // accelerate or decelerate to target speed
-        if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-            currentHorizontalSpeed > targetSpeed + speedOffset)
-        {
-            // creates curved result rather than a linear one giving a more organic speed change
-            // note T in Lerp is clamped, so we don't need to clamp our speed
-            _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                Time.deltaTime * SpeedChangeRate);
-        
-            // round speed to 3 decimal places
-            _speed = Mathf.Round(_speed * 1000f) / 1000f;
-        }
-        else
-        {
-            _speed = targetSpeed;
-        }
-
-        _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-        if (_animationBlend < 0.01f) _animationBlend = 0f;
-
-        // normalise input direction
-        Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-        
-        // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-        // if there is a move input rotate player when the player is moving
-        if (_input.move != Vector2.zero)
-        {
-            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                              _mainCamera.transform.eulerAngles.y;
-            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                RotationSmoothTime);
-
-            // rotate to face input direction relative to camera position
-            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-        }
-        else
-        {
-            _isSprint = false;
-        }
-        
-        Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-        // move the player
-        _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                         new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-        
-
-        // update animator if using character
-        if (_hasAnimator)
-        {
-            _animator.SetFloat(_animIDSpeed, _animationBlend);
-            _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-        }
+        Animator.SetBool(_animIDGrounded, Grounded);
     }
 
     private void JumpAndGravity()
@@ -290,43 +144,35 @@ public class PlayerController : MonoBehaviour
         {
             // reset the fall timeout timer
             _fallTimeoutDelta = FallTimeout;
-
-            // update animator if using character
-            if (_hasAnimator)
-            {
-                _animator.SetBool(_animIDJump, false);
-                _animator.SetBool(_animIDFreeFall, false);
-            }
-
+            
+            // Animator.SetBool(_animIDJump, false);
+            Animator.SetBool(_animIDFreeFall, false);
+            
             // stop our velocity dropping infinitely when grounded
             if (_verticalVelocity < 0.0f)
             {
                 _verticalVelocity = -2f;
             }
-
-            // Jump
-            if (_input.jump && _jumpTimeoutDelta <= 0.0f && !_isInvincible)
-            {
-                // the square root of H * -2 * G = how much velocity needed to reach desired height
-                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-
-                // update animator if using character
-                if (_hasAnimator)
-                {
-                    _animator.SetBool(_animIDJump, true);
-                }
-            }
-
-            // jump timeout
-            if (_jumpTimeoutDelta >= 0.0f)
-            {
-                _jumpTimeoutDelta -= Time.deltaTime;
-            }
+            
+            // // Jump
+            // if (Inputs.jump && _jumpTimeoutDelta <= 0.0f && !_isInvincible && !_isMelee)
+            // {
+            //     // the square root of H * -2 * G = how much velocity needed to reach desired height
+            //     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+            //     
+            //     Animator.SetBool(_animIDJump, true);
+            // }
+            //
+            // // jump timeout
+            // if (_jumpTimeoutDelta >= 0.0f)
+            // {
+            //     _jumpTimeoutDelta -= Time.deltaTime;
+            // }
         }
         else
         {
-            // reset the jump timeout timer
-            _jumpTimeoutDelta = JumpTimeout;
+            // // reset the jump timeout timer
+            // _jumpTimeoutDelta = JumpTimeout;
 
             // fall timeout
             if (_fallTimeoutDelta >= 0.0f)
@@ -335,15 +181,11 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                // update animator if using character
-                if (_hasAnimator)
-                {
-                    _animator.SetBool(_animIDFreeFall, true);
-                }
+                Animator.SetBool(_animIDFreeFall, true);
             }
 
-            // if we are not grounded, do not jump
-            _input.jump = false;
+            // // if we are not grounded, do not jump
+            // Inputs.jump = false;
         }
 
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
@@ -353,28 +195,73 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region Melee
+
+    private void Melee()
+    {
+        if (!(StateMachine.CurrentState is MoveState))
+            return;
+
+        if(StateMachine.GetState(StateName.Melee) is MeleeState { IsAvailableMelee: true } state)
+            StateMachine.ChangeState(StateName.Melee);
+    }
+
+    private void EndMelee()
+    {
+        StateMachine.ChangeState(StateName.Move);
+    }
+
+    #endregion
+
+    #region IFrame
     private void IFrame()
     {   
-        // 프레임 회피
-        if(_input.iFrame)
-        {
-            _input.iFrame = false;
-            
-            // 애니메이션 실행
-            _animator.SetTrigger(_animIDIFrame);
-            // 무적 ON
-            _isInvincible = true;
-            
-            //StartCoroutine(MoveForDistanceAndTime(5f, 0.2f));
-        }
+        if (!(StateMachine.CurrentState is MoveState))
+            return;
+        
+        StateMachine.ChangeState(StateName.IFrame);
     }
     
-    private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+    private void EndIFrame(AnimationEvent animationEvent)
     {
-        if (lfAngle < -360f) lfAngle += 360f;
-        if (lfAngle > 360f) lfAngle -= 360f;
-        return Mathf.Clamp(lfAngle, lfMin, lfMax);
+        StateMachine.ChangeState(StateName.Move);
     }
+
+    #endregion
+
+    #region coroutineCtrl
+    public Coroutine CoroutineStarter(IEnumerator coroutine)
+    {
+        return StartCoroutine(coroutine);
+    }
+
+    public void CoroutineStopper(Coroutine coroutine)
+    {
+        StopCoroutine(coroutine);
+    }
+    #endregion
+    
+    private IEnumerator MoveForDistanceAndTime(float distance, float duration)
+    {
+        Vector3 direction = transform.forward;  // 이동 방향
+        
+        // 일정한 속도로 이동하기 위한 거리
+        float speed = distance / duration;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            // 현재 시간에 따른 이동 거리 계산
+            float currentDistance = speed * Time.deltaTime;
+            //transform.Translate(direction * currentDistance, Space.World); // 균일한 속도로 이동
+            Controller.Move(direction * currentDistance); // 균일한 속도로 이동
+
+            elapsedTime += Time.deltaTime; // 경과 시간 증가
+            yield return null; // 다음 프레임까지 대기
+        }
+    }
+
+    #region Debug
 
     private void OnDrawGizmosSelected()
     {
@@ -389,15 +276,10 @@ public class PlayerController : MonoBehaviour
             new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
             GroundedRadius);
     }
-    
-    private void EndIFrame(AnimationEvent animationEvent)
-    {
-        //회피한 뒤 speed가 0이 아니면 sprint 모드로
-        _isSprint = _input.move != Vector2.zero;
-        
-        // 무적 OFF
-        _isInvincible = false;
-    }
+
+    #endregion
+
+    #region Animation Event
 
     private void OnFootstep(AnimationEvent animationEvent)
     {
@@ -406,7 +288,7 @@ public class PlayerController : MonoBehaviour
             if (FootstepAudioClips.Length > 0)
             {
                 var index = Random.Range(0, FootstepAudioClips.Length);
-                AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(Controller.center), FootstepAudioVolume);
             }
         }
     }
@@ -415,7 +297,7 @@ public class PlayerController : MonoBehaviour
     {
         if (animationEvent.animatorClipInfo.weight > 0.5f)
         {
-            AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+            AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(Controller.center), FootstepAudioVolume);
         }
     }
 
@@ -432,31 +314,5 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MoveForDistanceAndTime(dashInfo.dashDis, dashInfo.dashTime));
     }
 
-    private IEnumerator MoveForDistanceAndTime(float distance, float duration)
-    {
-        Vector3 direction = transform.forward;  // 이동 방향
-        
-        Vector3 startPos = transform.position; // 시작 위치
-        Vector3 targetPos = startPos + direction * distance; // 목표 위치
-        
-        // 일정한 속도로 이동하기 위한 거리
-        float speed = distance / duration;
-
-        float elapsedTime = 0f;
-        while (elapsedTime < duration)
-        {
-            // 현재 시간에 따른 이동 거리 계산
-            float currentDistance = speed * Time.deltaTime;
-            //transform.Translate(direction * currentDistance, Space.World); // 균일한 속도로 이동
-            _controller.Move(direction * currentDistance); // 균일한 속도로 이동
-
-            elapsedTime += Time.deltaTime; // 경과 시간 증가
-            yield return null; // 다음 프레임까지 대기
-        }
-
-        //EndIFrame(null);
-
-        // 최종 위치 보정
-        //transform.position = targetPos; // 최종 목표 위치로 이동
-    }
+    #endregion
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
@@ -9,7 +11,6 @@ public class PlayerInputs : MonoBehaviour
     public Vector2 move;
     public Vector2 look;
     public bool jump;
-    public bool iFrame;
 
     [Header("Movement Settings")]
     public bool analogMovement;
@@ -17,7 +18,15 @@ public class PlayerInputs : MonoBehaviour
     [Header("Mouse Cursor Settings")]
     public bool cursorLocked = true;
     public bool cursorInputForLook = true;
-    
+
+    public UnityAction OnIFrameInput;
+    public UnityAction OnMeleeInput;
+
+    private void Awake()
+    {
+	    DontDestroyOnLoad(this.gameObject);
+    }
+
     public void OnMove(InputValue value)
     {
     	MoveInput(value.Get<Vector2>());
@@ -38,7 +47,12 @@ public class PlayerInputs : MonoBehaviour
 
     public void OnIFrame(InputValue value)
     {
-	    IFrameInput(value.isPressed);
+	    OnIFrameInput.Invoke();
+    }
+
+    public void OnMelee(InputValue value)
+    {
+	    OnMeleeInput.Invoke();
     }
     
     public void MoveInput(Vector2 newMoveDirection)
@@ -54,11 +68,6 @@ public class PlayerInputs : MonoBehaviour
     public void JumpInput(bool newJumpState)
     {
     	jump = newJumpState;
-    }
-
-    public void IFrameInput(bool newIFrameState)
-    {
-	    iFrame = newIFrameState;
     }
 
     private void OnApplicationFocus(bool hasFocus)
