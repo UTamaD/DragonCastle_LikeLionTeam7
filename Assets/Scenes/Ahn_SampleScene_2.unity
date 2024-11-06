@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - id: Wing
+  - id: Wing Flap
     clip: {fileID: 8300000, guid: 5d899c056941065488afa4b7af4e16ae, type: 3}
     volume: 1
     pitch: 1

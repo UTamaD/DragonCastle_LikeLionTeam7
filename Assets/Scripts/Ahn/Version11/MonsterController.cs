@@ -62,6 +62,7 @@ public class MonsterController : MonoBehaviour
     public ProjectileConfig projectileConfig;
     public float projectileSpeed = 10f;
     
+    [SerializeField]
     private Transform currentTarget;
     private bool isChargingProjectile;
     private GameObject activeChargingEffect;
@@ -127,6 +128,9 @@ public class MonsterController : MonoBehaviour
     
     public void HandleMeteorStrike(MeteorStrike meteorStrike)
     {
+        // 공격 중이면 새로운 공격을 시작하지 않음
+        if (isAttacking) return;
+        
         if (meteorStrikeController != null)
         {
             Vector3[] positions = meteorStrike.Positions
@@ -138,12 +142,21 @@ public class MonsterController : MonoBehaviour
     }
     public void PerformAttack(string targetPlayerId, int attackType, float damage)
     {
+        // 공격 중이면 새로운 공격을 시작하지 않음
+        if (isAttacking) return;
+
+        
+        
         Transform targetTransform = PlayerController.Instance.GetPlayerTransform(targetPlayerId);
-        if (targetTransform == null) return;
 
-        // 타겟 저장
         currentTarget = targetTransform;
-
+        if (targetTransform == null)
+        {
+            Debug.LogWarning("PerformAttack no target");
+            return;
+        }
+        
+     
         // 타겟 방향으로 회전
         Vector3 directionToTarget = targetTransform.position - transform.position;
         if (directionToTarget != Vector3.zero)
@@ -167,7 +180,6 @@ public class MonsterController : MonoBehaviour
                 
             case 1: // Ranged
                 currentConfig = rangedAttackConfig;
-                StartProjectileAttack();
                 break;
         }
 
@@ -193,7 +205,6 @@ public class MonsterController : MonoBehaviour
             }
         }
 
-
     }
 
     public void OnStartCharging()
@@ -211,6 +222,7 @@ public class MonsterController : MonoBehaviour
     // 투사체 발사
     public void OnFireProjectile()
     {
+        Debug.LogWarning("OnFireProjectile");
         if (currentTarget == null) return;
 
         // 차징 이펙트 제거
@@ -375,7 +387,7 @@ public class MonsterController : MonoBehaviour
             attackTimer -= Time.deltaTime;
             if (attackTimer <= 0 && animator != null)
             {
-                animator.SetBool(IsAttacking, false);
+                //animator.SetBool(IsAttacking, false);
             }
         }
     }
@@ -406,6 +418,8 @@ public class MonsterController : MonoBehaviour
 
     public void UpdateTarget(string targetPlayerId, bool hasTargetFlag)
     {
+        
+        Debug.LogWarning("UpdateTarget");
         currentTargetPlayerId = targetPlayerId;
         hasTarget = hasTargetFlag;
       
@@ -418,7 +432,7 @@ public class MonsterController : MonoBehaviour
                 float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
                 if (distanceToTarget <= attackRange && attackTimer <= 0)
                 {
-                    PerformAttack();
+                    //PerformAttack();
                 }
             }
         }
@@ -448,6 +462,27 @@ public class MonsterController : MonoBehaviour
             SoundManager.Instance.PlaySound(soundId, transform.position);
         }
     }
+    
+    
+    public void OnAttackStart()
+    {
+        isAttacking = true;
+    }
+
+    public void OnAttackEnd()
+    {
+        isAttacking = false;
+        
+        
+        
+        // 차징 이펙트 정리
+        if (activeChargingEffect != null)
+        {
+            Destroy(activeChargingEffect);
+            activeChargingEffect = null;
+        }
+    }
+
     
     
 }

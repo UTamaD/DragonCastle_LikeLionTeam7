@@ -41,39 +41,50 @@ public class MeteorBehavior : MonoBehaviour
         }
 
         // 타겟을 향해 회전
-        transform.LookAt(targetPosition);
+        transform.rotation = Quaternion.LookRotation((targetPosition - startPosition).normalized);
+
+        // 디버그 로그 추가
+        Debug.Log($"Meteor initialized: Start={startPosition}, Target={targetPosition}, Distance={travelDistance}");
     }
 
     private void Update()
     {
+        if (travelDistance <= 0)
+        {
+            Debug.LogError("Travel distance is zero or negative!");
+            return;
+        }
+
         // 진행률 계산
-        float progress = currentDistance / travelDistance;
+        float progress = Mathf.Clamp01(currentDistance / travelDistance);
 
         // 가속도 적용
         currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxSpeed);
 
         // 커브를 통한 속도 조정
         float speedMultiplier = falloffCurve.Evaluate(progress);
-        float adjustedSpeed = currentSpeed * speedMultiplier;
+        float adjustedSpeed = Mathf.Max(currentSpeed * speedMultiplier, initialSpeed * 0.5f); // 최소 속도 보장
 
         // 이동 거리 계산
         float moveDistance = adjustedSpeed * Time.deltaTime;
         currentDistance += moveDistance;
 
+        // 이동 방향 계산
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        
         // 이동
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            targetPosition,
-            moveDistance
-        );
+        transform.position += direction * moveDistance;
 
-        // 충돌 체크
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        // 디버그용 광선 표시
+        Debug.DrawLine(transform.position, targetPosition, Color.red);
+        
+        // 목표 지점까지의 거리 체크
+        float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+        if (distanceToTarget < 0.1f)
         {
             OnImpact();
         }
     }
-    
     private void OnImpact()
     {
         // 충격 이펙트
@@ -104,5 +115,17 @@ public class MeteorBehavior : MonoBehaviour
 
         // 메테오 제거
         Destroy(gameObject);
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(targetPosition, 0.5f);
+            Gizmos.DrawLine(transform.position, targetPosition);
+        }
     }
 }
