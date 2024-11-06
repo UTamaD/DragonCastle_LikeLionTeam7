@@ -7,6 +7,7 @@ public abstract class SkillBase
     public PlayerController Owner { get; private set; }
     
     public DamageType Type;
+    
     public float AttackMultiplier;
 
     public SkillBase(PlayerController owner)
@@ -14,5 +15,7 @@ public abstract class SkillBase
         Owner = owner;
     }
 
-    public abstract void Attack();
+    public abstract bool IsAvailable();
+    public abstract void Active();
+    public abstract void Inactive();
 }

@@ -15,6 +15,15 @@ public class SkillManager : MonoBehaviour
     
     private Dictionary<PlayerSkillName, SkillBase> _skills = new Dictionary<PlayerSkillName, SkillBase>();
 
+    public void SetCurrentSkill(PlayerSkillName skillName)
+    {
+        if (_skills.TryGetValue(skillName, out SkillBase newSkill))
+        {
+            CurrentSkill = newSkill;
+        }
+
+    }
+    
     public void AddSkill(PlayerSkillName skillName, SkillBase skill)
     {
         if (!_skills.ContainsKey(skillName))
@@ -27,7 +36,7 @@ public class SkillManager : MonoBehaviour
     {
         if (_skills.TryGetValue(skillName, out SkillBase skill))
             return skill;
-        
+
         return null;
     }
 }

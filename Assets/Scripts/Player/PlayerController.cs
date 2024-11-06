@@ -212,8 +212,13 @@ public class PlayerController : MonoBehaviour
         if (!(StateMachine.CurrentState is MoveState))
             return;
 
-        if(StateMachine.GetState(StateName.Melee) is MeleeState { IsAvailableMelee: true } state)
+        SkillManager.SetCurrentSkill(PlayerSkillName.Melee);
+        MeleeState state = (MeleeState)(StateMachine.GetState(StateName.Melee));
+        if (state != null && SkillManager.CurrentSkill.IsAvailable())
+        {
+            state.SetCurSkill(SkillManager.CurrentSkill);
             StateMachine.ChangeState(StateName.Melee);
+        }
     }
 
     #endregion
