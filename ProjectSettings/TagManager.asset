@@ -4,16 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Weapon
-  - CinemachineTarget
+  - Enemy
+  - Ally
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - Player
+  - Wall
   - 
   - 
   - 
