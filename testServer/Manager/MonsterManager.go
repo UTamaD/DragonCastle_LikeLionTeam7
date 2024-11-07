@@ -28,7 +28,7 @@ func GetMonsterManager() *MonsterManager {
 
 func (mm *MonsterManager) UpdateMonster() {
 
-	ticker := time.NewTicker(16 * time.Millisecond)
+	ticker := time.NewTicker(100 * time.Millisecond)
 	for {
 		select {
 		case <-ticker.C:

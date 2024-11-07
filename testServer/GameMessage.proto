@@ -99,6 +99,13 @@ message MeteorStrike {
     repeated MeteorStrikePosition positions = 2;
 }
 
+message MonsterDamage {
+    int32 monsterId = 1;
+    float damage = 2;
+    int32 currentHp = 3;
+}
+
+
 message GameMessage {
   oneof message {
     PlayerPosition player_position = 1;
@@ -114,5 +121,6 @@ message GameMessage {
     MonsterAttack monsterAttack = 11;
     MonsterProjectile monsterProjectile = 12;
     MeteorStrike meteorStrike = 13;
+    MonsterDamage monsterDamage = 14;
   }
 } 

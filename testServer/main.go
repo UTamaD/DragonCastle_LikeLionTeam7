@@ -82,6 +82,11 @@ func processMessage(message *pb.GameMessage, conn *net.Conn) {
 		playerId := msg.Logout.PlayerId
 		playerManager := mg.GetPlayerManager()
 		playerManager.RemovePlayer(playerId)
+	case *pb.GameMessage_MonsterDamage:
+		monsterManager := mg.GetMonsterManager()
+		if monster, exists := monsterManager.GetMonster(msg.MonsterDamage.MonsterId); exists {
+			monster.TakeDamage(int(msg.MonsterDamage.Damage))
+		}
 	default:
 		panic(fmt.Sprintf("unexpected messages.isGameMessage_Message: %#v", msg))
 	}

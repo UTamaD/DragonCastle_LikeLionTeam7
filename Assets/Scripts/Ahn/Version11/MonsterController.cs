@@ -113,6 +113,11 @@ public class MonsterController : MonoBehaviour
 
     [Header("Meteor Strike")]
     public MeteorStrikeController meteorStrikeController;
+    
+    
+    [Header("Stats")]
+    public float maxHealth = 100f;
+    private float currentHealth;
 
     private void Awake()
     {
@@ -124,6 +129,11 @@ public class MonsterController : MonoBehaviour
         animationEffect = GetComponent<MonsterAnimationEffect>();
         
         
+    }
+    
+    private void Start()
+    {
+        currentHealth = maxHealth;
     }
     
     public void HandleMeteorStrike(MeteorStrike meteorStrike)
@@ -481,6 +491,45 @@ public class MonsterController : MonoBehaviour
             Destroy(activeChargingEffect);
             activeChargingEffect = null;
         }
+    }
+    
+    
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth < 0) currentHealth = 0;
+
+        // 서버에 데미지 알림
+        TcpProtobufClient.Instance.SendMonsterDamage(monsterId, damage, currentHealth);
+
+        
+        // 사망 처리
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    
+    public void SetHealth(float health)
+    {
+        currentHealth = health;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        // 사망 애니메이션
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
+
+        // 일정 시간 후 오브젝트 제거
+        Destroy(gameObject, 2f);
     }
 
     
