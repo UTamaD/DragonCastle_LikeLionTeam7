@@ -38,7 +38,6 @@ public class MeteorStrikeController : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger(MeteorAttackTrigger);
-            animator.SetBool(IsCastingMeteor, true);
         }
 
         List<GameObject> warningEffects = new List<GameObject>();
@@ -67,12 +66,7 @@ public class MeteorStrikeController : MonoBehaviour
         {
             Destroy(warning);
         }
-
-        // 시전 애니메이션 종료
-        if (animator != null)
-        {
-            animator.SetBool(IsCastingMeteor, false);
-        }
+        
     }
 
     private void SpawnMeteor(Vector3 targetPosition)

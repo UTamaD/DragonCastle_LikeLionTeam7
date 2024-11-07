@@ -62,6 +62,7 @@ public class MonsterController : MonoBehaviour
     public ProjectileConfig projectileConfig;
     public float projectileSpeed = 10f;
     
+    [SerializeField]
     private Transform currentTarget;
     private bool isChargingProjectile;
     private GameObject activeChargingEffect;
@@ -112,6 +113,11 @@ public class MonsterController : MonoBehaviour
 
     [Header("Meteor Strike")]
     public MeteorStrikeController meteorStrikeController;
+    
+    
+    [Header("Stats")]
+    public float maxHealth = 100f;
+    private float currentHealth;
 
     private void Awake()
     {
@@ -125,8 +131,16 @@ public class MonsterController : MonoBehaviour
         
     }
     
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
+    
     public void HandleMeteorStrike(MeteorStrike meteorStrike)
     {
+        // 공격 중이면 새로운 공격을 시작하지 않음
+        if (isAttacking) return;
+        
         if (meteorStrikeController != null)
         {
             Vector3[] positions = meteorStrike.Positions
@@ -138,12 +152,21 @@ public class MonsterController : MonoBehaviour
     }
     public void PerformAttack(string targetPlayerId, int attackType, float damage)
     {
-        Transform targetTransform = PlayerSpawner.Instance.GetPlayerTransform(targetPlayerId);
-        if (targetTransform == null) return;
+        // 공격 중이면 새로운 공격을 시작하지 않음
+        if (isAttacking) return;
 
-        // 타겟 저장
+        
+        
+        Transform targetTransform = PlayerController.Instance.GetPlayerTransform(targetPlayerId);
+
         currentTarget = targetTransform;
-
+        if (targetTransform == null)
+        {
+            Debug.LogWarning("PerformAttack no target");
+            return;
+        }
+        
+     
         // 타겟 방향으로 회전
         Vector3 directionToTarget = targetTransform.position - transform.position;
         if (directionToTarget != Vector3.zero)
@@ -167,7 +190,6 @@ public class MonsterController : MonoBehaviour
                 
             case 1: // Ranged
                 currentConfig = rangedAttackConfig;
-                StartProjectileAttack();
                 break;
         }
 
@@ -193,7 +215,6 @@ public class MonsterController : MonoBehaviour
             }
         }
 
-
     }
 
     public void OnStartCharging()
@@ -211,6 +232,7 @@ public class MonsterController : MonoBehaviour
     // 투사체 발사
     public void OnFireProjectile()
     {
+        Debug.LogWarning("OnFireProjectile");
         if (currentTarget == null) return;
 
         // 차징 이펙트 제거
@@ -375,7 +397,7 @@ public class MonsterController : MonoBehaviour
             attackTimer -= Time.deltaTime;
             if (attackTimer <= 0 && animator != null)
             {
-                animator.SetBool(IsAttacking, false);
+                //animator.SetBool(IsAttacking, false);
             }
         }
     }
@@ -406,19 +428,21 @@ public class MonsterController : MonoBehaviour
 
     public void UpdateTarget(string targetPlayerId, bool hasTargetFlag)
     {
+        
+        Debug.LogWarning("UpdateTarget");
         currentTargetPlayerId = targetPlayerId;
         hasTarget = hasTargetFlag;
       
 
         if (hasTarget)
         {
-            Transform targetTransform = PlayerSpawner.Instance.GetPlayerTransform(targetPlayerId);
+            Transform targetTransform = PlayerController.Instance.GetPlayerTransform(targetPlayerId);
             if (targetTransform != null)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
                 if (distanceToTarget <= attackRange && attackTimer <= 0)
                 {
-                    PerformAttack();
+                    //PerformAttack();
                 }
             }
         }
@@ -448,6 +472,66 @@ public class MonsterController : MonoBehaviour
             SoundManager.Instance.PlaySound(soundId, transform.position);
         }
     }
+    
+    
+    public void OnAttackStart()
+    {
+        isAttacking = true;
+    }
+
+    public void OnAttackEnd()
+    {
+        isAttacking = false;
+        
+        
+        
+        // 차징 이펙트 정리
+        if (activeChargingEffect != null)
+        {
+            Destroy(activeChargingEffect);
+            activeChargingEffect = null;
+        }
+    }
+    
+    
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth < 0) currentHealth = 0;
+
+        // 서버에 데미지 알림
+        TcpProtobufClient.Instance.SendMonsterDamage(monsterId, damage, currentHealth);
+
+        
+        // 사망 처리
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    
+    public void SetHealth(float health)
+    {
+        currentHealth = health;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        // 사망 애니메이션
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
+
+        // 일정 시간 후 오브젝트 제거
+        Destroy(gameObject, 2f);
+    }
+
     
     
 }

@@ -2,6 +2,7 @@
 package manager
 
 import (
+	pb "testServer/Messages"
 	"testServer/behavior"
 	"testServer/common"
 	"time"
@@ -92,33 +93,56 @@ func (m *Monster) Update() {
 	}
 }
 
-// CreateMonsterBehaviorTree creates the AI behavior tree for the monster
+func (mm *MonsterManager) GetMonster(id int32) (*Monster, bool) {
+	monster, exists := mm.monsters[id]
+	return monster, exists
+}
+
+func (m *Monster) TakeDamage(damage int) {
+	m.Health -= damage
+	if m.Health < 0 {
+		m.Health = 0
+	}
+
+	damageMsg := &pb.GameMessage{
+		Message: &pb.GameMessage_MonsterDamage{
+			MonsterDamage: &pb.MonsterDamage{
+				MonsterId: int32(m.ID),
+				Damage:    float32(damage),
+				CurrentHp: int32(m.Health),
+			},
+		},
+	}
+
+	GetPlayerManager().Broadcast(damageMsg)
+}
+
 func CreateMonsterBehaviorTree(monster *Monster) behavior.Node {
 	playerManager := GetPlayerManager()
 	netManager := GetNetManager()
+	state := &behavior.AttackState{}
 
 	return behavior.NewSelector(
-		// Combat sequence
 		behavior.NewSequence(
-			// Detect player (10 units range)
 			behavior.NewDetectPlayer(monster, 50.0, playerManager, netManager),
 			behavior.NewSelector(
-				// Melee attack sequence (within 2 units)
 				behavior.NewSequence(
 					behavior.NewDetectPlayer(monster, 2.0, playerManager, netManager),
-					behavior.NewMeleeAttack(monster, 2.0, 10, 2*time.Second, playerManager, netManager),
+					behavior.NewMeleeAttack(monster, 2.0, 10, 4*time.Second, playerManager, netManager, state),
+					behavior.NewWait(1*time.Second, false, state),
 				),
-				// Ranged attack sequence (2-8 units range)
-				behavior.NewRandom(
-					0.5,
-					behavior.NewSequence(
-						behavior.NewRangedAttack(monster, 50.0, 8, 13*time.Second, playerManager, netManager),
-					),
-					behavior.NewSequence(
-						behavior.NewMeteorAttack(monster, 59.0, 15, 15*time.Second, playerManager, netManager),
-					),
+				behavior.NewMutuallyExclusiveSelector(0.33,
+					[]behavior.Node{
+						behavior.NewSequence(
+							behavior.NewRangedAttack(monster, 50.0, 8, 10*time.Second, playerManager, netManager, state),
+							behavior.NewWait(1*time.Second, false, state),
+						),
+						behavior.NewSequence(
+							behavior.NewMeteorAttack(monster, 59.0, 15, 10*time.Second, playerManager, netManager, state),
+							behavior.NewWait(2*time.Second, false, state),
+						),
+					},
 				),
-				// Chase (when player is detected but outside attack range)
 				behavior.NewChase(monster, 50.0, playerManager, netManager),
 			),
 		),

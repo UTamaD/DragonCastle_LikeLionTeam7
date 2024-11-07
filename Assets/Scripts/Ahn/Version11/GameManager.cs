@@ -87,6 +87,9 @@ public class GameManager : MonoBehaviour
                     monster.HandleMeteorStrike(msg.MeteorStrike);
                 }
                 break;
+            case GameMessage.MessageOneofCase.MonsterDamage:
+                HandleMonsterDamage(msg.MonsterDamage);
+                break;
         }
     }
 
@@ -139,6 +142,14 @@ public class GameManager : MonoBehaviour
                 attackData.AttackType,  // 공격 타입
                 attackData.Damage       // 데미지
             );
+        }
+    }
+    
+    private void HandleMonsterDamage(MonsterDamage damageMsg)
+    {
+        if (monsters.TryGetValue(damageMsg.MonsterId, out MonsterController monster))
+        {
+            monster.SetHealth(damageMsg.CurrentHp);
         }
     }
 }

@@ -103,6 +103,23 @@ public class TcpProtobufClient : MonoBehaviour
         }
     }
 
+    public void SendMonsterDamage(int monsterId, float damage, float currentHp)
+    {
+        var damageMessage = new MonsterDamage
+        {
+            MonsterId = monsterId,
+            Damage = damage,
+            CurrentHp = (int)currentHp
+        };
+
+        var message = new GameMessage
+        {
+            MonsterDamage = damageMessage
+        };
+
+        SendMessage(message);
+    }
+    
     void OnMessageReceived(IAsyncResult ar)
     {
         try

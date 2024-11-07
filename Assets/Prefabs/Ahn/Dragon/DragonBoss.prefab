@@ -1299,27 +1299,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeAttackConfig:
     animationTrigger: AttackMelee
-    effects: []
-    sound: {fileID: 8300000, guid: 22b669b0456a5495d829c844a625ff15, type: 3}
+    effects:
+    - effectName: Attack1
+      effectPrefab: {fileID: 121928, guid: 66231dae4aba0dc45bf095fcda5f53a3, type: 3}
+      spawnPoint: {fileID: 1575658420949958763}
+      positionOffset: {x: 0, y: 0, z: 0}
+      rotationOffset: {x: 0, y: 0, z: 0}
+      duration: 0
+      followTarget: 0
+    sound: {fileID: 8300000, guid: f059f51c270dd6d479ad8b8338a7079f, type: 3}
   rangedAttackConfig:
     animationTrigger: AttackFireBall
-    effects: []
-    sound: {fileID: 8300000, guid: 014a875a99add4e059e3251f718b90e6, type: 3}
+    effects:
+    - effectName: Attack2
+      effectPrefab: {fileID: 1246638314895344, guid: 7ecd2f1c81540524883b86504a900455,
+        type: 3}
+      spawnPoint: {fileID: 6022714755959505748}
+      positionOffset: {x: 0, y: 0, z: 0}
+      rotationOffset: {x: 0, y: 0, z: 0}
+      duration: 0
+      followTarget: 0
+    sound: {fileID: 8300000, guid: f059f51c270dd6d479ad8b8338a7079f, type: 3}
   projectileConfig:
     projectilePrefab: {fileID: 1758863767508122, guid: 45d59be98d4e9254891ee54e2ff234e7,
       type: 3}
     spawnPoint: {fileID: 6022714755959505748}
     speed: 10
-    maxDistance: 30
+    maxDistance: 100
     fireAnimationTrigger: AttackFireBall
     chargingEffect: {fileID: 141900, guid: fbf1217560c08c44e8870f710b3dddb7, type: 3}
   projectileSpeed: 10
+  currentTarget: {fileID: 0}
   attackPoint: {fileID: 6022714755959505748}
   attackEffect:
     effectPrefab: {fileID: 1614648838348040, guid: 2faf10641c03d36499358c66ebe706e6,
       type: 3}
     duration: 2
-  attackSound: {fileID: 8300000, guid: d1c5b10525bdf43d2a7c34479b77a113, type: 3}
+  attackSound: {fileID: 8300000, guid: f059f51c270dd6d479ad8b8338a7079f, type: 3}
   meteorStrikeController: {fileID: 839455525664881390}
 --- !u!114 &661204062820336749
 MonoBehaviour:

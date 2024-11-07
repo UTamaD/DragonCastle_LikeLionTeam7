@@ -47,21 +47,24 @@ namespace Game {
             "IAEoAhIPCgd0YXJnZXRaGAUgASgCEhQKDHByb2plY3RpbGVJZBgGIAEoBSIs",
             "ChRNZXRlb3JTdHJpa2VQb3NpdGlvbhIJCgF4GAEgASgCEgkKAXoYAiABKAIi",
             "UAoMTWV0ZW9yU3RyaWtlEhEKCW1vbnN0ZXJJZBgBIAEoBRItCglwb3NpdGlv",
-            "bnMYAiADKAsyGi5nYW1lLk1ldGVvclN0cmlrZVBvc2l0aW9uItIECgtHYW1l",
-            "TWVzc2FnZRIvCg9wbGF5ZXJfcG9zaXRpb24YASABKAsyFC5nYW1lLlBsYXll",
-            "clBvc2l0aW9uSAASIQoEY2hhdBgCIAEoCzIRLmdhbWUuQ2hhdE1lc3NhZ2VI",
-            "ABIjCgVsb2dpbhgDIAEoCzISLmdhbWUuTG9naW5NZXNzYWdlSAASLAoNc3Bh",
-            "d25NeVBsYXllchgEIAEoCzITLmdhbWUuU3Bhd25NeVBsYXllckgAEjIKEHNw",
-            "YXduT3RoZXJQbGF5ZXIYBSABKAsyFi5nYW1lLlNwYXduT3RoZXJQbGF5ZXJI",
-            "ABIlCgZsb2dvdXQYBiABKAsyEy5nYW1lLkxvZ291dE1lc3NhZ2VIABIiCghw",
-            "YXRoVGVzdBgHIAEoCzIOLmdhbWUuUGF0aFRlc3RIABIqCgxzcGF3bk1vbnN0",
-            "ZXIYCCABKAsyEi5nYW1lLlNwYXduTW9uc3RlckgAEigKC21vdmVNb25zdGVy",
-            "GAkgASgLMhEuZ2FtZS5Nb3ZlTW9uc3RlckgAEiwKDW1vbnN0ZXJUYXJnZXQY",
-            "CiABKAsyEy5nYW1lLk1vbnN0ZXJUYXJnZXRIABIsCg1tb25zdGVyQXR0YWNr",
-            "GAsgASgLMhMuZ2FtZS5Nb25zdGVyQXR0YWNrSAASNAoRbW9uc3RlclByb2pl",
-            "Y3RpbGUYDCABKAsyFy5nYW1lLk1vbnN0ZXJQcm9qZWN0aWxlSAASKgoMbWV0",
-            "ZW9yU3RyaWtlGA0gASgLMhIuZ2FtZS5NZXRlb3JTdHJpa2VIAEIJCgdtZXNz",
-            "YWdlQgtaCS9NZXNzYWdlc2IGcHJvdG8z"));
+            "bnMYAiADKAsyGi5nYW1lLk1ldGVvclN0cmlrZVBvc2l0aW9uIkUKDU1vbnN0",
+            "ZXJEYW1hZ2USEQoJbW9uc3RlcklkGAEgASgFEg4KBmRhbWFnZRgCIAEoAhIR",
+            "CgljdXJyZW50SHAYAyABKAUigAUKC0dhbWVNZXNzYWdlEi8KD3BsYXllcl9w",
+            "b3NpdGlvbhgBIAEoCzIULmdhbWUuUGxheWVyUG9zaXRpb25IABIhCgRjaGF0",
+            "GAIgASgLMhEuZ2FtZS5DaGF0TWVzc2FnZUgAEiMKBWxvZ2luGAMgASgLMhIu",
+            "Z2FtZS5Mb2dpbk1lc3NhZ2VIABIsCg1zcGF3bk15UGxheWVyGAQgASgLMhMu",
+            "Z2FtZS5TcGF3bk15UGxheWVySAASMgoQc3Bhd25PdGhlclBsYXllchgFIAEo",
+            "CzIWLmdhbWUuU3Bhd25PdGhlclBsYXllckgAEiUKBmxvZ291dBgGIAEoCzIT",
+            "LmdhbWUuTG9nb3V0TWVzc2FnZUgAEiIKCHBhdGhUZXN0GAcgASgLMg4uZ2Ft",
+            "ZS5QYXRoVGVzdEgAEioKDHNwYXduTW9uc3RlchgIIAEoCzISLmdhbWUuU3Bh",
+            "d25Nb25zdGVySAASKAoLbW92ZU1vbnN0ZXIYCSABKAsyES5nYW1lLk1vdmVN",
+            "b25zdGVySAASLAoNbW9uc3RlclRhcmdldBgKIAEoCzITLmdhbWUuTW9uc3Rl",
+            "clRhcmdldEgAEiwKDW1vbnN0ZXJBdHRhY2sYCyABKAsyEy5nYW1lLk1vbnN0",
+            "ZXJBdHRhY2tIABI0ChFtb25zdGVyUHJvamVjdGlsZRgMIAEoCzIXLmdhbWUu",
+            "TW9uc3RlclByb2plY3RpbGVIABIqCgxtZXRlb3JTdHJpa2UYDSABKAsyEi5n",
+            "YW1lLk1ldGVvclN0cmlrZUgAEiwKDW1vbnN0ZXJEYW1hZ2UYDiABKAsyEy5n",
+            "YW1lLk1vbnN0ZXJEYW1hZ2VIAEIJCgdtZXNzYWdlQgtaCS9NZXNzYWdlc2IG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -80,7 +83,8 @@ namespace Game {
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.MonsterProjectile), global::Game.MonsterProjectile.Parser, new[]{ "MonsterId", "StartX", "StartZ", "TargetX", "TargetZ", "ProjectileId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.MeteorStrikePosition), global::Game.MeteorStrikePosition.Parser, new[]{ "X", "Z" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.MeteorStrike), global::Game.MeteorStrike.Parser, new[]{ "MonsterId", "Positions" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.GameMessage), global::Game.GameMessage.Parser, new[]{ "PlayerPosition", "Chat", "Login", "SpawnMyPlayer", "SpawnOtherPlayer", "Logout", "PathTest", "SpawnMonster", "MoveMonster", "MonsterTarget", "MonsterAttack", "MonsterProjectile", "MeteorStrike" }, new[]{ "Message" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.MonsterDamage), global::Game.MonsterDamage.Parser, new[]{ "MonsterId", "Damage", "CurrentHp" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.GameMessage), global::Game.GameMessage.Parser, new[]{ "PlayerPosition", "Chat", "Login", "SpawnMyPlayer", "SpawnOtherPlayer", "Logout", "PathTest", "SpawnMonster", "MoveMonster", "MonsterTarget", "MonsterAttack", "MonsterProjectile", "MeteorStrike", "MonsterDamage" }, new[]{ "Message" }, null, null, null)
           }));
     }
     #endregion
@@ -4294,6 +4298,278 @@ namespace Game {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class MonsterDamage : pb::IMessage<MonsterDamage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<MonsterDamage> _parser = new pb::MessageParser<MonsterDamage>(() => new MonsterDamage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<MonsterDamage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public MonsterDamage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public MonsterDamage(MonsterDamage other) : this() {
+      monsterId_ = other.monsterId_;
+      damage_ = other.damage_;
+      currentHp_ = other.currentHp_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public MonsterDamage Clone() {
+      return new MonsterDamage(this);
+    }
+
+    /// <summary>Field number for the "monsterId" field.</summary>
+    public const int MonsterIdFieldNumber = 1;
+    private int monsterId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int MonsterId {
+      get { return monsterId_; }
+      set {
+        monsterId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "damage" field.</summary>
+    public const int DamageFieldNumber = 2;
+    private float damage_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Damage {
+      get { return damage_; }
+      set {
+        damage_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "currentHp" field.</summary>
+    public const int CurrentHpFieldNumber = 3;
+    private int currentHp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CurrentHp {
+      get { return currentHp_; }
+      set {
+        currentHp_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as MonsterDamage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(MonsterDamage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MonsterId != other.MonsterId) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Damage, other.Damage)) return false;
+      if (CurrentHp != other.CurrentHp) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MonsterId != 0) hash ^= MonsterId.GetHashCode();
+      if (Damage != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Damage);
+      if (CurrentHp != 0) hash ^= CurrentHp.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (MonsterId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(MonsterId);
+      }
+      if (Damage != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Damage);
+      }
+      if (CurrentHp != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(CurrentHp);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (MonsterId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(MonsterId);
+      }
+      if (Damage != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Damage);
+      }
+      if (CurrentHp != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(CurrentHp);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (MonsterId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MonsterId);
+      }
+      if (Damage != 0F) {
+        size += 1 + 4;
+      }
+      if (CurrentHp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrentHp);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(MonsterDamage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MonsterId != 0) {
+        MonsterId = other.MonsterId;
+      }
+      if (other.Damage != 0F) {
+        Damage = other.Damage;
+      }
+      if (other.CurrentHp != 0) {
+        CurrentHp = other.CurrentHp;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            MonsterId = input.ReadInt32();
+            break;
+          }
+          case 21: {
+            Damage = input.ReadFloat();
+            break;
+          }
+          case 24: {
+            CurrentHp = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            MonsterId = input.ReadInt32();
+            break;
+          }
+          case 21: {
+            Damage = input.ReadFloat();
+            break;
+          }
+          case 24: {
+            CurrentHp = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class GameMessage : pb::IMessage<GameMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -4308,7 +4584,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4367,6 +4643,9 @@ namespace Game {
           break;
         case MessageOneofCase.MeteorStrike:
           MeteorStrike = other.MeteorStrike.Clone();
+          break;
+        case MessageOneofCase.MonsterDamage:
+          MonsterDamage = other.MonsterDamage.Clone();
           break;
       }
 
@@ -4535,6 +4814,18 @@ namespace Game {
       }
     }
 
+    /// <summary>Field number for the "monsterDamage" field.</summary>
+    public const int MonsterDamageFieldNumber = 14;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Game.MonsterDamage MonsterDamage {
+      get { return messageCase_ == MessageOneofCase.MonsterDamage ? (global::Game.MonsterDamage) message_ : null; }
+      set {
+        message_ = value;
+        messageCase_ = value == null ? MessageOneofCase.None : MessageOneofCase.MonsterDamage;
+      }
+    }
+
     private object message_;
     /// <summary>Enum of possible cases for the "message" oneof.</summary>
     public enum MessageOneofCase {
@@ -4552,6 +4843,7 @@ namespace Game {
       MonsterAttack = 11,
       MonsterProjectile = 12,
       MeteorStrike = 13,
+      MonsterDamage = 14,
     }
     private MessageOneofCase messageCase_ = MessageOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4595,6 +4887,7 @@ namespace Game {
       if (!object.Equals(MonsterAttack, other.MonsterAttack)) return false;
       if (!object.Equals(MonsterProjectile, other.MonsterProjectile)) return false;
       if (!object.Equals(MeteorStrike, other.MeteorStrike)) return false;
+      if (!object.Equals(MonsterDamage, other.MonsterDamage)) return false;
       if (MessageCase != other.MessageCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -4616,6 +4909,7 @@ namespace Game {
       if (messageCase_ == MessageOneofCase.MonsterAttack) hash ^= MonsterAttack.GetHashCode();
       if (messageCase_ == MessageOneofCase.MonsterProjectile) hash ^= MonsterProjectile.GetHashCode();
       if (messageCase_ == MessageOneofCase.MeteorStrike) hash ^= MeteorStrike.GetHashCode();
+      if (messageCase_ == MessageOneofCase.MonsterDamage) hash ^= MonsterDamage.GetHashCode();
       hash ^= (int) messageCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -4687,6 +4981,10 @@ namespace Game {
         output.WriteRawTag(106);
         output.WriteMessage(MeteorStrike);
       }
+      if (messageCase_ == MessageOneofCase.MonsterDamage) {
+        output.WriteRawTag(114);
+        output.WriteMessage(MonsterDamage);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4749,6 +5047,10 @@ namespace Game {
         output.WriteRawTag(106);
         output.WriteMessage(MeteorStrike);
       }
+      if (messageCase_ == MessageOneofCase.MonsterDamage) {
+        output.WriteRawTag(114);
+        output.WriteMessage(MonsterDamage);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4797,6 +5099,9 @@ namespace Game {
       }
       if (messageCase_ == MessageOneofCase.MeteorStrike) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(MeteorStrike);
+      }
+      if (messageCase_ == MessageOneofCase.MonsterDamage) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MonsterDamage);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4888,6 +5193,12 @@ namespace Game {
             MeteorStrike = new global::Game.MeteorStrike();
           }
           MeteorStrike.MergeFrom(other.MeteorStrike);
+          break;
+        case MessageOneofCase.MonsterDamage:
+          if (MonsterDamage == null) {
+            MonsterDamage = new global::Game.MonsterDamage();
+          }
+          MonsterDamage.MergeFrom(other.MonsterDamage);
           break;
       }
 
@@ -5027,6 +5338,15 @@ namespace Game {
             MeteorStrike = subBuilder;
             break;
           }
+          case 114: {
+            global::Game.MonsterDamage subBuilder = new global::Game.MonsterDamage();
+            if (messageCase_ == MessageOneofCase.MonsterDamage) {
+              subBuilder.MergeFrom(MonsterDamage);
+            }
+            input.ReadMessage(subBuilder);
+            MonsterDamage = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -5161,6 +5481,15 @@ namespace Game {
             }
             input.ReadMessage(subBuilder);
             MeteorStrike = subBuilder;
+            break;
+          }
+          case 114: {
+            global::Game.MonsterDamage subBuilder = new global::Game.MonsterDamage();
+            if (messageCase_ == MessageOneofCase.MonsterDamage) {
+              subBuilder.MergeFrom(MonsterDamage);
+            }
+            input.ReadMessage(subBuilder);
+            MonsterDamage = subBuilder;
             break;
           }
         }
