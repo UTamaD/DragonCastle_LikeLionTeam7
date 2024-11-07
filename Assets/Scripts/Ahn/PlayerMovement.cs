@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IDamageable, IKnockbackable, IDebuffable
+public class PlayerMovement : MonoBehaviour, IDamageable_th, IKnockbackable, IDebuffable
 {
     public float moveSpeed = 5f;
     public float turnSpeed = 100f;

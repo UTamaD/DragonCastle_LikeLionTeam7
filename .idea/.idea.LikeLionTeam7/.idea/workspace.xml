@@ -6,14 +6,44 @@
   <component name="ChangeListManager">
     <list default="true" id="5fccdaff-4ccb-49c6-8529-4b0227ee80c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/MassiveGreatSword_AnimSet/ScenePreview/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/MassiveGreatSword_AnimSet/ScenePreview/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_2.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_3.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_3.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_4.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_4.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Player/Player.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DamageField.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/KriptoFX/Magic Effects Pack v1/HDRP and URP patches/HDRP patch.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/KriptoFX/Magic Effects Pack v1/HDRP and URP patches/URP patch.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/KriptoFX/Realistic Effects Pack v4/HDRP and URP patches/HDRP patch.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/KriptoFX/Realistic Effects Pack v4/HDRP and URP patches/URP patch.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Scripts.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Scripts.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Scripts/Editor.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Scripts/Editor.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Scripts/Editor/Icons.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Scripts/Editor/Icons.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Shaders/Malbers_HDRP_15.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Shaders/Malbers_HDRP_16.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Shaders/Malbers_Standard.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Shaders/Malbers_URP_14.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Common/Shaders/Malbers_URP_16.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Dragons/4 - Unka the Dragon/1 - Unka AC/1 - Demos/3 - Unka AI Sample.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Malbers Animations/Dragons/4 - Unka the Dragon/1 - Unka AC/1 - Demos/3 - Unka AI Sample.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Dragons/4 - Unka the Dragon/1 - Unka AC/Unka 3.9b (AC 1.4.4c).unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Malbers Animations/Dragons/4 - Unka the Dragon/Textures/Unka Realistic Emmisive Brown.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Malbers Animations/Dragons/4 - Unka the Dragon/Textures/Unka Realistic Emmisive Brown.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Ahn/Dragon/DragonBoss.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Ahn/Dragon/DragonBoss.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/BT/DamageField.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/BT/DamageField.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerSpawner.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Inputs/PlayerInput.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Inputs/PlayerInput.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Inputs/PlayerInputs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Inputs/PlayerInputs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/LivingEntity/LivingEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/LivingEntity/LivingEntity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/Melee.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/Melee.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/SkillBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/SkillBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/SkillManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/SkillManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/State/MeleeState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/State/MeleeState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/State/MeleeState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/State/AttackState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/State/MeleeState.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/State/AttackState.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,11 +56,11 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2baf8514fc0a4c1683fd2faf0e4a53d429c00/4f/34bfb56b/RaycastHit.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e509afeff7384f24a8f0ac30527ff01c1cbe00/3d/21ed2ce0/Gizmos.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e509afeff7384f24a8f0ac30527ff01c1cbe00/52/4d76bb60/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/LivingEntity/DamageMessage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/LivingEntity/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/Skills/Melee.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/State/IFrameState.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/State/MeleeState.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/State/MoveState.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -118,6 +148,12 @@
       <workItem from="1730174884594" duration="15974000" />
       <workItem from="1730765906220" duration="7189000" />
       <workItem from="1730851567779" duration="3575000" />
+      <workItem from="1730862306603" duration="277000" />
+      <workItem from="1730862608960" duration="165000" />
+      <workItem from="1730867046856" duration="2901000" />
+      <workItem from="1730937640748" duration="3683000" />
+      <workItem from="1730942442178" duration="4000" />
+      <workItem from="1730942460497" duration="686000" />
     </task>
     <servers />
   </component>

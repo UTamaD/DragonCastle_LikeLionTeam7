@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
         // Input Event
         Inputs.OnIFrameInput += IFrame;
         Inputs.OnMeleeInput += Melee;
+        Inputs.OnJumpAttackInput += JumpAttack;
         
         InitStateMachine();
         InitSkills();
@@ -105,12 +106,13 @@ public class PlayerController : MonoBehaviour
     {
         StateMachine = new StateMachine(StateName.Move, new MoveState(this));
         StateMachine.AddState(StateName.IFrame, new IFrameState(this));
-        StateMachine.AddState(StateName.Melee, new MeleeState(this));
+        StateMachine.AddState(StateName.Melee, new AttackState(this));
     }
     
     private void InitSkills()
     {
-        SkillManager.AddSkill(PlayerSkillName.Melee, new Melee(this));
+        SkillManager.AddSkill(PlayerSkillName.Default, new Melee(this));
+        SkillManager.AddSkill(PlayerSkillName.Skill, new JumpAttack(this));
     }
     
     private void AssignAnimationIDs()
@@ -205,15 +207,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    #region Melee
+    #region Attack
 
     private void Melee()
     {
         if (!(StateMachine.CurrentState is MoveState))
             return;
 
-        SkillManager.SetCurrentSkill(PlayerSkillName.Melee);
-        MeleeState state = (MeleeState)(StateMachine.GetState(StateName.Melee));
+        SkillManager.SetCurrentSkill(PlayerSkillName.Default);
+        AttackState state = (AttackState)(StateMachine.GetState(StateName.Melee));
+        if (state != null && SkillManager.CurrentSkill.IsAvailable())
+        {
+            state.SetCurSkill(SkillManager.CurrentSkill);
+            StateMachine.ChangeState(StateName.Melee);
+        }
+    }
+    
+    private void JumpAttack()
+    {
+        if (!(StateMachine.CurrentState is MoveState))
+            return;
+
+        SkillManager.SetCurrentSkill(PlayerSkillName.Skill);
+        AttackState state = (AttackState)(StateMachine.GetState(StateName.Melee));
         if (state != null && SkillManager.CurrentSkill.IsAvailable())
         {
             state.SetCurSkill(SkillManager.CurrentSkill);

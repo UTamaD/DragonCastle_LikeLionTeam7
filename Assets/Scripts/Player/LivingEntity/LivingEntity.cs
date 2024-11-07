@@ -7,8 +7,8 @@ using UnityEngine.Serialization;
 public class LivingEntity : MonoBehaviour, IDamageable
 {
     [Header("== Basic Status ==")]
-    public float HpMax = 100;    
-    public float MpMax = 100;
+    public readonly float HpMax = 100;    
+    public readonly float MpMax = 100;
 
     public float Hp { get; protected set; }
     public float Mp { get; protected set; }

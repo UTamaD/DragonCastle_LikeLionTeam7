@@ -50,18 +50,18 @@ public class GameManager : MonoBehaviour
         switch (msg.MessageCase)
         {
             case GameMessage.MessageOneofCase.PlayerPosition:
-                PlayerController.Instance.OnOtherPlayerPositionUpdate(msg.PlayerPosition);
+                PlayerSpawner.Instance.OnOtherPlayerPositionUpdate(msg.PlayerPosition);
                 break;
             case GameMessage.MessageOneofCase.SpawnMyPlayer:
                 var mySpawnPos = new Vector3(msg.SpawnMyPlayer.X, msg.SpawnMyPlayer.Y, msg.SpawnMyPlayer.Z);
-                PlayerController.Instance.OnSpawnMyPlayer(mySpawnPos);
+                PlayerSpawner.Instance.OnSpawnMyPlayer(mySpawnPos);
                 break;
             case GameMessage.MessageOneofCase.SpawnOtherPlayer:
                 var otherSpawnPos = new Vector3(msg.SpawnOtherPlayer.X, msg.SpawnOtherPlayer.Y, msg.SpawnOtherPlayer.Z);
-                PlayerController.Instance.SpawnOtherPlayer(msg.SpawnOtherPlayer.PlayerId, otherSpawnPos);
+                PlayerSpawner.Instance.SpawnOtherPlayer(msg.SpawnOtherPlayer.PlayerId, otherSpawnPos);
                 break;
             case GameMessage.MessageOneofCase.Logout:
-                PlayerController.Instance.DestroyOtherPlayer(msg.Logout.PlayerId);
+                PlayerSpawner.Instance.DestroyOtherPlayer(msg.Logout.PlayerId);
                 break;
             case GameMessage.MessageOneofCase.SpawnMonster:
                 HandleSpawnMonster(msg.SpawnMonster);
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
                 HandlePathTest(msg.PathTest);
                 break;
             case GameMessage.MessageOneofCase.Chat:
-                PlayerController.Instance.OnRecevieChatMsg(msg.Chat);
+                PlayerSpawner.Instance.OnRecevieChatMsg(msg.Chat);
                 break;
             case GameMessage.MessageOneofCase.MonsterAttack:
                 HandleMonsterAttack(msg.MonsterAttack);

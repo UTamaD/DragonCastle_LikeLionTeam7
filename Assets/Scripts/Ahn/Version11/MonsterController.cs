@@ -138,7 +138,7 @@ public class MonsterController : MonoBehaviour
     }
     public void PerformAttack(string targetPlayerId, int attackType, float damage)
     {
-        Transform targetTransform = PlayerController.Instance.GetPlayerTransform(targetPlayerId);
+        Transform targetTransform = PlayerSpawner.Instance.GetPlayerTransform(targetPlayerId);
         if (targetTransform == null) return;
 
         // 타겟 저장
@@ -412,7 +412,7 @@ public class MonsterController : MonoBehaviour
 
         if (hasTarget)
         {
-            Transform targetTransform = PlayerController.Instance.GetPlayerTransform(targetPlayerId);
+            Transform targetTransform = PlayerSpawner.Instance.GetPlayerTransform(targetPlayerId);
             if (targetTransform != null)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);

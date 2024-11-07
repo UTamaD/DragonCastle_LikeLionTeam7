@@ -21,11 +21,7 @@ public class PlayerInputs : MonoBehaviour
 
     public UnityAction OnIFrameInput;
     public UnityAction OnMeleeInput;
-
-    private void Awake()
-    {
-	    DontDestroyOnLoad(this.gameObject);
-    }
+    public UnityAction OnJumpAttackInput;
 
     public void OnMove(InputValue value)
     {
@@ -53,6 +49,11 @@ public class PlayerInputs : MonoBehaviour
     public void OnMelee(InputValue value)
     {
 	    OnMeleeInput.Invoke();
+    }
+    
+    public void OnJumpAttack(InputValue value)
+    {
+	    OnJumpAttackInput.Invoke();
     }
     
     public void MoveInput(Vector2 newMoveDirection)

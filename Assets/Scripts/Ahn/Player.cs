@@ -23,22 +23,23 @@ public class Player : MonoBehaviour
     {
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
-        initRot = bodyObject.localRotation;
-        
-        if (playerCamera == null)
-        {
-            playerCamera = GetComponentInChildren<Camera>();
-        }
+        //initRot = bodyObject.localRotation;
+        initRot = transform.localRotation;
+        player = transform;
+        // if (playerCamera == null)
+        // {
+        //     playerCamera = GetComponentInChildren<Camera>();
+        // }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 moveForward = CalculateMoveForward();
-        ApplyMovement(moveForward);
-        UpdateAim();
-        UpdateCamera();
-        SendPositionToServer(moveForward);
+        //Vector3 moveForward = CalculateMoveForward();
+        //ApplyMovement(moveForward);
+        //UpdateAim();
+        //UpdateCamera();
+        SendPositionToServer(transform.position);
     }
     
     private void ApplyMovement(Vector3 moveForward)
@@ -90,6 +91,6 @@ public class Player : MonoBehaviour
 
     private void LateUpdate()
     {
-        bodyObject.rotation = Quaternion.Euler(0, player.eulerAngles.y, 0);
+        //bodyObject.rotation = Quaternion.Euler(0, player.eulerAngles.y, 0);
     }
 }

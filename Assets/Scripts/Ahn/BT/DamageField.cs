@@ -79,7 +79,7 @@ public class DamageField : MonoBehaviour
 
         foreach (var hitCollider in hitColliders)
         {
-            IDamageable damageable = hitCollider.GetComponent<IDamageable>();
+            IDamageable_th damageable = hitCollider.GetComponent<IDamageable_th>();
             if (damageable != null)
             {
                 ApplyEffectsToTarget(damageable, hitCollider.transform);
@@ -97,7 +97,7 @@ public class DamageField : MonoBehaviour
         });
     }
 
-    private void ApplyEffectsToTarget(IDamageable target, Transform targetTransform)
+    private void ApplyEffectsToTarget(IDamageable_th target, Transform targetTransform)
     {
         // Apply damage
         target.TakeDamage(damageAmount, damageType);
@@ -136,7 +136,7 @@ public class DamageField : MonoBehaviour
 }
 
 // 필요한 인터페이스 정의
-public interface IDamageable
+public interface IDamageable_th
 {
     void TakeDamage(float amount, DamageField.DamageType damageType);
 }

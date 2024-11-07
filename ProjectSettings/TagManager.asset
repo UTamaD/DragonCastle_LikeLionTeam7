@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Ally
+  - Animal
+  - CameraFocus
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Water
   - UI
   - Wall
-  - 
+  - Player
   - 
   - 
   - 

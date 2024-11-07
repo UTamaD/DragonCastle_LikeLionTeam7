@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum PlayerSkillName
 {
-    Melee,
-    Charge,
-    Dash,
+    Default,
+    Skill,
+    Ultimate,
 }
 
 public class SkillManager : MonoBehaviour
@@ -21,7 +21,6 @@ public class SkillManager : MonoBehaviour
         {
             CurrentSkill = newSkill;
         }
-
     }
     
     public void AddSkill(PlayerSkillName skillName, SkillBase skill)
