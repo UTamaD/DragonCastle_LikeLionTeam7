@@ -90,9 +90,50 @@ public class GameManager : MonoBehaviour
             case GameMessage.MessageOneofCase.MonsterDamage:
                 HandleMonsterDamage(msg.MonsterDamage);
                 break;
+            case GameMessage.MessageOneofCase.PlayerDamage:
+                HandlePlayerDamage(msg.PlayerDamage);
+                break;
+                
         }
     }
 
+
+
+private void HandlePlayerDamage(PlayerDamage playerDamage)
+{
+    Debug.Log($"Received damage for player: {playerDamage.PlayerId}");
+    Debug.Log($"Current player ID: {SuperManager.Instance.playerId}");
+    
+    // 내 플레이어가 맞은 경우
+    if (playerDamage.PlayerId == SuperManager.Instance.playerId)
+    {
+        Player myPlayer = PlayerController.Instance.GetMyPlayer();
+        if (myPlayer != null)
+        {
+            Debug.Log($"Applying {playerDamage.AttackType} damage: {playerDamage.Damage} to player: {myPlayer.PlayerId}");
+            myPlayer.TakeDamage(playerDamage.Damage);
+
+        }
+    }
+    else
+    {
+        
+        if (PlayerController.Instance.TryGetOtherPlayer(playerDamage.PlayerId, out OtherPlayer otherPlayer))
+        {
+            
+            Vector3 hitPoint = new Vector3(
+                playerDamage.HitPointX,
+                playerDamage.HitPointY,
+                playerDamage.HitPointZ
+            );
+
+            if (EffectManager.Instance != null)
+            {
+                // 피격 효과 재생
+            }
+        }
+    }
+}
     private void HandleSpawnMonster(SpawnMonster spawnData)
     {
         Vector3 spawnPosition = new Vector3(spawnData.X, 0, spawnData.Z);

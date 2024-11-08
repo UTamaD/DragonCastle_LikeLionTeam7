@@ -769,6 +769,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3762505437388365401}
+    - targetCorrespondingSourceObject: {fileID: 4394589388690788992, guid: 727171be4d6b9a2408c00d7921846e1b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3489750577739424627}
   m_SourcePrefab: {fileID: 100100000, guid: 727171be4d6b9a2408c00d7921846e1b, type: 3}
 --- !u!4 &78749488242247728 stripped
 Transform:
@@ -1244,6 +1248,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6529354768492644265}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7376995500318020905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4394589388690788992, guid: 727171be4d6b9a2408c00d7921846e1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6529354768492644265}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3489750577739424627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7376995500318020905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ca75cc972fc064a8aaa52e7b4c0d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config:
+    damageType: 0
+    deactivationType: 2
+    activationDelay: 0
+    duration: 1
+    damageAmount: 10
+    damageInterval: 0
+    radius: 3
+    hitEffect: {fileID: 0}
+    hitSound: {fileID: 0}
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  showDebugGizmos: 1
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.3}
 --- !u!4 &7418892796731907288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4353254745652665201, guid: 727171be4d6b9a2408c00d7921846e1b,
@@ -1316,7 +1353,7 @@ MonoBehaviour:
       followTarget: 0
     sound: {fileID: 8300000, guid: f059f51c270dd6d479ad8b8338a7079f, type: 3}
   projectileConfig:
-    projectilePrefab: {fileID: 1758863767508122, guid: 45d59be98d4e9254891ee54e2ff234e7,
+    projectilePrefab: {fileID: 1758863767508122, guid: 2918916d153e0774488dcd0e4db941fc,
       type: 3}
     spawnPoint: {fileID: 6022714755959505748}
     speed: 10
@@ -1332,6 +1369,8 @@ MonoBehaviour:
     duration: 2
   attackSound: {fileID: 8300000, guid: f059f51c270dd6d479ad8b8338a7079f, type: 3}
   meteorStrikeController: {fileID: 839455525664881390}
+  maxHealth: 100
+  WingLMeleeDamageField: {fileID: 3489750577739424627}
 --- !u!114 &661204062820336749
 MonoBehaviour:
   m_ObjectHideFlags: 0

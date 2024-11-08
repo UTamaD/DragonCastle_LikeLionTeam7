@@ -119,6 +119,9 @@ public class MonsterController : MonoBehaviour
     public float maxHealth = 100f;
     private float currentHealth;
 
+    [Header("MeleeDamageFields")]
+    [SerializeField]
+    private DamageField WingLMeleeDamageField;
     private void Awake()
     {
         
@@ -473,10 +476,22 @@ public class MonsterController : MonoBehaviour
         }
     }
     
-    
     public void OnAttackStart()
     {
         isAttacking = true;
+    }
+    
+    public void OnAttackStart(string AttackType)
+    {
+
+        isAttacking = true;
+
+        switch (AttackType)
+        {
+            case "WingMelee":
+                WingLMeleeDamageField?.StartDamageField();
+                break;
+        }
     }
 
     public void OnAttackEnd()
@@ -491,6 +506,22 @@ public class MonsterController : MonoBehaviour
             Destroy(activeChargingEffect);
             activeChargingEffect = null;
         }
+
+    }
+    
+    public void OnAttackEnd(string AttackType)
+    {
+        isAttacking = false;
+        
+        //근접 공격 데미지 필드 
+        switch (AttackType)
+        {
+            case "WingMelee":
+                WingLMeleeDamageField?.DeactivateDamageField();
+                break;
+        }
+        
+        
     }
     
     
@@ -531,6 +562,7 @@ public class MonsterController : MonoBehaviour
         // 일정 시간 후 오브젝트 제거
         Destroy(gameObject, 2f);
     }
+    
 
     
     

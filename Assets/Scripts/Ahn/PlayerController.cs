@@ -39,20 +39,24 @@ public class PlayerController : MonoBehaviour
     {
         GameObject SpawnPlayer = Instantiate(MyPlayerTemplate.gameObject, new Vector3(0, 1, 0), Quaternion.identity);
         myPlayer = SpawnPlayer.GetComponent<Player>();
+        myPlayer.Initialize(SuperManager.Instance.playerId);
     }
 
     public void SpawnOtherPlayer(string playerId, Vector3 spawnPos)
     {
-        GameObject SpawnPlayer = Instantiate(OtherPlayerTemplate.gameObject, spawnPos, Quaternion.identity);
+        GameObject spawnPlayer = Instantiate(OtherPlayerTemplate.gameObject, spawnPos, Quaternion.identity);
 
-        OtherPlayer otherPlayer = SpawnPlayer.GetComponent<OtherPlayer>();
+        OtherPlayer otherPlayer = spawnPlayer.GetComponent<OtherPlayer>();
+        Player playerComponent = spawnPlayer.GetComponent<Player>();
+        playerComponent.Initialize(playerId);
+        
         otherPlayer.transform.position = spawnPos;
         
         var vector3 = otherPlayer.transform.position;
         vector3.y = 1;
         otherPlayer.transform.position = vector3;
         
-        Camera otherPlayerCamera = SpawnPlayer.GetComponentInChildren<Camera>();
+        Camera otherPlayerCamera = spawnPlayer.GetComponentInChildren<Camera>();
         if (otherPlayerCamera != null)
         {
             otherPlayerCamera.gameObject.SetActive(false);
@@ -83,7 +87,7 @@ public class PlayerController : MonoBehaviour
     public Transform GetPlayerTransform(string playerId)
     {
         // 자신의 플레이어인 경우
-        if (myPlayer != null && playerId == SuperManager.Instance.playerId)
+        if (myPlayer != null && playerId == myPlayer.PlayerId)
         {
             return myPlayer.transform;
         }
@@ -104,5 +108,16 @@ public class PlayerController : MonoBehaviour
         {
             otherPlayer.UpdatePlayerPosition(playerPosition);
         }
+    }
+    
+    
+    public Player GetMyPlayer()
+    {
+        return myPlayer;
+    }
+
+    public bool TryGetOtherPlayer(string playerId, out OtherPlayer otherPlayer)
+    {
+        return _otherPlayers.TryGetValue(playerId, out otherPlayer);
     }
 }
