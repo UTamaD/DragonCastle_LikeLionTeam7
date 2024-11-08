@@ -105,6 +105,16 @@ message MonsterDamage {
     int32 currentHp = 3;
 }
 
+message PlayerDamage {
+    string playerId = 1;
+    float damage = 2;
+    int32 attackType = 3;
+    float hitPointX = 4;
+    float hitPointY = 5;
+    float hitPointZ = 6;
+}
+
+
 
 message GameMessage {
   oneof message {
@@ -122,5 +132,6 @@ message GameMessage {
     MonsterProjectile monsterProjectile = 12;
     MeteorStrike meteorStrike = 13;
     MonsterDamage monsterDamage = 14;
+    PlayerDamage playerDamage = 15;
   }
 } 

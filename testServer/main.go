@@ -87,6 +87,9 @@ func processMessage(message *pb.GameMessage, conn *net.Conn) {
 		if monster, exists := monsterManager.GetMonster(msg.MonsterDamage.MonsterId); exists {
 			monster.TakeDamage(int(msg.MonsterDamage.Damage))
 		}
+	case *pb.GameMessage_PlayerDamage:
+		playerManager := mg.GetPlayerManager()
+		playerManager.Broadcast(message)
 	default:
 		panic(fmt.Sprintf("unexpected messages.isGameMessage_Message: %#v", msg))
 	}
