@@ -7,6 +7,7 @@ public enum StateName
     Move = 0,
     IFrame,
     Melee,
+    Damaged,
 }
 
 public class StateMachine

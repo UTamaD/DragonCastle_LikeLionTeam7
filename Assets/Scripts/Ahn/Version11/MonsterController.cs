@@ -157,7 +157,7 @@ public class MonsterController : MonoBehaviour
 
         
         
-        Transform targetTransform = PlayerController.Instance.GetPlayerTransform(targetPlayerId);
+        Transform targetTransform = PlayerSpawner.Instance.GetPlayerTransform(targetPlayerId);
 
         currentTarget = targetTransform;
         if (targetTransform == null)
@@ -436,7 +436,7 @@ public class MonsterController : MonoBehaviour
 
         if (hasTarget)
         {
-            Transform targetTransform = PlayerController.Instance.GetPlayerTransform(targetPlayerId);
+            Transform targetTransform = PlayerSpawner.Instance.GetPlayerTransform(targetPlayerId);
             if (targetTransform != null)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);

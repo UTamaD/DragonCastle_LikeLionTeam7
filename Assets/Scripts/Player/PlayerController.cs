@@ -98,6 +98,9 @@ public class PlayerController : MonoBehaviour
         Inputs.OnMeleeInput += Melee;
         Inputs.OnJumpAttackInput += JumpAttack;
         
+        // Living Event
+        LivingEntity.OnDamagedEvent += Damaged;
+        
         InitStateMachine();
         InitSkills();
     }
@@ -107,6 +110,7 @@ public class PlayerController : MonoBehaviour
         StateMachine = new StateMachine(StateName.Move, new MoveState(this));
         StateMachine.AddState(StateName.IFrame, new IFrameState(this));
         StateMachine.AddState(StateName.Melee, new AttackState(this));
+        StateMachine.AddState(StateName.Damaged, new DamagedState(this));
     }
     
     private void InitSkills()
@@ -255,6 +259,14 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Damaged
+    private void Damaged()
+    {
+        StateMachine.ChangeState(StateName.Damaged);
+    }
+    
+    #endregion
+
     #region coroutineCtrl
     public Coroutine CoroutineStarter(IEnumerator coroutine)
     {
@@ -341,6 +353,11 @@ public class PlayerController : MonoBehaviour
     }
     
     private void OnEndMelee()
+    {
+        StateMachine.ChangeState(StateName.Move);
+    }
+
+    private void OnEndDamaged()
     {
         StateMachine.ChangeState(StateName.Move);
     }

@@ -37,7 +37,8 @@ public class CombatSystem : MonoBehaviour
         SkillBase skill = Owner.SkillManager.GetSkill(skillName);
         
         Collider damagedObj = hit.collider;
-        float def = damagedObj.GetComponent<CombatSystem>().CalculateDefense();
+        MonsterController monster = damagedObj.GetComponent<MonsterController>();
+        float def = 0;
         
         DamageMessage msg = new DamageMessage
         {
@@ -48,7 +49,8 @@ public class CombatSystem : MonoBehaviour
             hitNormal = hit.normal
         };
 
-        damagedObj.GetComponent<LivingEntity>().ApplyDamage(msg);
+        float dmg = CalculateDamage(_atk * skill.AttackMultiplier, def);
+        monster.TakeDamage(dmg);
     }
 
     private void DeleteGizmos()
