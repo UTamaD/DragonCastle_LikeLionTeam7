@@ -18,9 +18,26 @@ public class Player : MonoBehaviour
 
     private Vector3 prevMoveForward;
     
+    
+    public float maxHealth = 100f;
+    private float currentHealth;
+
+    public string PlayerId { get; private set; }
+    
     private Quaternion initRot;
+    
+    
+    public void Initialize(string playerId)
+    {
+        PlayerId = playerId;
+        currentHealth = maxHealth;
+    }
+    
+    
     private void Start()
     {
+        
+        currentHealth = maxHealth;
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
         //initRot = bodyObject.localRotation;
@@ -92,5 +109,26 @@ public class Player : MonoBehaviour
     private void LateUpdate()
     {
         //bodyObject.rotation = Quaternion.Euler(0, player.eulerAngles.y, 0);
+    }
+    
+
+
+
+    public void TakeDamage(float damage)
+    {
+        
+        Debug.Log("Player Take Damage : " + damage);
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            // 사망 처리
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        // 사망 처리 로직
+        Debug.Log("Player died");
     }
 }

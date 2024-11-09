@@ -260,6 +260,28 @@ public class TcpProtobufClient : MonoBehaviour
             ConnectToServer();
         }
     }
+    
+    public void SendPlayerDamage(string playerId, float damage, int attackType, float hitX, float hitY, float hitZ)
+    {
+        var damageMessage = new PlayerDamage
+        {
+            PlayerId = playerId,
+            Damage = damage,
+            AttackType = attackType,
+            HitPointX = hitX,
+            HitPointY = hitY,
+            HitPointZ = hitZ
+        };
+
+        var message = new GameMessage
+        {
+            PlayerDamage = damageMessage
+        };
+
+        SendMessage(message);
+    }
+    
+    
     void OnDisable()
     {
         try
@@ -282,4 +304,7 @@ public class TcpProtobufClient : MonoBehaviour
             Debug.LogError($"Error during cleanup: {e.Message}");
         }
     }
+    
+    
+    
 }
