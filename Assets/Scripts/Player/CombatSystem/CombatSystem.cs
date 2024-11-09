@@ -37,7 +37,10 @@ public class CombatSystem : MonoBehaviour
         SkillBase skill = Owner.SkillManager.GetSkill(skillName);
         
         Collider damagedObj = hit.collider;
-        MonsterController monster = damagedObj.GetComponent<MonsterController>();
+        MonsterController monster = damagedObj.GetComponentInParent<MonsterController>();
+        if (!monster)
+            return;
+        
         float def = 0;
         
         DamageMessage msg = new DamageMessage

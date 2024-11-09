@@ -6,15 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5fccdaff-4ccb-49c6-8529-4b0227ee80c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Ahn/DamageField.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Ahn/DamageField.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2/Global Volume Profile.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2/Global Volume Profile.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2/Volume Profile.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2/Volume Profile.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test_Jeongin_2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test_Jeongin_2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/DamageField.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/DamageField.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerMovement.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerMovement.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/CombatSystem/CombatSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/CombatSystem/CombatSystem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +122,7 @@
       <workItem from="1730943916740" duration="1244000" />
       <workItem from="1731136933320" duration="2126000" />
       <workItem from="1731139843383" duration="598000" />
+      <workItem from="1731141551901" duration="378000" />
     </task>
     <servers />
   </component>
