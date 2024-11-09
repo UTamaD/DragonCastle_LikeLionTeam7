@@ -99,41 +99,42 @@ public class GameManager : MonoBehaviour
 
 
 
-private void HandlePlayerDamage(PlayerDamage playerDamage)
-{
-    Debug.Log($"Received damage for player: {playerDamage.PlayerId}");
-    Debug.Log($"Current player ID: {SuperManager.Instance.playerId}");
-    
-    // 내 플레이어가 맞은 경우
-    if (playerDamage.PlayerId == SuperManager.Instance.playerId)
+    private void HandlePlayerDamage(PlayerDamage playerDamage)
     {
-        Player myPlayer = PlayerController.Instance.GetMyPlayer();
-        if (myPlayer != null)
-        {
-            Debug.Log($"Applying {playerDamage.AttackType} damage: {playerDamage.Damage} to player: {myPlayer.PlayerId}");
-            myPlayer.TakeDamage(playerDamage.Damage);
-
-        }
-    }
-    else
-    {
+        Debug.Log($"Received damage for player: {playerDamage.PlayerId}");
+        Debug.Log($"Current player ID: {SuperManager.Instance.playerId}");
         
-        if (PlayerController.Instance.TryGetOtherPlayer(playerDamage.PlayerId, out OtherPlayer otherPlayer))
+        // 내 플레이어가 맞은 경우
+        if (playerDamage.PlayerId == SuperManager.Instance.playerId)
+        {
+            Player myPlayer = PlayerSpawner.Instance.GetMyPlayer();
+            if (myPlayer != null)
+            {
+                Debug.Log($"Applying {playerDamage.AttackType} damage: {playerDamage.Damage} to player: {myPlayer.PlayerId}");
+                myPlayer.TakeDamage(playerDamage.Damage);
+
+            }
+        }
+        else
         {
             
-            Vector3 hitPoint = new Vector3(
-                playerDamage.HitPointX,
-                playerDamage.HitPointY,
-                playerDamage.HitPointZ
-            );
-
-            if (EffectManager.Instance != null)
+            if (PlayerSpawner.Instance.TryGetOtherPlayer(playerDamage.PlayerId, out OtherPlayer otherPlayer))
             {
-                // 피격 효과 재생
+                
+                Vector3 hitPoint = new Vector3(
+                    playerDamage.HitPointX,
+                    playerDamage.HitPointY,
+                    playerDamage.HitPointZ
+                );
+
+                if (EffectManager.Instance != null)
+                {
+                    // 피격 효과 재생
+                }
             }
         }
     }
-}
+    
     private void HandleSpawnMonster(SpawnMonster spawnData)
     {
         Vector3 spawnPosition = new Vector3(spawnData.X, 0, spawnData.Z);

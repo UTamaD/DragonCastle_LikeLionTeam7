@@ -325,18 +325,3 @@ public class DamageField : MonoBehaviour
 
     
 }
-
-public interface IDamageable
-{
-    void TakeDamage(float amount, DamageField.DamageType damageType);
-}
-
-public interface IKnockbackable
-{
-    void ApplyKnockback(Vector3 direction, float force, float duration);
-}
-
-public interface IDebuffable
-{
-    void ApplyDebuff(string debuffType, float duration, float intensity);
-}
