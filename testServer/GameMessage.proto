@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+package game;
+
+option go_package = "/Messages";
+
+message NavV3 {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message PathTest {
+  repeated NavV3 paths = 1;
+}
+
+message PlayerPosition {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+  float fx = 4;
+  float fy = 5;
+  float fz = 6;
+  string player_id = 7;
+  float speed = 8;
+  float rotation_y = 9;
+}
+
+message SpawnMyPlayer {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+  float rotation_y = 4;
+}
+
+message SpawnOtherPlayer {
+  string playerId = 1;
+  float x = 2;
+  float y = 3;
+  float z = 4;
+  float rotation_y = 5;
+}
+
+message ChatMessage {
+  string sender = 1;
+  string content = 2;
+}
+
+message LoginMessage {
+  string playerId = 1;    
+}
+
+message LogoutMessage {
+  string playerId = 1;    
+}
+
+
+message SpawnMonster {
+  float x = 1;
+  float z = 2;
+  int32 monsterId = 3;
+}
+
+message MoveMonster {
+  float x = 1;
+  float z = 2;
+  int32 monsterId = 3;
+}
+
+message MonsterTarget {
+  int32 monsterId = 1;
+  string targetPlayerId = 2;
+  bool hasTarget = 3;
+}
+
+message MonsterAttack {
+    int32 monsterId = 1;
+    string targetPlayerId = 2;
+    int32 attackType = 3;
+    float damage = 4;
+}
+
+message MonsterProjectile {
+    int32 monsterId = 1;
+    float startX = 2;
+    float startZ = 3;
+    float targetX = 4;
+    float targetZ = 5;
+    int32 projectileId = 6;
+}
+
+message MeteorStrikePosition {
+    float x = 1;
+    float z = 2;
+}
+
+message MeteorStrike {
+    int32 monsterId = 1;
+    repeated MeteorStrikePosition positions = 2;
+}
+
+message MonsterDamage {
+    int32 monsterId = 1;
+    float damage = 2;
+    int32 currentHp = 3;
+}
+
+message PlayerDamage {
+    string playerId = 1;
+    float damage = 2;
+    int32 attackType = 3;
+    float hitPointX = 4;
+    float hitPointY = 5;
+    float hitPointZ = 6;
+}
+
+
+
+message GameMessage {
+  oneof message {
+    PlayerPosition player_position = 1;
+    ChatMessage chat = 2;
+    LoginMessage login = 3;
+    SpawnMyPlayer spawnMyPlayer = 4;
+    SpawnOtherPlayer spawnOtherPlayer = 5;
+    LogoutMessage logout = 6;
+    PathTest pathTest = 7;
+    SpawnMonster spawnMonster = 8;
+    MoveMonster moveMonster = 9;
+    MonsterTarget monsterTarget = 10;
+    MonsterAttack monsterAttack = 11;
+    MonsterProjectile monsterProjectile = 12;
+    MeteorStrike meteorStrike = 13;
+    MonsterDamage monsterDamage = 14;
+    PlayerDamage playerDamage = 15;
+  }
+} 
