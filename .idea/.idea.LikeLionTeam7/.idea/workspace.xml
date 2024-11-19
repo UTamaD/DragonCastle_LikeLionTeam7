@@ -6,76 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5fccdaff-4ccb-49c6-8529-4b0227ee80c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/UAttack FireBall.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/UAttack FireBall.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/UAttack Wind High Loop.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/UAttack Wind High Loop.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/UAttack Wing L.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/UAttack Wing L.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/Unka Walk.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/Unka Walk.FBX.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/DragonBossController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/DragonBossController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack FireBall.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack FireBall.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Wind High Loop.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Wind High Loop.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Wing L.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Wing L.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Player/Player.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Malbers Animations/Dragons/4 - Unka the Dragon/1 - Unka AC/2 - Asset/Unka AC v2.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Malbers Animations/Dragons/4 - Unka the Dragon/1 - Unka AC/2 - Asset/Unka AC v2.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Malbers Animations/Dragons/Common/Eyes/Realistic/Eye Exotic Pink.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Malbers Animations/Dragons/Common/Eyes/Realistic/Eye Exotic Pink.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Malbers Animations/Dragons/Common/Eyes/Realistic/Eye Round Orange.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Malbers Animations/Dragons/Common/Eyes/Realistic/Eye Round Orange.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Dragon/DragonBoss.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Dragon/DragonBoss.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test_Jeongin_2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test_Jeongin_2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/DamageField.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/DamageField.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Player.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Player.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameMessage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/TcpProtobufClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/TcpProtobufClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/CombatSystem/CombatSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/CombatSystem/CombatSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Distortion.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Distortion.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Distortion.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Distortion.mat.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/FlashGroundCG.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/FlashGroundCG.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/FlashGroundCG.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/FlashGroundCG.mat.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Gradient17сg.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Gradient17сg.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Gradient17сg.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Gradient17сg.mat.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Point12cg.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Point12cg.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Point12cg.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Point12cg.mat.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Point19bcg.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Point19bcg.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Point19bcg.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Materials/Point19bcg.mat.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Models/QuadToCircle.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Models/QuadToCircle.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Settings/PP low.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Settings/PP low.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Settings/PP low.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Settings/PP low.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Settings/PPvolume.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Settings/PPvolume.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Settings/PPvolume.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Settings/PPvolume.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Add_CenterGlow.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Add_CenterGlow.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Add_CenterGlow.shader.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Add_CenterGlow.shader.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Blend_CenterGlow.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Blend_CenterGlow.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Blend_CenterGlow.shader.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Blend_CenterGlow.shader.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Distortion.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Distortion.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Distortion.shader.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Shaders/Distortion.shader.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Gradient17.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Gradient17.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Gradient3r.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Gradient3r.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/MaskForShader.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/MaskForShader.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Noise28.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Noise28.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Noise34.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Noise34.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/NormalMap8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/NormalMap8.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Point12.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Point12.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Point19.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Point19.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Trail58.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/HSFiles/Textures/Trail58.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Map track markers VFX/Demo scene/Standard material.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/RPG VFX Bundle/URP and HDRP patches/HDRP patch.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/RPG VFX Bundle/URP and HDRP patches/URP patch.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Add_CG.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Add_CG.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Add_CG.shadergraph.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Add_CG.shadergraph.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Blend_CG.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Blend_CG.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Blend_CG.shadergraph.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Blend_CG.shadergraph.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Distortion.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Distortion.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Distortion.shadergraph.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Render Pipelines support/Shaders/URP_Distortion.shadergraph.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +133,7 @@
       <workItem from="1731483650132" duration="9181000" />
       <workItem from="1731837457361" duration="12442000" />
       <workItem from="1731892257586" duration="5996000" />
-      <workItem from="1731990585891" duration="7947000" />
+      <workItem from="1731990585891" duration="9117000" />
     </task>
     <servers />
   </component>

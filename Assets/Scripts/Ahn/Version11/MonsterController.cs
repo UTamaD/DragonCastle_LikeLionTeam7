@@ -222,7 +222,7 @@ public class MonsterController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(
                     transform.rotation,
                     Quaternion.LookRotation(moveDirection),
-                    currentLerpSpeed * Time.deltaTime
+                    currentLerpSpeed * Time.deltaTime * 5f
                 );
             }
 
