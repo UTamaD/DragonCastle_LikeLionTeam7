@@ -44,6 +44,15 @@ public class DamageField : MonoBehaviour
         [Header("Effect Settings")]
         public GameObject hitEffect;
         public AudioClip hitSound;
+        
+        public GameObject hitEnvironmentEffect;
+        public AudioClip hitEnvironmentSound;
+
+        [Header("Collision Settings")]
+        [Tooltip("플레이어 외의 레이어와의 충돌 여부")]
+        public bool checkEnvironmentCollision = false;
+        [Tooltip("환경 충돌 시 이펙트 생성 여부")]
+        public bool createEffectOnEnvironmentCollision = true;
     }
 
     [Header("Configuration")]
@@ -51,6 +60,8 @@ public class DamageField : MonoBehaviour
     
     [Header("Target Settings")]
     public LayerMask targetLayers;
+    [Tooltip("환경 충돌 체크용 레이어")]
+    public LayerMask environmentLayers;
     
     [Header("Debug")]
     public bool showDebugGizmos = true;
@@ -59,6 +70,7 @@ public class DamageField : MonoBehaviour
     // Private fields
     private float damageTimer;
     private HashSet<Player> hitPlayers = new HashSet<Player>();
+    private HashSet<int> hitEnvironmentObjects = new HashSet<int>();
     private Collider damageCollider;
     private bool isActive = false;
     private float currentDuration;
@@ -122,6 +134,7 @@ public class DamageField : MonoBehaviour
         currentDuration = 0f;
         damageTimer = 0f;
         hitPlayers.Clear();
+        hitEnvironmentObjects.Clear();
         SetColliderState(true);
     }
     
@@ -164,6 +177,7 @@ public class DamageField : MonoBehaviour
     {
         if (!isActive) return;
 
+        // 플레이어 충돌 체크
         Player player = other.GetComponent<Player>();
         if (player != null && !hitPlayers.Contains(player))
         {
@@ -174,14 +188,47 @@ public class DamageField : MonoBehaviour
                 hitPlayers.Add(player);
             }
 
-            // 충돌시 비활성화 타입이고 근접 공격이 아닌 경우
             if (config.deactivationType == DeactivationType.Collision 
                 && config.damageType != DamageType.Melee)
             {
                 DeactivateDamageField();
+                return;
             }
         }
+        // 환경 오브젝트 충돌 체크
+        if (config.checkEnvironmentCollision && 
+            ((1 << other.gameObject.layer) & environmentLayers.value) != 0 &&
+            !hitEnvironmentObjects.Contains(other.gameObject.GetInstanceID()))
+        {
+            HandleEnvironmentCollision(other);
+        }
     }
+    
+    
+    private void HandleEnvironmentCollision(Collider other)
+    {
+        int objectId = other.gameObject.GetInstanceID();
+        hitEnvironmentObjects.Add(objectId);
+
+        if (config.createEffectOnEnvironmentCollision && config.hitEnvironmentEffect != null)
+        {
+            Debug.Log("HandleEnvironmentCollision");
+            Vector3 collisionPoint = GetCollisionPoint(other);
+            Instantiate(config.hitEnvironmentEffect, collisionPoint, Quaternion.identity);
+        }
+
+        if (config.hitEnvironmentSound != null)
+        {
+            AudioSource.PlayClipAtPoint(config.hitEnvironmentSound, other.transform.position);
+        }
+
+        if (config.deactivationType == DeactivationType.Collision 
+            && config.damageType != DamageType.Melee)
+        {
+            DeactivateDamageField();
+        }
+    }
+    
 
     private void OnTriggerStay(Collider other)
     {
@@ -262,9 +309,11 @@ public class DamageField : MonoBehaviour
     
     public void DeactivateDamageField()
     {
+        Debug.Log("DeactivateDamageField");
         isActive = false;
         SetColliderState(false);
         hitPlayers.Clear();
+        hitEnvironmentObjects.Clear();
 
         // 근접 공격이 아닌 경우에만 오브젝트 파괴
         if (config.damageType != DamageType.Melee)
@@ -320,6 +369,29 @@ public class DamageField : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(DestroyAfterDelay());
     }
+    
+    private Vector3 GetCollisionPoint(Collider other)
+    {
+        // 1. 콜라이더의 중심점 구하기
+        Vector3 colliderCenter = other.bounds.center;
+    
+        // 2. 데미지 필드의 위치에서 콜라이더 중심으로의 방향 벡터 구하기
+        Vector3 directionToCollider = (colliderCenter - transform.position).normalized;
+    
+        // 3. 레이캐스트로 정확한 충돌 지점 찾기
+        RaycastHit hit;
+        float rayDistance = Vector3.Distance(transform.position, colliderCenter) + 1f; // 약간의 여유 거리 추가
+    
+        if (Physics.Raycast(transform.position, directionToCollider, out hit, rayDistance, environmentLayers))
+        {
+            return hit.point;
+        }
+    
+        // 4. 레이캐스트가 실패한 경우 대체 방법
+        // 데미지 필드 위치와 콜라이더 중심점의 중간 지점 사용
+        return Vector3.Lerp(transform.position, colliderCenter, 0.5f);
+    }
+
     
     
 

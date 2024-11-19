@@ -5,6 +5,8 @@ using UnityEngine;
 
 public enum DamageType
 {
+    melee,
+    fire,
     
 }
 
@@ -53,7 +55,7 @@ public class CombatSystem : MonoBehaviour
         };
 
         float dmg = CalculateDamage(_atk * skill.AttackMultiplier, def);
-        monster.TakeDamage(dmg);
+        monster.TakeDamage(msg);
     }
 
     private void DeleteGizmos()

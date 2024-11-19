@@ -72,6 +72,7 @@ message SpawnMonster {
   float x = 1;
   float z = 2;
   int32 monsterId = 3;
+  float rotationY = 4;
 }
 
 message MoveMonster {
@@ -127,6 +128,12 @@ message PlayerDamage {
     float hitPointZ = 6;
 }
 
+message MonsterRotate {
+    int32 monsterId = 1;
+    float rotation = 2;
+     float duration = 3;
+}
+
 
 
 message GameMessage {
@@ -146,5 +153,6 @@ message GameMessage {
     MeteorStrike meteorStrike = 13;
     MonsterDamage monsterDamage = 14;
     PlayerDamage playerDamage = 15;
+    MonsterRotate monsterRotate = 16;
   }
 } 

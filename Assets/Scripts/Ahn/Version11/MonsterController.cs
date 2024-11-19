@@ -11,11 +11,29 @@ public class MonsterAttackEffect
     public float duration = 2f;
 }
 
+[System.Serializable]
+public class MonsterAttackConfig
+{
+    public string animationTrigger;
+    public EffectData[] effects;
+    public AudioClip sound;
+}
+
+[System.Serializable]
+public class ProjectileConfig
+{
+    public GameObject projectilePrefab;
+    public Transform spawnPoint;
+    public float speed = 10f;
+    public float maxDistance = 30f;
+    [Header("Animation Settings")]
+    public string fireAnimationTrigger = "RangedAttack";
+    public GameObject chargingEffect;
+}
 
 public class MonsterController : MonoBehaviour
 {
-    
-    // 공격 상태 열거형
+    #region State Enums
     private enum AttackState
     {
         None,
@@ -23,155 +41,267 @@ public class MonsterController : MonoBehaviour
         RangedAttack,
         MeteorAttack
     }
-    
-    private AttackState currentAttackState = AttackState.None;
-    
+    #endregion
+
+    #region Component References
+    private Animator animator;
+    private AudioSource audioSource;
+    private MonsterAnimationEffect animationEffect;
+    #endregion
+
+    #region Core Properties
     private int monsterId;
     private Vector3 currentServerPosition;
     private string currentTargetPlayerId;
     private bool hasTarget;
-    
-    [System.Serializable]
-    public class MonsterAttackConfig
-    {
-        public string animationTrigger;
-        public EffectData[] effects;
-        public AudioClip sound;
-    }
-    
-    [System.Serializable]
-    public class ProjectileConfig
-    {
-        public GameObject projectilePrefab;
-        public Transform spawnPoint;
-        public float speed = 10f;
-        public float maxDistance = 30f;
-        [Header("Animation Settings")]
-        public string fireAnimationTrigger = "RangedAttack";
-        public GameObject chargingEffect;    // 차징 시 표시할 이펙트
-    }
-    
-  
-    
+    private Transform currentTarget;
+    private AttackState currentAttackState = AttackState.None;
+    #endregion
+
+    #region Configuration Settings
     [Header("Attack Configs")]
     public MonsterAttackConfig meleeAttackConfig;
     public MonsterAttackConfig rangedAttackConfig;
-    
-    // 투사체 관련
+
     [Header("Projectile Settings")]
     public ProjectileConfig projectileConfig;
-    public float projectileSpeed = 10f;
-    
-    [SerializeField]
-    private Transform currentTarget;
-    private bool isChargingProjectile;
-    private GameObject activeChargingEffect;
-    
-    // 애니메이션 관련
-    private Animator animator;
-    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-    private static readonly int IsTurningLeft = Animator.StringToHash("IsTurningLeft");
-    private static readonly int IsTurningRight = Animator.StringToHash("IsTurningRight");
-    private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
 
-    // 공격 관련
-    private float attackRange = 2.0f;
-    private float attackDuration = 1.0f;
-    private float attackTimer;
+    [Header("Rotation Settings")]
+    [SerializeField] private float minRotationSpeed = 0.5f;
+    [SerializeField] private float rotationThreshold = 5f;
+    [SerializeField] private float maxRotationSpeed = 2f;
 
-    // 이동 관련
-    private float moveThreshold = 0.01f;        // 이동으로 간주할 최소 거리
-    private float positionLerpSpeed = 15f;      // 위치 보간 속도
-
-    // 회전 관련
-    private float rotationThreshold = 5f;       // 회전으로 간주할 최소 각도 (도)
-    private float maxRotationSpeed = 360f;      // 최대 회전 속도 (도/초)
-    private float rotationAcceleration = 720f;  // 회전 가속도 (도/초^2)
-    private float currentRotationVelocity;      // 현재 회전 속도
-    private float currentYAngle;                // 현재 Y축 회전 각도
-    private float targetYAngle;                 // 목표 Y축 회전 각도
-    private float rotationAnimThreshold = 30f;  // 회전 애니메이션 재생 임계값
+    [Header("Movement Settings")]
+    [SerializeField] private float moveThreshold = 0.01f;
+    [SerializeField] private float positionLerpSpeed = 15f;
+    [SerializeField] private float moveStopDelay = 0.5f;
+    [SerializeField] private AnimationCurve movementCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); // 추가: 이동 보간 커브
+    private Vector3 previousPosition;
+    private float currentMoveSpeed;
+    private float targetMoveSpeed;
+    private float moveSpeedVelocity;
     
-    
-    public Transform attackPoint;
-    private ParticleSystem attackParticleSystem;
-    
-    public MonsterAttackEffect attackEffect;
-
-    
-    // 공격 사운드 관련
-    public AudioClip attackSound;
-    private AudioSource audioSource;
-
-    // 공격 애니메이션 관련
-    private static readonly int AttackTrigger = Animator.StringToHash("Attack");
-    private static readonly int AttackSpeed = Animator.StringToHash("AttackSpeed");
-   
-    private MonsterAnimationEffect animationEffect;
-    
-    private bool isAttacking = false;
-
-    [Header("Meteor Strike")]
-    public MeteorStrikeController meteorStrikeController;
-    
+    [SerializeField] private float baseMovementSpeed = 15f;        // 기본 이동 속도
+    [SerializeField] private float maxMovementSpeed = 20f;         // 최대 이동 속도
+    [SerializeField] private float accelerationTime = 0.3f;        // 가속 시간
+    private Vector3 currentVelocity;
+    private float currentSpeed;
     
     [Header("Stats")]
     public float maxHealth = 100f;
     private float currentHealth;
 
+    [Header("Combat References")]
+    public Transform attackPoint;
+    public MonsterAttackEffect attackEffect;
+    public MeteorStrikeController meteorStrikeController;
+
     [Header("MeleeDamageFields")]
-    [SerializeField]
-    private DamageField WingLMeleeDamageField;
+    [SerializeField] private DamageField WingLMeleeDamageField;
+
+    [Header("HitFX")]
+    public GameObject MeleeHitVfx;
+    public string MeleeHitSfx;
+    #endregion
+
+    #region State Variables
+    private bool isChargingProjectile;
+    private GameObject activeChargingEffect;
+    private bool useRootMotion = false;
+    private bool wasRootMotionEnabled = false;
+    private float currentRotationVelocity;
+    private float targetYAngle;
+    private bool isRotating = false;
+    private float currentRotation;
+    private float targetRotation;
+    private float rotationStartTime;
+    private float rotationDuration;
+    private Coroutine currentRotationCoroutine;
+    private bool isMovingCommand = false;
+    private float lastMoveTime;
+    private bool isAttacking = false;
+    #endregion
+
+    #region Animation Hash IDs
+    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+    private static readonly int IsTurningLeft = Animator.StringToHash("IsTurningLeft");
+    private static readonly int IsTurningRight = Animator.StringToHash("IsTurningRight");
+    private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
+    private static readonly int MovementSpeed = Animator.StringToHash("MovementSpeed");
+    #endregion
+
+    #region Unity Lifecycle Methods
     private void Awake()
     {
-        
-        currentYAngle = transform.eulerAngles.y;
-        
         animator = GetComponent<Animator>();
+        animator.applyRootMotion = false;
         audioSource = gameObject.AddComponent<AudioSource>();
         animationEffect = GetComponent<MonsterAnimationEffect>();
-        
-        
+        previousPosition = transform.position;
     }
-    
+
     private void Start()
     {
         currentHealth = maxHealth;
     }
-    
-    public void HandleMeteorStrike(MeteorStrike meteorStrike)
+
+    private void Update()
     {
-        // 공격 중이면 새로운 공격을 시작하지 않음
-        if (isAttacking) return;
-        
-        if (meteorStrikeController != null)
+        UpdateMovementAndRotation();
+    }
+
+    private void OnDisable()
+    {
+        CleanupEffects();
+    }
+
+    private void OnAnimatorMove()
+    {
+        if (!useRootMotion) return;
+
+        if (animator && isRotating)
         {
-            Vector3[] positions = meteorStrike.Positions
-                .Select(p => new Vector3(p.X, 0, p.Z))
-                .ToArray();
-                
-            meteorStrikeController.StartMeteorStrike(positions);
+            transform.rotation *= animator.deltaRotation;
         }
     }
+    #endregion
+
+    #region Initialization
+    public void Initialize(int id)
+    {
+        monsterId = id;
+        hasTarget = false;
+        currentServerPosition = transform.position;
+        currentRotationVelocity = 0f;
+        ResetAnimatorState();
+    }
+
+    private void ResetAnimatorState()
+    {
+        if (animator != null)
+        {
+            animator.SetBool(IsMoving, false);
+            animator.SetBool(IsTurningLeft, false);
+            animator.SetBool(IsTurningRight, false);
+            animator.SetBool(IsAttacking, false);
+        }
+    }
+    #endregion
+
+    #region Movement and Rotation
+    private void UpdateMovementAndRotation()
+    {
+        float distanceToServerPos = Vector3.Distance(transform.position, currentServerPosition);
+
+        if (distanceToServerPos > moveThreshold)
+        {
+            float baseSpeed = 2f;
+        
+            // 거리에 따른 속도 변화를 최소화하되 유지
+            float speedMultiplier = Mathf.Clamp(distanceToServerPos / 30f, 1f, 1.05f);
+        
+            float currentLerpSpeed = baseSpeed * speedMultiplier;
+
+            // 실제 이동 속도 계산
+            Vector3 moveDirection = (currentServerPosition - transform.position).normalized;
+            Vector3 previousPos = transform.position;
+        
+            transform.position = Vector3.Lerp(
+                transform.position,
+                currentServerPosition,
+                currentLerpSpeed * Time.deltaTime
+            );
+
+            // 실제 이동 거리 기반으로 애니메이션 속도 계산
+            float actualSpeed = Vector3.Distance(previousPos, transform.position) / Time.deltaTime;
+            float normalizedSpeed = Mathf.Lerp(0.5f, 1f, actualSpeed / (baseSpeed * 1.05f));
+            // 0.5 ~ 1 범위로 정규화된 애니메이션 속도
+
+            if (moveDirection != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Lerp(
+                    transform.rotation,
+                    Quaternion.LookRotation(moveDirection),
+                    currentLerpSpeed * Time.deltaTime * 5f
+                );
+            }
+
+            animator?.SetFloat("MovementSpeed", normalizedSpeed);
+
+            lastMoveTime = Time.time;
+            isMovingCommand = true;
+        }
+        else if (isMovingCommand)
+        {
+            if (Time.time - lastMoveTime > moveStopDelay)
+            {
+                isMovingCommand = false;
+                animator?.SetBool(IsMoving, false);
+                animator?.SetFloat("MovementSpeed", 0f);
+            }
+        }
+
+        UpdateMovementAnimation();
+    }
+    
+
+    private void UpdateMovementAnimation()
+    {
+
+        
+            
+        if (animator != null && isMovingCommand && !isAttacking)
+        {
+            RestoreRootMotionState();
+            animator.SetBool(IsMoving, true);
+        }
+    }
+
+    public void UpdatePosition(Vector3 newPosition)
+    {
+        currentServerPosition = newPosition;
+        isMovingCommand = true;
+        lastMoveTime = Time.time;
+    }
+
+    public void UpdateRotation(float rotation, float duration)
+    {
+        if (currentRotationCoroutine != null)
+        {
+            StopCoroutine(currentRotationCoroutine);
+            RestoreRootMotionState();
+        }
+        currentRotationCoroutine = StartCoroutine(RootMotionRotation(rotation, duration));
+    }
+    #endregion
+
+    #region Combat
+    public void UpdateTarget(string targetPlayerId, bool hasTargetFlag)
+    {
+        currentTargetPlayerId = targetPlayerId;
+        hasTarget = hasTargetFlag;
+
+        if (hasTarget)
+        {
+            currentTarget = PlayerSpawner.Instance.GetPlayerTransform(targetPlayerId);
+        }
+    }
+
     public void PerformAttack(string targetPlayerId, int attackType, float damage)
     {
-        // 공격 중이면 새로운 공격을 시작하지 않음
         if (isAttacking) return;
 
-        
-        
         Transform targetTransform = PlayerSpawner.Instance.GetPlayerTransform(targetPlayerId);
-
         currentTarget = targetTransform;
-        if (targetTransform == null)
-        {
-            Debug.LogWarning("PerformAttack no target");
-            return;
-        }
-        
-     
-        // 타겟 방향으로 회전
-        Vector3 directionToTarget = targetTransform.position - transform.position;
+        if (targetTransform == null) return;
+
+        RotateTowardsTarget(targetTransform);
+        ExecuteAttack(attackType);
+    }
+
+    private void RotateTowardsTarget(Transform target)
+    {
+        Vector3 directionToTarget = target.position - transform.position;
         if (directionToTarget != Vector3.zero)
         {
             Vector3 currentRotation = transform.rotation.eulerAngles;
@@ -182,63 +312,74 @@ public class MonsterController : MonoBehaviour
                 currentRotation.z
             );
         }
+    }
 
-        // 공격 타입에 따른 처리
+    private void ExecuteAttack(int attackType)
+    {
         MonsterAttackConfig currentConfig = null;
         switch (attackType)
         {
-            case 0: // Melee
+            case 0:
                 currentConfig = meleeAttackConfig;
                 break;
-                
-            case 1: // Ranged
+            case 1:
                 currentConfig = rangedAttackConfig;
                 break;
         }
 
         if (currentConfig != null)
         {
-            // 애니메이션 트리거
-            if (animator != null)
-            {
-                animator.SetTrigger(currentConfig.animationTrigger);
-            }
-
-            // 이펙트 설정
-            if (animationEffect != null)
-            {
-                animationEffect.SetCurrentTarget(targetTransform);
-                animationEffect.SetEffects(currentConfig.effects);
-            }
-
-            // 사운드 재생
-            if (audioSource != null && currentConfig.sound != null)
-            {
-                audioSource.PlayOneShot(currentConfig.sound);
-            }
+            PlayAttackAnimation(currentConfig.animationTrigger);
+            SetupAttackEffects(currentConfig);
+            PlayAttackSound(currentConfig.sound);
         }
+    }
+    #endregion
 
+    #region Effects and Animation
+    private void PlayAttackAnimation(string trigger)
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger(trigger);
+        }
+    }
+
+    private void SetupAttackEffects(MonsterAttackConfig config)
+    {
+        if (animationEffect != null)
+        {
+            animationEffect.SetCurrentTarget(currentTarget);
+            animationEffect.SetEffects(config.effects);
+        }
+    }
+
+    private void PlayAttackSound(AudioClip sound)
+    {
+        if (audioSource != null && sound != null)
+        {
+            audioSource.PlayOneShot(sound);
+        }
     }
 
     public void OnStartCharging()
     {
         if (projectileConfig.chargingEffect != null && projectileConfig.spawnPoint != null)
         {
-            activeChargingEffect = Instantiate(projectileConfig.chargingEffect, 
-                projectileConfig.spawnPoint.position, 
-                projectileConfig.spawnPoint.rotation, 
-                projectileConfig.spawnPoint);
+            activeChargingEffect = Instantiate(
+                projectileConfig.chargingEffect,
+                projectileConfig.spawnPoint.position,
+                projectileConfig.spawnPoint.rotation,
+                projectileConfig.spawnPoint
+            );
         }
         isChargingProjectile = true;
     }
 
-    // 투사체 발사
     public void OnFireProjectile()
     {
-        Debug.LogWarning("OnFireProjectile");
         if (currentTarget == null) return;
 
-        // 차징 이펙트 제거
         if (activeChargingEffect != null)
         {
             Destroy(activeChargingEffect);
@@ -249,35 +390,13 @@ public class MonsterController : MonoBehaviour
         isChargingProjectile = false;
     }
 
-    
-    private void StartProjectileAttack()
-    {
-        if (animator != null)
-        {
-            animator.SetTrigger(projectileConfig.fireAnimationTrigger);
-        }
-    }
-    
-    
-    private void Update()
-    {
-
-        UpdateMovementAndRotation();
-        UpdateAttackTimer();
-    }
-    
     private void FireProjectile(Vector3 targetPosition)
     {
-        if (projectileConfig.projectilePrefab == null)
-        {
-            Debug.LogWarning("Projectile prefab is not set!");
-            return;
-        }
+        if (projectileConfig.projectilePrefab == null) return;
 
         Transform spawnPoint = projectileConfig.spawnPoint != null ? projectileConfig.spawnPoint : attackPoint;
-        
         GameObject projectile = Instantiate(projectileConfig.projectilePrefab, spawnPoint.position, Quaternion.identity);
-        
+
         RFX1_TransformMotion projectileMotion = projectile.GetComponentInChildren<RFX1_TransformMotion>();
         if (projectileMotion != null)
         {
@@ -287,264 +406,31 @@ public class MonsterController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Projectile prefab does not have RFX1_TransformMotion component!");
             Destroy(projectile);
         }
     }
-    
-    private void OnDisable()
+    #endregion
+
+    #region Health System
+    public void TakeDamage(DamageMessage msg)
     {
-        // 차징 이펙트 정리
-        if (activeChargingEffect != null)
-        {
-            Destroy(activeChargingEffect);
-            activeChargingEffect = null;
-        }
-    }
+        currentHealth -= msg.amount;
+        currentHealth = Mathf.Max(0, currentHealth);
 
-
-    private void UpdateMovementAndRotation()
-    {
-        float distanceToServerPos = Vector3.Distance(transform.position, currentServerPosition);
-        Vector3 directionToTarget = currentServerPosition - transform.position;
-
-        if (directionToTarget != Vector3.zero)
-        {
-            // 목표 회전 각도 계산
-            targetYAngle = Quaternion.LookRotation(directionToTarget).eulerAngles.y;
-            
-            // 현재 각도와 목표 각도의 차이 계산 (항상 최단 경로로 회전)
-            float angleDifference = Mathf.DeltaAngle(currentYAngle, targetYAngle);
-            
-            if (Mathf.Abs(angleDifference) > rotationThreshold)
-            {
-                // 부드러운 회전 속도 계산
-                float targetRotationSpeed = Mathf.Sign(angleDifference) * Mathf.Min(Mathf.Abs(angleDifference), maxRotationSpeed);
-                currentRotationVelocity = Mathf.MoveTowards(
-                    currentRotationVelocity,
-                    targetRotationSpeed,
-                    rotationAcceleration * Time.deltaTime
-                );
-
-                // 회전 적용
-                currentYAngle = Mathf.MoveTowardsAngle(
-                    currentYAngle,
-                    targetYAngle,
-                    Mathf.Abs(currentRotationVelocity) * Time.deltaTime
-                );
-
-                // 회전 애니메이션 제어
-                bool isSignificantRotation = Mathf.Abs(angleDifference) > rotationAnimThreshold;
-                if (isSignificantRotation)
-                {
-                    animator.SetBool(IsTurningLeft, angleDifference > 0);
-                    animator.SetBool(IsTurningRight, angleDifference < 0);
-                    animator.SetBool(IsMoving, false);
-                }
-                else
-                {
-                    animator.SetBool(IsTurningLeft, false);
-                    animator.SetBool(IsTurningRight, false);
-                }
-
-                // 실제 회전 적용
-                transform.rotation = Quaternion.Euler(0, currentYAngle, 0);
-            }
-            else
-            {
-                // 회전이 완료되면 회전 애니메이션 중지
-                animator.SetBool(IsTurningLeft, false);
-                animator.SetBool(IsTurningRight, false);
-                currentRotationVelocity = 0f;
-            }
-
-            // 이동 처리
-            if (distanceToServerPos > moveThreshold)
-            {
-                // 큰 회전 중에는 이동하지 않음
-                bool canMove = Mathf.Abs(Mathf.DeltaAngle(currentYAngle, targetYAngle)) < 45f;
-                
-                if (canMove)
-                {
-                    transform.position = Vector3.Lerp(
-                        transform.position, 
-                        currentServerPosition, 
-                        positionLerpSpeed * Time.deltaTime
-                    );
-                    animator.SetBool(IsMoving, true);
-                }
-                else
-                {
-                    animator.SetBool(IsMoving, false);
-                }
-            }
-            else
-            {
-                animator.SetBool(IsMoving, false);
-            }
-        }
-        else
-        {
-            // 모든 이동/회전 애니메이션 중지
-            animator.SetBool(IsMoving, false);
-            animator.SetBool(IsTurningLeft, false);
-            animator.SetBool(IsTurningRight, false);
-            currentRotationVelocity = 0f;
-        }
-    }
-
-    private void UpdateAttackTimer()
-    {
-        if (attackTimer > 0)
-        {
-            attackTimer -= Time.deltaTime;
-            if (attackTimer <= 0 && animator != null)
-            {
-                //animator.SetBool(IsAttacking, false);
-            }
-        }
-    }
-
-    public void Initialize(int id)
-    {
-        monsterId = id;
-        hasTarget = false;
-        currentServerPosition = transform.position;
-        currentYAngle = transform.eulerAngles.y;
-        currentRotationVelocity = 0f;
-    
+        PlayHitSound(msg.hitPoint, msg.type);
+        SpawnHitEffect(msg.hitPoint, msg.hitNormal, msg.type);
         
-        if (animator != null)
-        {
-            animator.SetBool(IsMoving, false);
-            animator.SetBool(IsTurningLeft, false);
-            animator.SetBool(IsTurningRight, false);
-            animator.SetBool(IsAttacking, false);
-        }
-    }
-    
+        TcpProtobufClient.Instance.SendMonsterDamage(monsterId, msg.amount, currentHealth);
 
-    public void UpdatePosition(Vector3 newPosition)
-    {
-        currentServerPosition = newPosition;
-    }
-
-    public void UpdateTarget(string targetPlayerId, bool hasTargetFlag)
-    {
-        
-        Debug.LogWarning("UpdateTarget");
-        currentTargetPlayerId = targetPlayerId;
-        hasTarget = hasTargetFlag;
-      
-
-        if (hasTarget)
-        {
-            Transform targetTransform = PlayerSpawner.Instance.GetPlayerTransform(targetPlayerId);
-            if (targetTransform != null)
-            {
-                float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
-                if (distanceToTarget <= attackRange && attackTimer <= 0)
-                {
-                    //PerformAttack();
-                }
-            }
-        }
-        else
-        {
-            if (animator != null)
-            {
-                animator.SetBool(IsAttacking, false);
-            }
-            attackTimer = 0;
-        }
-    }
-
-    private void PerformAttack()
-    {
-        if (animator != null)
-        {
-            animator.SetBool(IsAttacking, true);
-        }
-        attackTimer = attackDuration;
-    }
-    
-    public void PlaySound(string soundId)
-    {
-        if (SoundManager.Instance != null)
-        {
-            SoundManager.Instance.PlaySound(soundId, transform.position);
-        }
-    }
-    
-    public void OnAttackStart()
-    {
-        isAttacking = true;
-    }
-    
-    public void OnAttackStart(string AttackType)
-    {
-
-        isAttacking = true;
-
-        switch (AttackType)
-        {
-            case "WingMelee":
-                WingLMeleeDamageField?.StartDamageField();
-                break;
-        }
-    }
-
-    public void OnAttackEnd()
-    {
-        isAttacking = false;
-        
-        
-        
-        // 차징 이펙트 정리
-        if (activeChargingEffect != null)
-        {
-            Destroy(activeChargingEffect);
-            activeChargingEffect = null;
-        }
-
-    }
-    
-    public void OnAttackEnd(string AttackType)
-    {
-        isAttacking = false;
-        
-        //근접 공격 데미지 필드 
-        switch (AttackType)
-        {
-            case "WingMelee":
-                WingLMeleeDamageField?.DeactivateDamageField();
-                break;
-        }
-        
-        
-    }
-    
-    
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth < 0) currentHealth = 0;
-
-        // 서버에 데미지 알림
-        TcpProtobufClient.Instance.SendMonsterDamage(monsterId, damage, currentHealth);
-
-        
-        // 사망 처리
         if (currentHealth <= 0)
         {
             Die();
         }
     }
-    
+
     public void SetHealth(float health)
     {
         currentHealth = health;
-
         if (currentHealth <= 0)
         {
             Die();
@@ -553,17 +439,187 @@ public class MonsterController : MonoBehaviour
 
     private void Die()
     {
-        // 사망 애니메이션
         if (animator != null)
         {
             animator.SetTrigger("Die");
         }
-
-        // 일정 시간 후 오브젝트 제거
         Destroy(gameObject, 2f);
     }
-    
+    #endregion
 
+    #region Utility Methods
+    private void CleanupEffects()
+    {
+        if (activeChargingEffect != null)
+        {
+            Destroy(activeChargingEffect);
+            activeChargingEffect = null;
+        }
+        
+        if (currentRotationCoroutine != null)
+        {
+            StopCoroutine(currentRotationCoroutine);
+            RestoreRootMotionState();
+        }
+    }
+
+    public void PlaySound(string soundId)
+    {
+        SoundManager.Instance?.PlaySound(soundId, transform.position);
+    }
+
+    private void PlayHitSound(Vector3 hitPoint, DamageType skillType)
+    {
+        switch(skillType)
+        {
+            case DamageType.melee:
+            case DamageType.fire:
+                SoundManager.Instance.PlaySound(MeleeHitSfx, hitPoint);
+                break;
+        }
+    }
+
+    private void SpawnHitEffect(Vector3 hitPoint, Vector3 hitNormal, DamageType skillType)
+    {
+        GameObject effectPrefab = null;
+        switch(skillType)
+        {
+            case DamageType.melee:
+            case DamageType.fire:
+                effectPrefab = MeleeHitVfx;
+                break;
+        }
+        
+        if (effectPrefab != null)
+        {
+            Quaternion rotation = Quaternion.LookRotation(hitNormal);
+            GameObject effect = Instantiate(effectPrefab, hitPoint, rotation);
+            Destroy(effect, 2f);
+        }
+    }
+    #endregion
+
+    #region Animation Events
+    public void OnAttackStart(string AttackType)
+    {
+        isAttacking = true;
+        if (AttackType == "WingMelee")
+        {
+            WingLMeleeDamageField?.StartDamageField();
+        }
+    }
+
+    public void OnAttackEnd(string AttackType)
+    {
+        isAttacking = false;
+        switch (AttackType)
+        {
+            case "WingMelee":
+                WingLMeleeDamageField?.DeactivateDamageField();
+                break;
+            default:
+                if (activeChargingEffect != null)
+                {
+                    Destroy(activeChargingEffect);
+                    activeChargingEffect = null;
+                }
+                break;
+        }
+    }
+    #endregion
+
+    #region Special Attacks
+    public void HandleMeteorStrike(MeteorStrike meteorStrike)
+    {
+        if (isAttacking) return;
+        
+        if (meteorStrikeController != null)
+        {
+            Vector3[] positions = meteorStrike.Positions
+                .Select(p => new Vector3(p.X, 0, p.Z))
+                .ToArray();
+                
+            meteorStrikeController.StartMeteorStrike(positions);
+            }
+    }
+    #endregion
+
+    #region Root Motion Handling
+    private void EnableRotationRootMotion()
+    {
+        wasRootMotionEnabled = animator.applyRootMotion;
+        useRootMotion = true;
+        animator.applyRootMotion = true;
+    }
+
+    private void RestoreRootMotionState()
+    {
+        useRootMotion = false;
+        animator.applyRootMotion = wasRootMotionEnabled;
+        
+        animator.SetBool(IsTurningLeft, false);
+        animator.SetBool(IsTurningRight, false);
+        animator.SetFloat("RotationSpeed", 0f);
+    }
     
+    private IEnumerator RootMotionRotation(float targetRotationRad, float duration)
+    {
+        isRotating = true;
+        float startRotation = transform.eulerAngles.y;
+        targetRotation = targetRotationRad * Mathf.Rad2Deg;
+        float rotationDiff = Mathf.Abs(Mathf.DeltaAngle(startRotation, targetRotation));
     
+        if (rotationDiff >= rotationThreshold)
+        {
+            yield return HandleLargeRotation(startRotation, rotationDiff);
+        }
+        else
+        {
+            yield return HandleSmallRotation(startRotation, duration);
+        }
+
+        RestoreRootMotionState();
+        currentRotationCoroutine = null;
+        isRotating = false;
+    }
+
+    private IEnumerator HandleLargeRotation(float startRotation, float rotationDiff)
+    {
+        EnableRotationRootMotion();
+        
+        float angleDiff = Mathf.DeltaAngle(startRotation, targetRotation);
+        float normalizedRotation = rotationDiff / 180f;
+        float animationSpeed = Mathf.Lerp(minRotationSpeed, 1f, normalizedRotation) * maxRotationSpeed;
+        
+        animator.SetBool(IsTurningLeft, angleDiff > 0);
+        animator.SetBool(IsTurningRight, angleDiff < 0);
+        animator.SetFloat("RotationSpeed", animationSpeed);
+
+        while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetRotation)) > 0.1f)
+        {
+            yield return null;
+        }
+    }
+
+    private IEnumerator HandleSmallRotation(float startRotation, float duration)
+    {
+        float elapsedTime = 0f;
+        float rotationDiff = Mathf.Abs(Mathf.DeltaAngle(startRotation, targetRotation));
+        float rotationSpeed = rotationDiff / duration;
+        
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
+            t = t * t * (3f - 2f * t); // Smoothstep interpolation
+            
+            float currentAngle = Mathf.LerpAngle(startRotation, targetRotation, t);
+            transform.rotation = Quaternion.Euler(0f, currentAngle, 0f);
+            
+            yield return null;
+        }
+
+        transform.rotation = Quaternion.Euler(0f, targetRotation, 0f);
+    }
+    #endregion
 }
