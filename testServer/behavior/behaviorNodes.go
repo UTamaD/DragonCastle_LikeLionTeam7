@@ -1,6 +1,7 @@
 package behavior
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"math/rand"
@@ -91,56 +92,17 @@ func (s *Selector) Execute() Status {
 			return Running
 		}
 	}
-	//log.Printf("Selector: All children failed, selector failing")
 	return Failure
-}
-
-type Random struct {
-	probability   float32
-	option1       Node
-	option2       Node
-	lastChange    time.Time
-	minInterval   time.Duration
-	currentChoice int32
-}
-
-func NewRandom(probability float32, option1, option2 Node) *Random {
-	return &Random{
-		probability: probability,
-		option1:     option1,
-		option2:     option2,
-		minInterval: 2 * time.Second, // 최소 2초 간격으로 변경
-	}
-}
-
-func (r *Random) Execute() Status {
-	now := time.Now()
-	if now.Sub(r.lastChange) < r.minInterval {
-		if r.currentChoice == 1 {
-			return r.option1.Execute()
-		}
-		return r.option2.Execute()
-	}
-
-	r.lastChange = now
-	if rand.Float32() < r.probability {
-		r.currentChoice = 1
-		log.Printf("Random: Choosing option 1 (probability: %.2f)", r.probability)
-		return r.option1.Execute()
-	}
-	r.currentChoice = 2
-	log.Printf("Random: Choosing option 2 (probability: %.2f)", r.probability)
-	return r.option2.Execute()
 }
 
 type Wait struct {
 	duration  time.Duration
 	startTime time.Time
 	started   bool
-	state     *AttackState // 공유 상태
+	state     *AttackState
 }
 
-func NewWait(duration time.Duration, resetOnFailure bool, state *AttackState) *Wait { // state 매개변수 추가
+func NewWait(duration time.Duration, resetOnFailure bool, state *AttackState) *Wait {
 	return &Wait{
 		duration: duration,
 		started:  false,
@@ -158,7 +120,7 @@ func (w *Wait) Execute() Status {
 	if time.Since(w.startTime) >= w.duration {
 		w.started = false
 		w.state.mutex.Lock()
-		w.state.currentAttack = NoAttack // Wait 완료 후 공격 상태 초기화
+		w.state.currentAttack = NoAttack
 		w.state.mutex.Unlock()
 		return Success
 	}
@@ -183,6 +145,7 @@ func NewDetectPlayer(monster common.IMonster, range_ float32, p common.IPlayerMa
 		checkDelay: 500 * time.Millisecond,
 	}
 }
+
 func (d *DetectPlayer) FindTarget() *common.Point {
 	points := d.p.ListPoints()
 	if len(points) > 0 {
@@ -196,7 +159,6 @@ func (d *DetectPlayer) FindTarget() *common.Point {
 }
 
 func (d *DetectPlayer) Execute() Status {
-
 	now := time.Now()
 	if now.Sub(d.lastCheck) < d.checkDelay {
 		return Running
@@ -206,7 +168,6 @@ func (d *DetectPlayer) Execute() Status {
 	target := d.FindTarget()
 	d.monster.SetTarget(target)
 	if target == nil {
-		//log.Printf("Monster[%d] DetectPlayer: No target found", d.monster.GetID())
 		return Failure
 	}
 
@@ -214,10 +175,8 @@ func (d *DetectPlayer) Execute() Status {
 	dist := distance(pos.X, pos.Z, target.X, target.Z)
 
 	if dist <= d.range_ {
-		//log.Printf("Monster[%d] DetectPlayer: Target found within range (%.2f)", d.monster.GetID(), dist)
 		return Success
 	}
-	//log.Printf("Monster[%d] DetectPlayer: Target out of range (%.2f)", d.monster.GetID(), dist)
 	return Failure
 }
 
@@ -230,52 +189,54 @@ const (
 )
 
 type Attack struct {
-	monster    common.IMonster
-	range_     float32
-	damage     int
-	cooldown   time.Duration
-	p          common.IPlayerManager
-	n          common.INetworkManager
-	attackType int32
-	state      *AttackState
+	monster     common.IMonster
+	range_      float32
+	damage      int
+	cooldown    time.Duration
+	p           common.IPlayerManager
+	n           common.INetworkManager
+	attackType  int32
+	state       *AttackState
+	actionState *ActionState
 }
 
 func NewAttack(monster common.IMonster, range_ float32, damage int, cooldown time.Duration,
-	p common.IPlayerManager, n common.INetworkManager, attackType int32, state *AttackState) *Attack { // state 매개변수 추가
+	p common.IPlayerManager, n common.INetworkManager, attackType int32, state *AttackState) *Attack {
 	return &Attack{
-		monster:    monster,
-		range_:     range_,
-		damage:     damage,
-		cooldown:   cooldown,
-		p:          p,
-		n:          n,
-		attackType: attackType,
-		state:      state,
+		monster:     monster,
+		range_:      range_,
+		damage:      damage,
+		cooldown:    cooldown,
+		p:           p,
+		n:           n,
+		attackType:  attackType,
+		state:       state,
+		actionState: NewActionState(),
 	}
 }
 func (a *Attack) Execute() Status {
+	if !a.actionState.SetAction(fmt.Sprintf("attack_%d", a.attackType)) {
+		return Failure
+	}
+	defer a.actionState.ClearAction()
 
 	a.state.mutex.Lock()
 	defer a.state.mutex.Unlock()
 
-	// 다른 공격이 진행 중인지 확인
 	if a.state.currentAttack != NoAttack && a.state.currentAttack != a.attackType {
 		return Failure
 	}
 
-	// 쿨다운 체크
 	if time.Since(a.state.lastAttackTime) < a.cooldown {
 		return Running
 	}
 
 	if a.monster.IsDead() {
-		log.Printf("Monster[%d] Attack failed: monster is dead", a.monster.GetID())
 		return Failure
 	}
 
 	target := a.monster.GetTarget()
 	if target == nil {
-		log.Printf("Monster[%d] Attack failed: no target", a.monster.GetID())
 		return Failure
 	}
 
@@ -285,16 +246,8 @@ func (a *Attack) Execute() Status {
 		return Failure
 	}
 
-	now := time.Now()
-	if now.Sub(a.state.lastAttackTime) < a.cooldown {
-		return Running
-	}
-
-	log.Printf("Monster[%d] Performing attack type: %d", a.monster.GetID(), a.attackType)
-
 	a.state.currentAttack = a.attackType
 
-	// 원거리 공격인 경우 투사체 발사
 	if a.attackType == int32(RangedAttack) {
 		projectileMsg := &pb.GameMessage{
 			Message: &pb.GameMessage_MonsterProjectile{
@@ -311,7 +264,6 @@ func (a *Attack) Execute() Status {
 		a.p.Broadcast(projectileMsg)
 	}
 
-	// 공격 메시지 전송
 	attackMsg := &pb.GameMessage{
 		Message: &pb.GameMessage_MonsterAttack{
 			MonsterAttack: &pb.MonsterAttack{
@@ -329,7 +281,6 @@ func (a *Attack) Execute() Status {
 	return Success
 }
 
-// 구체적인 공격 타입들
 type MeleeAttackNode struct {
 	*Attack
 }
@@ -353,20 +304,76 @@ func NewRangedAttack(monster common.IMonster, range_ float32, damage int,
 }
 
 type Chase struct {
-	monster common.IMonster
-	speed   float32
-	p       common.IPlayerManager
-	n       common.INetworkManager
+	monster      common.IMonster
+	speed        float32
+	p            common.IPlayerManager
+	n            common.INetworkManager
+	startTime    time.Time
+	minDuration  time.Duration
+	actionState  *ActionState
+	acceleration float32
+	maxSpeed     float32
+	lastUpdate   time.Time
+	currentSpeed float32 // 현재 속도
 }
 
-func NewChase(monster common.IMonster, speed float32, p common.IPlayerManager, n common.INetworkManager) *Chase {
-	return &Chase{monster: monster, speed: speed, p: p, n: n}
+func NewChase(monster common.IMonster, speed float32, p common.IPlayerManager, n common.INetworkManager, actionState *ActionState) *Chase {
+	return &Chase{
+		monster:      monster,
+		speed:        2.0,
+		p:            p,
+		n:            n,
+		minDuration:  2 * time.Second,
+		actionState:  actionState,
+		acceleration: 1.1, //
+		maxSpeed:     7.0, //
+		lastUpdate:   time.Now(),
+		currentSpeed: 2.0, //
+	}
 }
-
 func (c *Chase) Execute() Status {
+	if !c.actionState.SetAction("chase") {
+		return Failure
+	}
+	defer c.actionState.ClearAction()
+
 	target := c.monster.GetTarget()
 	if target == nil {
 		return Failure
+	}
+
+	if c.startTime.IsZero() {
+		c.startTime = time.Now()
+		c.lastUpdate = c.startTime
+	}
+
+	// 현재 시간과 경과 시간 계산
+	now := time.Now()
+	elapsedTime := now.Sub(c.startTime)
+
+	if elapsedTime < c.minDuration {
+		// 현재 속도 계산 (가속도 적용)
+		currentSpeed := c.speed + float32(elapsedTime.Seconds())*c.acceleration
+		if currentSpeed > c.maxSpeed {
+			currentSpeed = c.maxSpeed
+		}
+
+		c.updatePositionWithSpeed(target, currentSpeed, now)
+		return Running
+	}
+
+	c.startTime = time.Time{}
+	return Success
+}
+
+func (c *Chase) updatePositionWithSpeed(target *common.Point, currentSpeed float32, now time.Time) {
+	deltaTime := now.Sub(c.lastUpdate).Seconds()
+	c.lastUpdate = now
+
+	// 매우 약한 가속
+	c.currentSpeed += float32(deltaTime) * c.acceleration * 0.2 // 가속도를 더욱 감소
+	if c.currentSpeed > c.maxSpeed {
+		c.currentSpeed = c.maxSpeed
 	}
 
 	pos := c.monster.GetPosition()
@@ -375,11 +382,14 @@ func (c *Chase) Execute() Status {
 	dist := float32(math.Sqrt(float64(dx*dx + dy*dy)))
 
 	if dist < 0.1 {
-		return Success
+		return
 	}
 
-	newX := pos.X + (dx/dist)*0.1
-	newZ := pos.Z + (dy/dist)*0.1
+	moveX := (dx / dist) * c.currentSpeed * float32(deltaTime)
+	moveZ := (dy / dist) * c.currentSpeed * float32(deltaTime)
+
+	newX := pos.X + moveX
+	newZ := pos.Z + moveZ
 	c.monster.SetPosition(newX, newZ)
 
 	MonsterMove := &pb.GameMessage{
@@ -391,37 +401,43 @@ func (c *Chase) Execute() Status {
 			},
 		},
 	}
-
 	c.p.Broadcast(MonsterMove)
-	return Running
 }
 
 type MeteorAttackNode struct {
-	monster  common.IMonster
-	range_   float32
-	damage   int
-	cooldown time.Duration
-	p        common.IPlayerManager
-	n        common.INetworkManager
-	state    *AttackState // AttackState 추가
+	monster     common.IMonster
+	range_      float32
+	damage      int
+	cooldown    time.Duration
+	p           common.IPlayerManager
+	n           common.INetworkManager
+	state       *AttackState
+	actionState *ActionState
 }
 
 func NewMeteorAttack(monster common.IMonster, range_ float32, damage int,
 	cooldown time.Duration, p common.IPlayerManager, n common.INetworkManager, state *AttackState) *MeteorAttackNode {
 	return &MeteorAttackNode{
-		monster:  monster,
-		range_:   range_,
-		damage:   damage,
-		cooldown: cooldown,
-		p:        p,
-		n:        n,
-		state:    state,
+		monster:     monster,
+		range_:      range_,
+		damage:      damage,
+		cooldown:    cooldown,
+		p:           p,
+		n:           n,
+		state:       state,
+		actionState: NewActionState(),
 	}
 }
 
 func (m *MeteorAttackNode) Execute() Status {
+	if !m.actionState.SetAction("meteor_attack") {
+		return Failure
+	}
+	defer m.actionState.ClearAction()
+
 	m.state.mutex.Lock()
 	defer m.state.mutex.Unlock()
+
 	if m.monster.IsDead() {
 		return Failure
 	}
@@ -442,9 +458,8 @@ func (m *MeteorAttackNode) Execute() Status {
 	monsterPos := m.monster.GetPosition()
 	meteorPositions := make([]*pb.MeteorStrikePosition, 5)
 	for i := 0; i < 5; i++ {
-		// 랜덤 각도와 거리로 위치 생성
 		angle := rand.Float64() * 2 * math.Pi
-		distance := rand.Float32() * 40 // 100 유닛 범위 내
+		distance := rand.Float32() * 40
 
 		x := monsterPos.X + distance*float32(math.Cos(angle))
 		z := monsterPos.Z + distance*float32(math.Sin(angle))
@@ -455,7 +470,6 @@ func (m *MeteorAttackNode) Execute() Status {
 		}
 	}
 
-	// 메테오 스트라이크 메시지 전송
 	meteorMsg := &pb.GameMessage{
 		Message: &pb.GameMessage_MeteorStrike{
 			MeteorStrike: &pb.MeteorStrike{
@@ -466,7 +480,6 @@ func (m *MeteorAttackNode) Execute() Status {
 	}
 	m.p.Broadcast(meteorMsg)
 
-	// 공격 메시지 전송
 	attackMsg := &pb.GameMessage{
 		Message: &pb.GameMessage_MonsterAttack{
 			MonsterAttack: &pb.MonsterAttack{
@@ -489,136 +502,6 @@ func distance(x1, y1, x2, y2 float32) float32 {
 	dx := x2 - x1
 	dy := y2 - y1
 	return float32(math.Sqrt(float64(dx*dx + dy*dy)))
-}
-
-type RetreatAfterAttack struct {
-	monster   common.IMonster
-	speed     float32
-	duration  time.Duration
-	startTime time.Time
-	started   bool
-	p         common.IPlayerManager
-	n         common.INetworkManager
-}
-
-func NewRetreatAfterAttack(monster common.IMonster, speed float32, duration time.Duration, p common.IPlayerManager, n common.INetworkManager) *RetreatAfterAttack {
-	return &RetreatAfterAttack{
-		monster:  monster,
-		speed:    speed,
-		duration: duration,
-		p:        p,
-		n:        n,
-	}
-}
-
-func (r *RetreatAfterAttack) Execute() Status {
-
-	if !r.started {
-		r.startTime = time.Now()
-		r.started = true
-		log.Printf("Monster[%d] Retreat started", r.monster.GetID())
-	}
-
-	target := r.monster.GetTarget()
-	if target == nil {
-		return Failure
-	}
-
-	pos := r.monster.GetPosition()
-	// 타겟으로부터 반대 방향 계산
-	dx := pos.X - target.X
-	dy := pos.Z - target.Z
-	dist := float32(math.Sqrt(float64(dx*dx + dy*dy)))
-
-	if dist > 0 {
-		// 반대 방향으로 이동
-		newX := pos.X + (dx/dist)*0.1*r.speed
-		newZ := pos.Z + (dy/dist)*0.1*r.speed
-		r.monster.SetPosition(newX, newZ)
-
-		// 이동 메시지 전송
-		moveMsg := &pb.GameMessage{
-			Message: &pb.GameMessage_MoveMonster{
-				MoveMonster: &pb.MoveMonster{
-					X:         newX,
-					Z:         newZ,
-					MonsterId: int32(r.monster.GetID()),
-				},
-			},
-		}
-		r.p.Broadcast(moveMsg)
-	}
-
-	// 지정된 시간이 지나면 종료
-	if time.Since(r.startTime) >= r.duration {
-		r.started = false
-		log.Printf("Monster[%d] Retreat completed", r.monster.GetID())
-		return Success
-	}
-	return Running
-}
-
-type ApproachAfterAttack struct {
-	monster   common.IMonster
-	speed     float32
-	duration  time.Duration
-	startTime time.Time
-	started   bool
-	p         common.IPlayerManager
-	n         common.INetworkManager
-}
-
-func NewApproachAfterAttack(monster common.IMonster, speed float32, duration time.Duration, p common.IPlayerManager, n common.INetworkManager) *ApproachAfterAttack {
-	return &ApproachAfterAttack{
-		monster:  monster,
-		speed:    speed,
-		duration: duration,
-		p:        p,
-		n:        n,
-	}
-}
-
-func (a *ApproachAfterAttack) Execute() Status {
-	if !a.started {
-		a.startTime = time.Now()
-		a.started = true
-		log.Printf("Monster[%d] Approach started", a.monster.GetID())
-	}
-
-	target := a.monster.GetTarget()
-	if target == nil {
-		return Failure
-	}
-
-	pos := a.monster.GetPosition()
-	dx := target.X - pos.X
-	dy := target.Z - pos.Z
-	dist := float32(math.Sqrt(float64(dx*dx + dy*dy)))
-
-	if dist > 0 {
-		// 타겟 방향으로 이동
-		newX := pos.X + (dx/dist)*0.1*a.speed
-		newZ := pos.Z + (dy/dist)*0.1*a.speed
-		a.monster.SetPosition(newX, newZ)
-
-		moveMsg := &pb.GameMessage{
-			Message: &pb.GameMessage_MoveMonster{
-				MoveMonster: &pb.MoveMonster{
-					X:         newX,
-					Z:         newZ,
-					MonsterId: int32(a.monster.GetID()),
-				},
-			},
-		}
-		a.p.Broadcast(moveMsg)
-	}
-
-	if time.Since(a.startTime) >= a.duration {
-		a.started = false
-		log.Printf("Monster[%d] Approach completed", a.monster.GetID())
-		return Success
-	}
-	return Running
 }
 
 type MutuallyExclusiveSelector struct {
@@ -655,4 +538,240 @@ func (m *MutuallyExclusiveSelector) Execute() Status {
 	}
 
 	return status
+}
+
+type RotateToTarget struct {
+	monster     common.IMonster
+	p           common.IPlayerManager
+	n           common.INetworkManager
+	rotateSpeed float32
+	minAngle    float32
+	viewAngle   float32
+	actionState *ActionState
+}
+
+func NewRotateToTarget(monster common.IMonster, rotateSpeed float32, p common.IPlayerManager, n common.INetworkManager) *RotateToTarget {
+	return &RotateToTarget{
+		monster:     monster,
+		rotateSpeed: rotateSpeed,
+		p:           p,
+		n:           n,
+		minAngle:    10.0,
+		viewAngle:   90.0,
+		actionState: NewActionState(),
+	}
+}
+func (r *RotateToTarget) Execute() Status {
+	if !r.actionState.SetAction("rotate") {
+		return Failure
+	}
+	defer r.actionState.ClearAction()
+
+	target := r.monster.GetTarget()
+	if target == nil {
+		return Failure
+	}
+
+	pos := r.monster.GetPosition()
+	currentRotation := r.monster.GetRotation()
+
+	targetAngle := float32(math.Atan2(float64(target.Z-pos.Z), float64(target.X-pos.X)))
+	angleDiffDegrees := math.Abs(float64(normalizeAngle(targetAngle-currentRotation))) * 180 / math.Pi
+
+	if angleDiffDegrees <= float64(r.viewAngle/2) || angleDiffDegrees < float64(r.minAngle) {
+		return Success
+	}
+
+	baseDuration := 1.0
+	additionalTime := math.Floor(angleDiffDegrees / 90.0)
+	totalDuration := baseDuration + additionalTime
+
+	rotateMsg := &pb.GameMessage{
+		Message: &pb.GameMessage_MonsterRotate{
+			MonsterRotate: &pb.MonsterRotate{
+				MonsterId: int32(r.monster.GetID()),
+				Rotation:  targetAngle,
+				Duration:  float32(totalDuration),
+			},
+		},
+	}
+	r.p.Broadcast(rotateMsg)
+
+	time.Sleep(time.Duration(totalDuration * float64(time.Second)))
+
+	r.monster.SetRotation(targetAngle)
+	return Success
+}
+
+func normalizeAngle(angle float32) float32 {
+	const twoPi = 2 * math.Pi
+	normalized := float64(angle)
+	normalized = math.Mod(normalized, twoPi)
+	if normalized < -math.Pi {
+		normalized += twoPi
+	} else if normalized > math.Pi {
+		normalized -= twoPi
+	}
+	return float32(normalized)
+}
+
+type PatternState struct {
+	LastPattern  string
+	PatternCount int
+	MaxRepeat    int
+}
+
+type PatternTracker struct {
+	state          *PatternState
+	combatSelector Node
+	chaseSequence  Node
+}
+
+func NewPatternTracker(state *PatternState, combatSelector, chaseSequence Node) *PatternTracker {
+	if state == nil {
+		state = &PatternState{
+			MaxRepeat: 2,
+		}
+	}
+	return &PatternTracker{
+		state:          state,
+		combatSelector: combatSelector,
+		chaseSequence:  chaseSequence,
+	}
+}
+
+func (p *PatternTracker) Execute() Status {
+	var result Status
+
+	if p.state.PatternCount >= p.state.MaxRepeat {
+		if p.state.LastPattern == "chase" {
+			result = p.combatSelector.Execute()
+			if result == Success || result == Running {
+				p.state.LastPattern = "combat"
+				p.state.PatternCount = 1
+			}
+		} else {
+			result = p.chaseSequence.Execute()
+			if result == Success || result == Running {
+				p.state.LastPattern = "chase"
+				p.state.PatternCount = 1
+			}
+		}
+		return result
+	}
+
+	if rand.Float32() < 0.25 {
+		result = p.chaseSequence.Execute()
+		if result == Success || result == Running {
+			if p.state.LastPattern == "chase" {
+				p.state.PatternCount++
+			} else {
+				p.state.LastPattern = "chase"
+				p.state.PatternCount = 1
+			}
+		}
+	} else {
+		result = p.combatSelector.Execute()
+		if result == Success || result == Running {
+			if p.state.LastPattern == "combat" {
+				p.state.PatternCount++
+			} else {
+				p.state.LastPattern = "combat"
+				p.state.PatternCount = 1
+			}
+		}
+	}
+
+	return result
+}
+
+type RotateWithoutAnimation struct {
+	monster common.IMonster
+}
+
+func NewRotateWithoutAnimation(monster common.IMonster) *RotateWithoutAnimation {
+	return &RotateWithoutAnimation{
+		monster: monster,
+	}
+}
+
+func (r *RotateWithoutAnimation) Execute() Status {
+	target := r.monster.GetTarget()
+	if target == nil {
+		return Failure
+	}
+
+	pos := r.monster.GetPosition()
+	targetAngle := float32(math.Atan2(float64(target.Z-pos.Z), float64(target.X-pos.X)))
+	r.monster.SetRotation(targetAngle)
+
+	return Success
+}
+
+type InSightCheck struct {
+	monster    common.IMonster
+	viewAngle  float32
+	lastCheck  time.Time
+	checkDelay time.Duration
+}
+
+func NewInSightCheck(monster common.IMonster, viewAngle float32) *InSightCheck {
+	return &InSightCheck{
+		monster:   monster,
+		viewAngle: viewAngle,
+	}
+}
+
+func (i *InSightCheck) Execute() Status {
+	now := time.Now()
+	if now.Sub(i.lastCheck) < i.checkDelay {
+		return Success
+	}
+	i.lastCheck = now
+
+	target := i.monster.GetTarget()
+	if target == nil {
+		return Failure
+	}
+
+	pos := i.monster.GetPosition()
+	currentRotation := i.monster.GetRotation()
+	targetAngle := float32(math.Atan2(float64(target.Z-pos.Z), float64(target.X-pos.X)))
+	angleDiff := math.Abs(float64(normalizeAngle(targetAngle-currentRotation))) * 180 / math.Pi
+
+	if angleDiff <= float64(i.viewAngle/2) {
+		return Success
+	}
+
+	return Failure
+}
+
+// behaviorNodes.go에 추가
+type ActionState struct {
+	mutex         sync.Mutex
+	currentAction string // "none", "chase", "attack", "rotate" 등
+}
+
+func NewActionState() *ActionState {
+	return &ActionState{
+		currentAction: "none",
+	}
+}
+
+func (a *ActionState) SetAction(action string) bool {
+	a.mutex.Lock()
+	defer a.mutex.Unlock()
+
+	if a.currentAction != "none" {
+		return false
+	}
+
+	a.currentAction = action
+	return true
+}
+
+func (a *ActionState) ClearAction() {
+	a.mutex.Lock()
+	defer a.mutex.Unlock()
+	a.currentAction = "none"
 }

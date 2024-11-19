@@ -40,7 +40,7 @@ public class PlayerSpawner : MonoBehaviour
 
     void SpawnMyPlayer( Vector3 spawnPos)
     {
-        GameObject SpawnPlayer = Instantiate(MyPlayerTemplate.gameObject, new Vector3(0, 1, 0), Quaternion.identity);
+        GameObject SpawnPlayer = Instantiate(MyPlayerTemplate.gameObject, spawnPos, Quaternion.identity);
         myPlayer = SpawnPlayer.GetComponent<Player>();
         cam.Follow = SpawnPlayer.transform.GetChild(0);
         cam.LookAt = SpawnPlayer.transform.GetChild(0);

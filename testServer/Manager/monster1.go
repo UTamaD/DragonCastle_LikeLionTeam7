@@ -11,6 +11,7 @@ import (
 type Monster struct {
 	ID        int
 	X, Z      float32
+	Rotation  float32
 	Health    int
 	MaxHealth int
 	Target    *common.Point
@@ -87,6 +88,14 @@ func (m *Monster) IsDead() bool {
 	return m.Health <= 0
 }
 
+func (m *Monster) GetRotation() float32 {
+	return m.Rotation
+}
+
+func (m *Monster) SetRotation(r float32) {
+	m.Rotation = r
+}
+
 func (m *Monster) Update() {
 	if !m.IsDead() {
 		m.AI.Execute()
@@ -117,34 +126,55 @@ func (m *Monster) TakeDamage(damage int) {
 	GetPlayerManager().Broadcast(damageMsg)
 }
 
-func CreateMonsterBehaviorTree(monster *Monster) behavior.Node {
+func CreateMonsterBehaviorTree(monster common.IMonster) behavior.Node {
 	playerManager := GetPlayerManager()
 	netManager := GetNetManager()
 	state := &behavior.AttackState{}
+	patternState := &behavior.PatternState{MaxRepeat: 2}
+	actionState := behavior.NewActionState()
+
+	// Combat pattern selector that manages different attack patterns
+	combatSelector := behavior.NewSelector(
+		// Melee attack sequence
+		behavior.NewSequence(
+			behavior.NewDetectPlayer(monster, 4.0, playerManager, netManager),
+			behavior.NewRotateWithoutAnimation(monster),
+			behavior.NewMeleeAttack(monster, 4.0, 10, 4*time.Second, playerManager, netManager, state),
+			behavior.NewWait(1*time.Second, false, state),
+		),
+		// Ranged/Meteor attack selector with mutual exclusion
+		behavior.NewMutuallyExclusiveSelector(0.33,
+			[]behavior.Node{
+				// Ranged attack sequence
+				behavior.NewSequence(
+					behavior.NewDetectPlayer(monster, 30.0, playerManager, netManager),
+					behavior.NewRotateWithoutAnimation(monster),
+					behavior.NewRangedAttack(monster, 30.0, 8, 10*time.Second, playerManager, netManager, state),
+					behavior.NewWait(1*time.Second, false, state),
+				),
+				// Meteor attack sequence
+				behavior.NewSequence(
+					behavior.NewDetectPlayer(monster, 40.0, playerManager, netManager),
+					behavior.NewRotateWithoutAnimation(monster),
+					behavior.NewMeteorAttack(monster, 40.0, 15, 10*time.Second, playerManager, netManager, state),
+					behavior.NewWait(2*time.Second, false, state),
+				),
+			},
+		),
+	)
+
+	// Chase sequence with animated rotation before movement
+	chaseSequence := behavior.NewSequence(
+		behavior.NewDetectPlayer(monster, 50.0, playerManager, netManager),
+		behavior.NewRotateToTarget(monster, 2.0, playerManager, netManager),
+		behavior.NewChase(monster, 2.0, playerManager, netManager, actionState),
+		behavior.NewWait(10*time.Second, false, state),
+	)
 
 	return behavior.NewSelector(
 		behavior.NewSequence(
 			behavior.NewDetectPlayer(monster, 50.0, playerManager, netManager),
-			behavior.NewSelector(
-				behavior.NewSequence(
-					behavior.NewDetectPlayer(monster, 2.0, playerManager, netManager),
-					behavior.NewMeleeAttack(monster, 2.0, 10, 4*time.Second, playerManager, netManager, state),
-					behavior.NewWait(1*time.Second, false, state),
-				),
-				behavior.NewMutuallyExclusiveSelector(0.33,
-					[]behavior.Node{
-						behavior.NewSequence(
-							behavior.NewRangedAttack(monster, 50.0, 8, 10*time.Second, playerManager, netManager, state),
-							behavior.NewWait(1*time.Second, false, state),
-						),
-						behavior.NewSequence(
-							behavior.NewMeteorAttack(monster, 59.0, 15, 10*time.Second, playerManager, netManager, state),
-							behavior.NewWait(2*time.Second, false, state),
-						),
-					},
-				),
-				behavior.NewChase(monster, 50.0, playerManager, netManager),
-			),
+			behavior.NewPatternTracker(patternState, combatSelector, chaseSequence),
 		),
 	)
 }

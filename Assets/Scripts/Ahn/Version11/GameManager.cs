@@ -93,11 +93,20 @@ public class GameManager : MonoBehaviour
             case GameMessage.MessageOneofCase.PlayerDamage:
                 HandlePlayerDamage(msg.PlayerDamage);
                 break;
+            case GameMessage.MessageOneofCase.MonsterRotate:
+                HandleMonsterRotate(msg.MonsterRotate);
+                break;
                 
         }
     }
 
-
+    private void HandleMonsterRotate(MonsterRotate rotateData)
+    {
+        if (monsters.TryGetValue(rotateData.MonsterId, out MonsterController monster))
+        {
+            monster.UpdateRotation(rotateData.Rotation, rotateData.Duration);
+        }
+    }
 
     private void HandlePlayerDamage(PlayerDamage playerDamage)
     {
@@ -138,7 +147,9 @@ public class GameManager : MonoBehaviour
     private void HandleSpawnMonster(SpawnMonster spawnData)
     {
         Vector3 spawnPosition = new Vector3(spawnData.X, 0, spawnData.Z);
-        GameObject monsterObj = Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
+        GameObject monsterObj = Instantiate(monsterPrefab, spawnPosition, 
+            Quaternion.Euler(0, spawnData.RotationY * Mathf.Rad2Deg, 0));
+        
         MonsterController controller = monsterObj.GetComponent<MonsterController>();
         controller.Initialize(spawnData.MonsterId);
         monsters[spawnData.MonsterId] = controller;

@@ -146,7 +146,7 @@ MonoBehaviour:
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 257
   _verticalVelocity: 0
   IsSprint: 0
 --- !u!114 &599924185046549998
@@ -252,8 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3d33e61adc9a1429da15c888e8239f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpMax: 100
-  MpMax: 100
 --- !u!114 &-91670673609557521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +269,7 @@ MonoBehaviour:
   bodyObject: {fileID: 0}
   Speed: 5
   mouseSensitivity: 1
+  maxHealth: 100
 --- !u!1 &8276128269984820837
 GameObject:
   m_ObjectHideFlags: 0

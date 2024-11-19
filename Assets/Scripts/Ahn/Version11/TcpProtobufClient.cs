@@ -237,13 +237,13 @@ public class TcpProtobufClient : MonoBehaviour
                 byte[] messageBytes = message.ToByteArray();
                 byte[] lengthBytes = BitConverter.GetBytes(messageBytes.Length);
 
-                Debug.Log($"Sending message of type: {message.MessageCase}, length: {messageBytes.Length}");
+                //Debug.Log($"Sending message of type: {message.MessageCase}, length: {messageBytes.Length}");
             
                 stream.Write(lengthBytes, 0, 4);
                 stream.Write(messageBytes, 0, messageBytes.Length);
                 stream.Flush(); // 스트림 즉시 전송 보장
             
-                Debug.Log("Message sent successfully");
+                //Debug.Log("Message sent successfully");
             }
             else
             {

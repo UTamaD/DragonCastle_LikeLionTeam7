@@ -21,6 +21,8 @@ type IMonster interface {
 	SetHealth(health int)
 	GetMaxHealth() int
 	IsDead() bool
+	GetRotation() float32
+	SetRotation(r float32)
 }
 type INetworkManager interface {
 	MakePacket(sg *pb.GameMessage) []byte
