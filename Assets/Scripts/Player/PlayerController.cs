@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour
 {
     #region Public Variable
 
-    [Header("Player")]
+    [Header("Player")] 
+    public int Combo = 3;
+    
+    [Space(10)]
     public float MoveSpeed = 2.0f;
     public float SprintSpeed = 5.335f;
     
@@ -43,8 +46,6 @@ public class PlayerController : MonoBehaviour
     public float _verticalVelocity;
     private float _terminalVelocity = 53.0f;
     
-    private int _comboNum = 0;
-
     // timeout deltatime
     private float _jumpTimeoutDelta;
     private float _fallTimeoutDelta;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
     public SkillManager SkillManager { get; private set; }
     public LivingEntity LivingEntity { get; private set; }
     public CombatSystem CombatSystem { get; private set; }
+    public Player Player { get; private set; }
     public CharacterController Controller  { get; private set; }
     public PlayerInputs Inputs { get; private set; }
     public GameObject MainCamera { get; private set; }
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviour
         SkillManager = GetComponent<SkillManager>();
         LivingEntity = GetComponent<LivingEntity>();
         CombatSystem = GetComponent<CombatSystem>();
+        Player = GetComponent<Player>();
         Controller = GetComponent<CharacterController>();
         Inputs = GetComponent<PlayerInputs>();
         Animator = GetComponentInChildren<Animator>();
@@ -169,28 +172,9 @@ public class PlayerController : MonoBehaviour
             {
                 _verticalVelocity = -2f;
             }
-            
-            // // Jump
-            // if (Inputs.jump && _jumpTimeoutDelta <= 0.0f && !_isInvincible && !_isMelee)
-            // {
-            //     // the square root of H * -2 * G = how much velocity needed to reach desired height
-            //     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-            //     
-            //     Animator.SetBool(_animIDJump, true);
-            // }
-            //
-            // // jump timeout
-            // if (_jumpTimeoutDelta >= 0.0f)
-            // {
-            //     _jumpTimeoutDelta -= Time.deltaTime;
-            // }
         }
         else
         {
-            // // reset the jump timeout timer
-            // _jumpTimeoutDelta = JumpTimeout;
-
-            // fall timeout
             if (_fallTimeoutDelta >= 0.0f)
             {
                 _fallTimeoutDelta -= Time.deltaTime;
@@ -199,9 +183,6 @@ public class PlayerController : MonoBehaviour
             {
                 Animator.SetBool(_animIDFreeFall, true);
             }
-
-            // // if we are not grounded, do not jump
-            // Inputs.jump = false;
         }
 
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
@@ -262,6 +243,9 @@ public class PlayerController : MonoBehaviour
     #region Damaged
     private void Damaged()
     {
+        if ((StateMachine.CurrentState is IFrameState))
+            return;
+        
         StateMachine.ChangeState(StateName.Damaged);
     }
     

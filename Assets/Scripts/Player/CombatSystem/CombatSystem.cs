@@ -68,14 +68,12 @@ public class CombatSystem : MonoBehaviour
             if (Physics.SphereCast(transform.position, 2f, transform.forward, out RaycastHit hit, 2f))
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawRay(transform.position, transform.forward * hit.distance);
-                Gizmos.DrawWireSphere(transform.position + transform.forward * hit.distance, 2.0f);
+                Gizmos.DrawWireSphere(transform.position + transform.forward * 2f, 2.0f);
             }
             else
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawRay(transform.position, transform.forward * hit.distance);
-                Gizmos.DrawWireSphere(transform.position + transform.forward * hit.distance, 2.0f);
+                Gizmos.DrawWireSphere(transform.position + transform.forward * 2f, 2.0f);
             }
         }
     }

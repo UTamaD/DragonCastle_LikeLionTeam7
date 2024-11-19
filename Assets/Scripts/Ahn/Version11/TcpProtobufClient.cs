@@ -10,6 +10,7 @@ public class TcpProtobufClient : MonoBehaviour
     public static TcpProtobufClient Instance { get; private set; }
     
     private TcpClient tcpClient;
+    private Thread receiveThread;
     private NetworkStream stream;
     private bool isRunning = false;
 
@@ -32,7 +33,7 @@ public class TcpProtobufClient : MonoBehaviour
     void Start()
     {
         ConnectToServer();
-        SendLoginMessage(SuperManager.Instance.playerId);
+        //SendLoginMessage(SuperManager.Instance.playerId);
     }
 
     void ConnectToServer()
@@ -42,7 +43,12 @@ public class TcpProtobufClient : MonoBehaviour
             tcpClient = new TcpClient(SERVER_IP, SERVER_PORT);
             stream = tcpClient.GetStream();
             isRunning = true;
-            StartReceiving();
+            
+            //StartReceiving();
+            
+            receiveThread = new Thread(ReceiveLoop);
+            receiveThread.Start();
+
             Debug.Log("Connected to server.");
 
             // 연결 상태 추가 로깅
@@ -52,6 +58,32 @@ public class TcpProtobufClient : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError($"Error connecting to server: {e.Message}");
+        }
+    }
+    
+    void ReceiveLoop()
+    {
+        byte[] lengthBuffer = new byte[4];
+        while (isRunning)
+        {
+            try
+            {
+                int bytesRead = stream.Read(lengthBuffer, 0, 4);
+                if (bytesRead == 0) break; // Connection closed
+
+                int length = BitConverter.ToInt32(lengthBuffer, 0);
+                byte[] messageBuffer = new byte[length];
+                bytesRead = stream.Read(messageBuffer, 0, length);
+                if (bytesRead == 0) break; // Connection closed
+
+                GameMessage gameMessage = GameMessage.Parser.ParseFrom(messageBuffer);
+                UnityMainThreadDispatcher.Instance.Enqueue(gameMessage);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error in receive loop: {e.Message}");
+                break;
+            }
         }
     }
 
@@ -204,6 +236,7 @@ public class TcpProtobufClient : MonoBehaviour
     {
         SendSpawnMonster(0, 0, 1);
     }
+    
     public void SendSpawnMonster(float x, float z, int monsterId)
     {
         var spawnMonster = new SpawnMonster
@@ -226,7 +259,6 @@ public class TcpProtobufClient : MonoBehaviour
         //만약 액션 반환값에 필요한 다른 데이터가 더 있다면 여기서 추가
         SendMessage(message);
     }
-
     
     private void SendMessage(GameMessage message)
     {
@@ -304,7 +336,4 @@ public class TcpProtobufClient : MonoBehaviour
             Debug.LogError($"Error during cleanup: {e.Message}");
         }
     }
-    
-    
-    
 }

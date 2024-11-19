@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,16 +8,19 @@ using UnityEngine.Serialization;
 public class LivingEntity : MonoBehaviour, IDamageable
 {
     [Header("== Basic Status ==")]
-    public readonly float HpMax = 100;    
-    public readonly float MpMax = 100;
+    public float HpMax = 100;
 
     public float Hp { get; protected set; }
-    public float Mp { get; protected set; }
 
     public bool IsDead { get; protected set; }
 
     public UnityAction OnDamagedEvent;
     public UnityAction OnDeathEvent;
+
+    private void Start()
+    {
+        Hp = HpMax;
+    }
 
     public virtual void ChangeHp(float value)
     {
@@ -24,18 +28,15 @@ public class LivingEntity : MonoBehaviour, IDamageable
         OnHpChanged();
     }
     
-    public virtual void ChangeMp(float value)
-    {
-        Mp += value;
-        OnMpChanged();
-    }
-
     private void OnHpChanged()
     {
     }
-
-    private void OnMpChanged()
+    
+    public virtual void ApplyDamage(float dmgAmount)
     {
+        ChangeHp(-dmgAmount);
+        
+        OnDamagedEvent?.Invoke();
     }
     
     public virtual void ApplyDamage(DamageMessage dmgMsg)

@@ -51,7 +51,8 @@ public class MoveState : BaseState
         Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
         Owner.Controller.Move(targetDirection.normalized * (targetSpeed * Time.deltaTime) +
                              new Vector3(0.0f, Owner._verticalVelocity, 0.0f) * Time.deltaTime);
-
+        
+        Owner.Player.SendPositionToServer(targetDirection.normalized, targetRotation, targetSpeed);
         Owner.Animator.SetFloat(_animIDSpeed, targetSpeed);
     }
 

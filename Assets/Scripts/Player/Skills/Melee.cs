@@ -22,7 +22,7 @@ public class Melee : SkillBase
 
     public override bool IsAvailable()
     {
-        return (_comboCount < 4);
+        return (_comboCount < (Owner.Combo + 1));
     }
 
     public override void Active()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game;
@@ -5,19 +6,84 @@ using UnityEngine;
 
 public class OtherPlayer : MonoBehaviour
 {
-    private float lastUpdateTime;
+    public PlayerController PlayerController { get; private set; }
+    public LivingEntity LivingEntity { get; private set; }
+    public Animator Animator { get; private set; }
+    
+    // position
     private Vector3 Destination;
     private Vector3 Direction;
-    private float rotationY;
-    private float currentRotationY;
     private float Speed;
-    private float interpTime = 0.2f;
-    private float checkDistanceTime = 10.0f;
-    private float rotationSpeed = 720f; // 초당 회전 속도 (도)
     
-
+    private float interpTime = 0.2f;
+    private float checkDistance = 10f;
+    private float checkDistanceTime = 10.0f;
+    
+    private float rotationY;
+    private float _rotationVelocity;
+    
     private Coroutine interpDestinationCoroutine = null;
 
+    public string PlayerId { get; private set; }
+    public void Initialize(string playerId)
+    {
+        PlayerId = playerId; 
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        LivingEntity = GetComponent<LivingEntity>();
+        Animator = GetComponent<Animator>();
+
+        LivingEntity.OnDamagedEvent += Damaged;
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        if (interpDestinationCoroutine != null)
+            return;
+        
+        float timeSinceLastUpdate = Time.deltaTime;
+        transform.position += Direction * (Speed * timeSinceLastUpdate);
+    }
+
+    private void LateUpdate()
+    {
+        UpdateRotation();
+    }
+
+    public void UpdatePlayerPosition(PlayerPosition p)
+    {
+        Direction = new Vector3(p.Fx, p.Fy, p.Fz);
+        Speed = p.Speed;
+        
+        Destination = new Vector3(p.X, p.Y, p.Z);
+        rotationY = p.RotationY;
+
+        float distance = (transform.position - Destination).magnitude;
+        if (interpDestinationCoroutine == null &&  distance > checkDistanceTime )
+        {
+            interpDestinationCoroutine = StartCoroutine(InterpDestination());
+        }
+    }
+    
+    void UpdateRotation()
+    {
+       // float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationY, 
+       //     ref _rotationVelocity, PlayerController.RotationSmoothTime);
+       
+       if(rotationY != 0)
+        transform.rotation = Quaternion.Euler(0, rotationY, 0);
+    }
+    
+    private void Damaged()
+    {
+        Animator.SetBool("KnockBack", true);
+        Animator.SetTrigger("Damaged");
+    }
+    
     IEnumerator InterpDestination()
     {
         Vector3 initPosition = transform.position;
@@ -37,55 +103,7 @@ public class OtherPlayer : MonoBehaviour
             }
 
             lerp += Time.deltaTime / interpTime;
+            yield return null;
         }
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    public void UpdatePlayerPosition(PlayerPosition p)
-    {
-        Destination = new Vector3(p.X, p.Y, p.Z);
-        Direction = new Vector3(p.Fx, p.Fy, p.Fz);
-        Speed = p.Speed;
-        rotationY = p.RotationY;
-
-        float distance = (transform.position - Destination).magnitude;
-        if (interpDestinationCoroutine == null &&  distance > checkDistanceTime )
-        {
-            interpDestinationCoroutine = StartCoroutine(InterpDestination());
-        }
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (interpDestinationCoroutine != null)
-        {
-            UpdateRotation();
-            return;
-        }
-        
-        float timeSinceLastUpdate = Time.deltaTime;
-        transform.position += Direction * (Speed * timeSinceLastUpdate);
-        
-        UpdateRotation();
-    }
-    
-    void UpdateRotation()
-    {
-        // 현재 회전과 목표 회전 사이의 각도 차이 계산
-        float angleDifference = Mathf.DeltaAngle(currentRotationY, rotationY);
-        
-        // 회전 속도에 따라 현재 프레임에서 회전할 수 있는 최대 각도 계산
-        float maxRotation = rotationSpeed * Time.deltaTime;
-        
-        // 부드러운 회전을 위해 SmoothDamp 사용
-        currentRotationY = Mathf.MoveTowards(currentRotationY, rotationY, maxRotation);
-
-        // Y축을 기준으로 회전 적용
-        transform.rotation = Quaternion.Euler(0, currentRotationY, 0);
     }
 }

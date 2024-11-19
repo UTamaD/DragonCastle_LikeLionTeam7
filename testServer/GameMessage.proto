@@ -41,6 +41,20 @@ message SpawnOtherPlayer {
   float rotation_y = 5;
 }
 
+message AnimatorSetFloat {
+  string animId = 1;
+  float condition = 2;
+}
+
+message AnimatorSetBool {
+  string animId = 1;
+  bool condition = 2;
+}
+
+message AnimatorSetTrigger {
+  string animId = 1;
+}
+
 message ChatMessage {
   string sender = 1;
   string content = 2;
@@ -53,7 +67,6 @@ message LoginMessage {
 message LogoutMessage {
   string playerId = 1;    
 }
-
 
 message SpawnMonster {
   float x = 1;

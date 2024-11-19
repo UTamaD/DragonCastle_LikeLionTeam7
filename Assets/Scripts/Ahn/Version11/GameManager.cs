@@ -54,11 +54,12 @@ public class GameManager : MonoBehaviour
                 break;
             case GameMessage.MessageOneofCase.SpawnMyPlayer:
                 var mySpawnPos = new Vector3(msg.SpawnMyPlayer.X, msg.SpawnMyPlayer.Y, msg.SpawnMyPlayer.Z);
-                PlayerSpawner.Instance.OnSpawnMyPlayer(mySpawnPos);
+                PlayerSpawner.Instance.SpawnMyPlayer(mySpawnPos);
                 break;
             case GameMessage.MessageOneofCase.SpawnOtherPlayer:
                 var otherSpawnPos = new Vector3(msg.SpawnOtherPlayer.X, msg.SpawnOtherPlayer.Y, msg.SpawnOtherPlayer.Z);
-                PlayerSpawner.Instance.SpawnOtherPlayer(msg.SpawnOtherPlayer.PlayerId, otherSpawnPos);
+                var otherSpawnRot = msg.SpawnOtherPlayer.RotationY;
+                PlayerSpawner.Instance.SpawnOtherPlayer(msg.SpawnOtherPlayer.PlayerId, otherSpawnPos, otherSpawnRot);
                 break;
             case GameMessage.MessageOneofCase.Logout:
                 PlayerSpawner.Instance.DestroyOtherPlayer(msg.Logout.PlayerId);
@@ -75,9 +76,6 @@ public class GameManager : MonoBehaviour
             case GameMessage.MessageOneofCase.PathTest:
                 HandlePathTest(msg.PathTest);
                 break;
-            case GameMessage.MessageOneofCase.Chat:
-                PlayerSpawner.Instance.OnRecevieChatMsg(msg.Chat);
-                break;
             case GameMessage.MessageOneofCase.MonsterAttack:
                 HandleMonsterAttack(msg.MonsterAttack);
                 break;
@@ -93,12 +91,9 @@ public class GameManager : MonoBehaviour
             case GameMessage.MessageOneofCase.PlayerDamage:
                 HandlePlayerDamage(msg.PlayerDamage);
                 break;
-                
         }
     }
-
-
-
+    
     private void HandlePlayerDamage(PlayerDamage playerDamage)
     {
         Debug.Log($"Received damage for player: {playerDamage.PlayerId}");
@@ -108,19 +103,17 @@ public class GameManager : MonoBehaviour
         if (playerDamage.PlayerId == SuperManager.Instance.playerId)
         {
             Player myPlayer = PlayerSpawner.Instance.GetMyPlayer();
+            PlayerController myPlayerCtrl = PlayerSpawner.Instance.GetMyPlayerController();
             if (myPlayer != null)
             {
                 Debug.Log($"Applying {playerDamage.AttackType} damage: {playerDamage.Damage} to player: {myPlayer.PlayerId}");
-                myPlayer.TakeDamage(playerDamage.Damage);
-
+                myPlayerCtrl.LivingEntity.ApplyDamage(playerDamage.Damage);
             }
         }
         else
         {
-            
             if (PlayerSpawner.Instance.TryGetOtherPlayer(playerDamage.PlayerId, out OtherPlayer otherPlayer))
             {
-                
                 Vector3 hitPoint = new Vector3(
                     playerDamage.HitPointX,
                     playerDamage.HitPointY,
@@ -130,6 +123,7 @@ public class GameManager : MonoBehaviour
                 if (EffectManager.Instance != null)
                 {
                     // 피격 효과 재생
+                    otherPlayer.LivingEntity.ApplyDamage(playerDamage.Damage);
                 }
             }
         }

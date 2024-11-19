@@ -1,20 +1,16 @@
 package manager
 
 import (
-	"encoding/binary"
 	"errors"
-	"log"
 	"net"
 
 	pb "testServer/Messages"
 	"testServer/common"
-
-	"google.golang.org/protobuf/proto"
 )
 
 // 위치 정보를 담는 구조체
 type Point struct {
-	X, Y float32
+	X, Y, Z float32
 }
 
 // Player represents a single player with some attributes
@@ -23,9 +19,8 @@ type Player struct {
 	Name      string
 	Age       int
 	Conn      *net.Conn
-	Y         float32
+	Point     Point
 	RotationY float32
-	Point     *common.Point
 }
 
 var playerManager *PlayerManager
@@ -64,8 +59,7 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 		Name:      name,
 		Age:       age,
 		Conn:      conn,
-		Point:     &common.Point{X: 0, Z: 0},
-		Y:         0,
+		Point:     Point{X: 0, Y: 0, Z: 0},
 		RotationY: 0,
 	}
 
@@ -77,59 +71,42 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 		Message: &pb.GameMessage_SpawnMyPlayer{
 			SpawnMyPlayer: &pb.SpawnMyPlayer{
 				X:         player.Point.X,
-				Y:         player.Y,
+				Y:         player.Point.Y,
 				Z:         player.Point.Z,
 				RotationY: player.RotationY,
 			},
 		},
-	}
-
-	pathTest := &pb.GameMessage{
-		Message: &pb.GameMessage_PathTest{
-			PathTest: &pb.PathTest{},
-		},
-	}
-
-	path, err := GetNavMeshManager().PathFinding(-230, 0, -291, 235, 0, 180)
-	if err == nil {
-		for _, path := range path.PathList {
-			pathTest.GetPathTest().Paths = append(pathTest.GetPathTest().Paths, &pb.NavV3{X: float32(path.X), Y: float32(path.Y), Z: float32(path.Z)})
-		}
-
-		response := GetNetManager().MakePacket(pathTest)
-		(*player.Conn).Write(response)
 	}
 
 	response := GetNetManager().MakePacket(myPlayerSapwn)
-	(*player.Conn).Write(response)
-
-	for _, m := range GetMonsterManager().monsters {
-		MonsterSapwn := &pb.GameMessage{
-			Message: &pb.GameMessage_SpawnMonster{SpawnMonster: &pb.SpawnMonster{X: m.X, Z: m.Z, MonsterId: int32(m.ID)}},
-		}
-		response := GetNetManager().MakePacket(MonsterSapwn)
-		(*player.Conn).Write(response)
+	if response == nil {
+		return &player
 	}
 
+	(*player.Conn).Write(response)
+
+	// 나의 정보를 다른 플레이어에게 보냄
 	otherPlayerSpawnPacket := &pb.GameMessage{
 		Message: &pb.GameMessage_SpawnOtherPlayer{
 			SpawnOtherPlayer: &pb.SpawnOtherPlayer{
-				PlayerId:  name,
+				PlayerId:  player.Name,
 				X:         player.Point.X,
-				Y:         player.Y,
+				Y:         player.Point.Y,
 				Z:         player.Point.Z,
 				RotationY: player.RotationY,
 			},
 		},
 	}
 
-	// 이 코드를 들어온 유저를 제외한 플레이어들에게 스폰시켜달라고 한다.
+	response = GetNetManager().MakePacket(otherPlayerSpawnPacket)
+	if response == nil {
+		return &player
+	}
+
 	for _, p := range pm.players {
 		if p.Name == name {
 			continue
 		}
-
-		response = GetNetManager().MakePacket(otherPlayerSpawnPacket)
 
 		(*p.Conn).Write(response)
 	}
@@ -145,7 +122,7 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 				SpawnOtherPlayer: &pb.SpawnOtherPlayer{
 					PlayerId:  p.Name,
 					X:         p.Point.X,
-					Y:         p.Y,
+					Y:         p.Point.Y,
 					Z:         p.Point.Z,
 					RotationY: player.RotationY,
 				},
@@ -163,16 +140,14 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 func (pm *PlayerManager) MovePlayer(p *pb.GameMessage_PlayerPosition) {
 
 	pm.players[p.PlayerPosition.PlayerId].Point.X = p.PlayerPosition.X
-	pm.players[p.PlayerPosition.PlayerId].Y = p.PlayerPosition.Y
+	pm.players[p.PlayerPosition.PlayerId].Point.Y = p.PlayerPosition.Y
 	pm.players[p.PlayerPosition.PlayerId].Point.Z = p.PlayerPosition.Z
 	pm.players[p.PlayerPosition.PlayerId].RotationY = p.PlayerPosition.RotationY
 
-	response, err := proto.Marshal(&pb.GameMessage{
+	response := GetNetManager().MakePacket(&pb.GameMessage{
 		Message: p,
 	})
-
-	if err != nil {
-		log.Printf("Failed to marshal response: %v", err)
+	if response == nil {
 		return
 	}
 
@@ -181,10 +156,7 @@ func (pm *PlayerManager) MovePlayer(p *pb.GameMessage_PlayerPosition) {
 			continue
 		}
 
-		lengthBuf := make([]byte, 4)
-		binary.LittleEndian.PutUint32(lengthBuf, uint32(len(response)))
-		lengthBuf = append(lengthBuf, response...)
-		(*player.Conn).Write(lengthBuf)
+		(*player.Conn).Write(response)
 	}
 }
 

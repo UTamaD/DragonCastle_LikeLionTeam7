@@ -11,10 +11,12 @@ public class PlayerSpawner : MonoBehaviour
     public static PlayerSpawner Instance { get; private set; }
 
     private Player myPlayer;
+    private PlayerController myPlayerCtrl;
     private Dictionary<string, OtherPlayer> _otherPlayers = new();
 
-    public Player MyPlayerTemplate;
-    public OtherPlayer OtherPlayerTemplate;
+    public Transform SpawnPosition;
+    public GameObject MyPlayerTemplate;
+    public GameObject OtherPlayerTemplate;
 
     public CinemachineVirtualCamera cam;
     
@@ -35,39 +37,25 @@ public class PlayerSpawner : MonoBehaviour
     {
         
     }
-    
 
-
-    void SpawnMyPlayer( Vector3 spawnPos)
+    public void SpawnMyPlayer( Vector3 spawnPos)
     {
-        GameObject SpawnPlayer = Instantiate(MyPlayerTemplate.gameObject, new Vector3(0, 1, 0), Quaternion.identity);
+        GameObject SpawnPlayer = Instantiate(MyPlayerTemplate, SpawnPosition.position, Quaternion.identity);
         myPlayer = SpawnPlayer.GetComponent<Player>();
+        myPlayerCtrl = SpawnPlayer.GetComponent<PlayerController>();
         cam.Follow = SpawnPlayer.transform.GetChild(0);
         cam.LookAt = SpawnPlayer.transform.GetChild(0);
         myPlayer.Initialize(SuperManager.Instance.playerId);
     }
 
-    public void SpawnOtherPlayer(string playerId, Vector3 spawnPos)
+    public void SpawnOtherPlayer(string playerId, Vector3 spawnPos, float spawnRot)
     {
         GameObject spawnPlayer = Instantiate(OtherPlayerTemplate.gameObject, spawnPos, Quaternion.identity);
-
         OtherPlayer otherPlayer = spawnPlayer.GetComponent<OtherPlayer>();
-        Player playerComponent = spawnPlayer.GetComponent<Player>();
-        playerComponent.Initialize(playerId);
-        
         otherPlayer.transform.position = spawnPos;
-        
-        var vector3 = otherPlayer.transform.position;
-        vector3.y = 1;
-        otherPlayer.transform.position = vector3;
-        
-        Camera otherPlayerCamera = spawnPlayer.GetComponentInChildren<Camera>();
-        if (otherPlayerCamera != null)
-        {
-            otherPlayerCamera.gameObject.SetActive(false);
-        }
-        
+        otherPlayer.transform.rotation = Quaternion.Euler(0.0f, spawnRot, 0.0f);
         _otherPlayers.Add(playerId, otherPlayer);
+        otherPlayer.Initialize(playerId);
     }
     
     public void DestroyOtherPlayer(string playerId)
@@ -78,15 +66,14 @@ public class PlayerSpawner : MonoBehaviour
             _otherPlayers.Remove(playerId);
         }
     }
-
-    public void OnSpawnMyPlayer( Vector3 spawnPos)
+    
+    public void OnOtherPlayerPositionUpdate(PlayerPosition playerPosition)
     {
-        SpawnMyPlayer(spawnPos);
-    }
-
-    public void OnRecevieChatMsg(ChatMessage chatmsg)
-    {
-       
+        if (_otherPlayers.TryGetValue(
+                playerPosition.PlayerId, out OtherPlayer otherPlayer))
+        {
+            otherPlayer.UpdatePlayerPosition(playerPosition);
+        }
     }
     
     public Transform GetPlayerTransform(string playerId)
@@ -106,19 +93,14 @@ public class PlayerSpawner : MonoBehaviour
         return null;
     }
     
-    public void OnOtherPlayerPositionUpdate(PlayerPosition playerPosition)
-    {
-        if (_otherPlayers.TryGetValue(
-             playerPosition.PlayerId, out OtherPlayer otherPlayer))
-        {
-            otherPlayer.UpdatePlayerPosition(playerPosition);
-        }
-    }
-    
-    
     public Player GetMyPlayer()
     {
         return myPlayer;
+    }
+    
+    public PlayerController GetMyPlayerController()
+    {
+        return myPlayerCtrl;
     }
 
     public bool TryGetOtherPlayer(string playerId, out OtherPlayer otherPlayer)
