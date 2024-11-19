@@ -66,7 +66,6 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 	pm.players[name] = &player
 	pm.nextID++
 
-	// 내가 로그인 되었음을 나한테 알려준다.
 	myPlayerSapwn := &pb.GameMessage{
 		Message: &pb.GameMessage_SpawnMyPlayer{
 			SpawnMyPlayer: &pb.SpawnMyPlayer{
@@ -85,7 +84,6 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 
 	(*player.Conn).Write(response)
 
-	// 나의 정보를 다른 플레이어에게 보냄
 	otherPlayerSpawnPacket := &pb.GameMessage{
 		Message: &pb.GameMessage_SpawnOtherPlayer{
 			SpawnOtherPlayer: &pb.SpawnOtherPlayer{
@@ -111,7 +109,16 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 		(*p.Conn).Write(response)
 	}
 
-	// 다른 플레이어의 위치정보를 접속한 인원에게 보낸다.
+	monsters := GetMonsterManager().GetMonsters()
+
+	for _, monster := range monsters {
+		MonsterSpawn := &pb.GameMessage{
+			Message: &pb.GameMessage_SpawnMonster{SpawnMonster: &pb.SpawnMonster{X: monster.X, Z: monster.Z, MonsterId: int32(monster.ID), RotationY: monster.Rotation}},
+		}
+		response := GetNetManager().MakePacket(MonsterSpawn)
+		(*player.Conn).Write(response)
+	}
+
 	for _, p := range pm.players {
 		if p.Name == name {
 			continue

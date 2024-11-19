@@ -39,7 +39,7 @@ func main() {
 func handleConnection(conn net.Conn) {
 	defer conn.Close()
 	for {
-		// 메시지 길이를 먼저 읽습니다 (4바이트)
+
 		lengthBuf := make([]byte, 4)
 		_, err := conn.Read(lengthBuf)
 		if err != nil {
@@ -48,7 +48,6 @@ func handleConnection(conn net.Conn) {
 		}
 		length := binary.LittleEndian.Uint32(lengthBuf)
 
-		// 메시지 본문을 읽습니다
 		messageBuf := make([]byte, length)
 		_, err = conn.Read(messageBuf)
 		if err != nil {
@@ -56,7 +55,6 @@ func handleConnection(conn net.Conn) {
 			return
 		}
 
-		// Protocol Buffers 메시지를 파싱합니다
 		message := &pb.GameMessage{}
 		err = proto.Unmarshal(messageBuf, message)
 		if err != nil {
@@ -64,7 +62,6 @@ func handleConnection(conn net.Conn) {
 			continue
 		}
 
-		// 메시지 처리
 		processMessage(message, &conn)
 
 	}
