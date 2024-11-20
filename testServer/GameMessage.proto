@@ -114,9 +114,16 @@ message MeteorStrike {
 }
 
 message MonsterDamage {
-    int32 monsterId = 1;
+    int32 monster_id = 1;
     float damage = 2;
-    int32 currentHp = 3;
+    int32 current_hp = 3;
+    float hit_point_x = 4;
+    float hit_point_y = 5;
+    float hit_point_z = 6;
+    float hit_normal_x = 7;
+    float hit_normal_y = 8;
+    float hit_normal_z = 9;
+    int32 hit_effect_type = 10;
 }
 
 message PlayerDamage {
@@ -135,7 +142,18 @@ message MonsterRotate {
 }
 
 
+message Point3D {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
 
+message MonsterHitEffect {
+    int32 monster_id = 1;
+    Point3D hit_point = 2;
+    Point3D hit_normal = 3;
+    int32 hit_effect_type = 4;
+}
 message GameMessage {
   oneof message {
     PlayerPosition player_position = 1;
@@ -154,5 +172,6 @@ message GameMessage {
     MonsterDamage monsterDamage = 14;
     PlayerDamage playerDamage = 15;
     MonsterRotate monsterRotate = 16;
+    MonsterHitEffect monsterHitEffect = 17;
   }
 } 

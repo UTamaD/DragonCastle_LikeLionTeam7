@@ -24849,7 +24849,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4412271280512140}
   - component: {fileID: 114176226489844222}
-  - component: {fileID: 3580480431689276781}
   m_Layer: 0
   m_Name: MeteorCollisionDamageField
   m_TagString: Untagged
@@ -24905,33 +24904,6 @@ MonoBehaviour:
   Speed: 10
   AirDrag: 0.1
   UseGravity: 1
---- !u!114 &3580480431689276781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1246638314895344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7ca75cc972fc064a8aaa52e7b4c0d9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config:
-    damageType: 2
-    deactivationType: 0
-    activationDelay: 0
-    duration: 2
-    damageAmount: 10
-    damageInterval: 5
-    radius: 2
-    hitEffect: {fileID: 0}
-    hitSound: {fileID: 0}
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  showDebugGizmos: 1
-  gizmoColor: {r: 0.02047503, g: 1, b: 0, a: 0.3}
 --- !u!1 &1251970027701648
 GameObject:
   m_ObjectHideFlags: 0
@@ -40213,6 +40185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4732728138656692}
   - component: {fileID: 114865851078540738}
+  - component: {fileID: 6486803705949160842}
   m_Layer: 0
   m_Name: Collision
   m_TagString: Untagged
@@ -40250,6 +40223,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivatedGameObject: {fileID: 1715008461236488}
   Delay: 0.29
+--- !u!114 &6486803705949160842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669712084603642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ca75cc972fc064a8aaa52e7b4c0d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config:
+    damageType: 2
+    deactivationType: 0
+    activationDelay: 0
+    duration: 2
+    damageAmount: 10
+    damageInterval: 0
+    radius: 2
+    hitEffect: {fileID: 0}
+    hitSound: {fileID: 0}
+    hitEnvironmentEffect: {fileID: 0}
+    hitEnvironmentSound: {fileID: 0}
+    checkEnvironmentCollision: 0
+    createEffectOnEnvironmentCollision: 1
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  environmentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  showDebugGizmos: 1
+  gizmoColor: {r: 0.15148926, g: 1, b: 0, a: 0.3}
 --- !u!1 &1696402668857230
 GameObject:
   m_ObjectHideFlags: 0
@@ -40885,6 +40892,7 @@ GameObject:
   - component: {fileID: 108240078134870414}
   - component: {fileID: 114988425338788122}
   - component: {fileID: 114477174476765794}
+  - component: {fileID: 6454169738481224068}
   m_Layer: 0
   m_Name: Point light Dragon1
   m_TagString: Untagged
@@ -41034,12 +41042,35 @@ MonoBehaviour:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   GraphTimeMultiplier: 7
   GraphIntensityMultiplier: 3
   IsLoop: 0
   UseShadowsIfPossible: 0
   canUpdate: 0
+--- !u!114 &6454169738481224068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844462968241678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1860095513426724
 GameObject:
   m_ObjectHideFlags: 0

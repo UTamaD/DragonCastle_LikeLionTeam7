@@ -33,44 +33,56 @@ namespace Game {
             "eBgBIAEoAhIJCgF5GAIgASgCEgkKAXoYAyABKAISEgoKcm90YXRpb25feRgE",
             "IAEoAiJZChBTcGF3bk90aGVyUGxheWVyEhAKCHBsYXllcklkGAEgASgJEgkK",
             "AXgYAiABKAISCQoBeRgDIAEoAhIJCgF6GAQgASgCEhIKCnJvdGF0aW9uX3kY",
-            "BSABKAIiLgoLQ2hhdE1lc3NhZ2USDgoGc2VuZGVyGAEgASgJEg8KB2NvbnRl",
-            "bnQYAiABKAkiIAoMTG9naW5NZXNzYWdlEhAKCHBsYXllcklkGAEgASgJIiEK",
-            "DUxvZ291dE1lc3NhZ2USEAoIcGxheWVySWQYASABKAkiSgoMU3Bhd25Nb25z",
-            "dGVyEgkKAXgYASABKAISCQoBehgCIAEoAhIRCgltb25zdGVySWQYAyABKAUS",
-            "EQoJcm90YXRpb25ZGAQgASgCIjYKC01vdmVNb25zdGVyEgkKAXgYASABKAIS",
-            "CQoBehgCIAEoAhIRCgltb25zdGVySWQYAyABKAUiTQoNTW9uc3RlclRhcmdl",
-            "dBIRCgltb25zdGVySWQYASABKAUSFgoOdGFyZ2V0UGxheWVySWQYAiABKAkS",
-            "EQoJaGFzVGFyZ2V0GAMgASgIIl4KDU1vbnN0ZXJBdHRhY2sSEQoJbW9uc3Rl",
-            "cklkGAEgASgFEhYKDnRhcmdldFBsYXllcklkGAIgASgJEhIKCmF0dGFja1R5",
-            "cGUYAyABKAUSDgoGZGFtYWdlGAQgASgCIn4KEU1vbnN0ZXJQcm9qZWN0aWxl",
-            "EhEKCW1vbnN0ZXJJZBgBIAEoBRIOCgZzdGFydFgYAiABKAISDgoGc3RhcnRa",
-            "GAMgASgCEg8KB3RhcmdldFgYBCABKAISDwoHdGFyZ2V0WhgFIAEoAhIUCgxw",
-            "cm9qZWN0aWxlSWQYBiABKAUiLAoUTWV0ZW9yU3RyaWtlUG9zaXRpb24SCQoB",
-            "eBgBIAEoAhIJCgF6GAIgASgCIlAKDE1ldGVvclN0cmlrZRIRCgltb25zdGVy",
-            "SWQYASABKAUSLQoJcG9zaXRpb25zGAIgAygLMhouZ2FtZS5NZXRlb3JTdHJp",
-            "a2VQb3NpdGlvbiJFCg1Nb25zdGVyRGFtYWdlEhEKCW1vbnN0ZXJJZBgBIAEo",
-            "BRIOCgZkYW1hZ2UYAiABKAISEQoJY3VycmVudEhwGAMgASgFIn0KDFBsYXll",
-            "ckRhbWFnZRIQCghwbGF5ZXJJZBgBIAEoCRIOCgZkYW1hZ2UYAiABKAISEgoK",
-            "YXR0YWNrVHlwZRgDIAEoBRIRCgloaXRQb2ludFgYBCABKAISEQoJaGl0UG9p",
-            "bnRZGAUgASgCEhEKCWhpdFBvaW50WhgGIAEoAiJGCg1Nb25zdGVyUm90YXRl",
-            "EhEKCW1vbnN0ZXJJZBgBIAEoBRIQCghyb3RhdGlvbhgCIAEoAhIQCghkdXJh",
-            "dGlvbhgDIAEoAiLaBQoLR2FtZU1lc3NhZ2USLwoPcGxheWVyX3Bvc2l0aW9u",
-            "GAEgASgLMhQuZ2FtZS5QbGF5ZXJQb3NpdGlvbkgAEiEKBGNoYXQYAiABKAsy",
-            "ES5nYW1lLkNoYXRNZXNzYWdlSAASIwoFbG9naW4YAyABKAsyEi5nYW1lLkxv",
-            "Z2luTWVzc2FnZUgAEiwKDXNwYXduTXlQbGF5ZXIYBCABKAsyEy5nYW1lLlNw",
-            "YXduTXlQbGF5ZXJIABIyChBzcGF3bk90aGVyUGxheWVyGAUgASgLMhYuZ2Ft",
-            "ZS5TcGF3bk90aGVyUGxheWVySAASJQoGbG9nb3V0GAYgASgLMhMuZ2FtZS5M",
-            "b2dvdXRNZXNzYWdlSAASIgoIcGF0aFRlc3QYByABKAsyDi5nYW1lLlBhdGhU",
-            "ZXN0SAASKgoMc3Bhd25Nb25zdGVyGAggASgLMhIuZ2FtZS5TcGF3bk1vbnN0",
-            "ZXJIABIoCgttb3ZlTW9uc3RlchgJIAEoCzIRLmdhbWUuTW92ZU1vbnN0ZXJI",
-            "ABIsCg1tb25zdGVyVGFyZ2V0GAogASgLMhMuZ2FtZS5Nb25zdGVyVGFyZ2V0",
-            "SAASLAoNbW9uc3RlckF0dGFjaxgLIAEoCzITLmdhbWUuTW9uc3RlckF0dGFj",
-            "a0gAEjQKEW1vbnN0ZXJQcm9qZWN0aWxlGAwgASgLMhcuZ2FtZS5Nb25zdGVy",
-            "UHJvamVjdGlsZUgAEioKDG1ldGVvclN0cmlrZRgNIAEoCzISLmdhbWUuTWV0",
-            "ZW9yU3RyaWtlSAASLAoNbW9uc3RlckRhbWFnZRgOIAEoCzITLmdhbWUuTW9u",
-            "c3RlckRhbWFnZUgAEioKDHBsYXllckRhbWFnZRgPIAEoCzISLmdhbWUuUGxh",
-            "eWVyRGFtYWdlSAASLAoNbW9uc3RlclJvdGF0ZRgQIAEoCzITLmdhbWUuTW9u",
-            "c3RlclJvdGF0ZUgAQgkKB21lc3NhZ2VCC1oJL01lc3NhZ2VzYgZwcm90bzM="));
+            "BSABKAIiNQoQQW5pbWF0b3JTZXRGbG9hdBIOCgZhbmltSWQYASABKAkSEQoJ",
+            "Y29uZGl0aW9uGAIgASgCIjQKD0FuaW1hdG9yU2V0Qm9vbBIOCgZhbmltSWQY",
+            "ASABKAkSEQoJY29uZGl0aW9uGAIgASgIIiQKEkFuaW1hdG9yU2V0VHJpZ2dl",
+            "chIOCgZhbmltSWQYASABKAkiLgoLQ2hhdE1lc3NhZ2USDgoGc2VuZGVyGAEg",
+            "ASgJEg8KB2NvbnRlbnQYAiABKAkiIAoMTG9naW5NZXNzYWdlEhAKCHBsYXll",
+            "cklkGAEgASgJIiEKDUxvZ291dE1lc3NhZ2USEAoIcGxheWVySWQYASABKAki",
+            "SgoMU3Bhd25Nb25zdGVyEgkKAXgYASABKAISCQoBehgCIAEoAhIRCgltb25z",
+            "dGVySWQYAyABKAUSEQoJcm90YXRpb25ZGAQgASgCIjYKC01vdmVNb25zdGVy",
+            "EgkKAXgYASABKAISCQoBehgCIAEoAhIRCgltb25zdGVySWQYAyABKAUiTQoN",
+            "TW9uc3RlclRhcmdldBIRCgltb25zdGVySWQYASABKAUSFgoOdGFyZ2V0UGxh",
+            "eWVySWQYAiABKAkSEQoJaGFzVGFyZ2V0GAMgASgIIl4KDU1vbnN0ZXJBdHRh",
+            "Y2sSEQoJbW9uc3RlcklkGAEgASgFEhYKDnRhcmdldFBsYXllcklkGAIgASgJ",
+            "EhIKCmF0dGFja1R5cGUYAyABKAUSDgoGZGFtYWdlGAQgASgCIn4KEU1vbnN0",
+            "ZXJQcm9qZWN0aWxlEhEKCW1vbnN0ZXJJZBgBIAEoBRIOCgZzdGFydFgYAiAB",
+            "KAISDgoGc3RhcnRaGAMgASgCEg8KB3RhcmdldFgYBCABKAISDwoHdGFyZ2V0",
+            "WhgFIAEoAhIUCgxwcm9qZWN0aWxlSWQYBiABKAUiLAoUTWV0ZW9yU3RyaWtl",
+            "UG9zaXRpb24SCQoBeBgBIAEoAhIJCgF6GAIgASgCIlAKDE1ldGVvclN0cmlr",
+            "ZRIRCgltb25zdGVySWQYASABKAUSLQoJcG9zaXRpb25zGAIgAygLMhouZ2Ft",
+            "ZS5NZXRlb3JTdHJpa2VQb3NpdGlvbiLhAQoNTW9uc3RlckRhbWFnZRISCgpt",
+            "b25zdGVyX2lkGAEgASgFEg4KBmRhbWFnZRgCIAEoAhISCgpjdXJyZW50X2hw",
+            "GAMgASgFEhMKC2hpdF9wb2ludF94GAQgASgCEhMKC2hpdF9wb2ludF95GAUg",
+            "ASgCEhMKC2hpdF9wb2ludF96GAYgASgCEhQKDGhpdF9ub3JtYWxfeBgHIAEo",
+            "AhIUCgxoaXRfbm9ybWFsX3kYCCABKAISFAoMaGl0X25vcm1hbF96GAkgASgC",
+            "EhcKD2hpdF9lZmZlY3RfdHlwZRgKIAEoBSJ9CgxQbGF5ZXJEYW1hZ2USEAoI",
+            "cGxheWVySWQYASABKAkSDgoGZGFtYWdlGAIgASgCEhIKCmF0dGFja1R5cGUY",
+            "AyABKAUSEQoJaGl0UG9pbnRYGAQgASgCEhEKCWhpdFBvaW50WRgFIAEoAhIR",
+            "CgloaXRQb2ludFoYBiABKAIiRgoNTW9uc3RlclJvdGF0ZRIRCgltb25zdGVy",
+            "SWQYASABKAUSEAoIcm90YXRpb24YAiABKAISEAoIZHVyYXRpb24YAyABKAIi",
+            "KgoHUG9pbnQzRBIJCgF4GAEgASgCEgkKAXkYAiABKAISCQoBehgDIAEoAiKE",
+            "AQoQTW9uc3RlckhpdEVmZmVjdBISCgptb25zdGVyX2lkGAEgASgFEiAKCWhp",
+            "dF9wb2ludBgCIAEoCzINLmdhbWUuUG9pbnQzRBIhCgpoaXRfbm9ybWFsGAMg",
+            "ASgLMg0uZ2FtZS5Qb2ludDNEEhcKD2hpdF9lZmZlY3RfdHlwZRgEIAEoBSKO",
+            "BgoLR2FtZU1lc3NhZ2USLwoPcGxheWVyX3Bvc2l0aW9uGAEgASgLMhQuZ2Ft",
+            "ZS5QbGF5ZXJQb3NpdGlvbkgAEiEKBGNoYXQYAiABKAsyES5nYW1lLkNoYXRN",
+            "ZXNzYWdlSAASIwoFbG9naW4YAyABKAsyEi5nYW1lLkxvZ2luTWVzc2FnZUgA",
+            "EiwKDXNwYXduTXlQbGF5ZXIYBCABKAsyEy5nYW1lLlNwYXduTXlQbGF5ZXJI",
+            "ABIyChBzcGF3bk90aGVyUGxheWVyGAUgASgLMhYuZ2FtZS5TcGF3bk90aGVy",
+            "UGxheWVySAASJQoGbG9nb3V0GAYgASgLMhMuZ2FtZS5Mb2dvdXRNZXNzYWdl",
+            "SAASIgoIcGF0aFRlc3QYByABKAsyDi5nYW1lLlBhdGhUZXN0SAASKgoMc3Bh",
+            "d25Nb25zdGVyGAggASgLMhIuZ2FtZS5TcGF3bk1vbnN0ZXJIABIoCgttb3Zl",
+            "TW9uc3RlchgJIAEoCzIRLmdhbWUuTW92ZU1vbnN0ZXJIABIsCg1tb25zdGVy",
+            "VGFyZ2V0GAogASgLMhMuZ2FtZS5Nb25zdGVyVGFyZ2V0SAASLAoNbW9uc3Rl",
+            "ckF0dGFjaxgLIAEoCzITLmdhbWUuTW9uc3RlckF0dGFja0gAEjQKEW1vbnN0",
+            "ZXJQcm9qZWN0aWxlGAwgASgLMhcuZ2FtZS5Nb25zdGVyUHJvamVjdGlsZUgA",
+            "EioKDG1ldGVvclN0cmlrZRgNIAEoCzISLmdhbWUuTWV0ZW9yU3RyaWtlSAAS",
+            "LAoNbW9uc3RlckRhbWFnZRgOIAEoCzITLmdhbWUuTW9uc3RlckRhbWFnZUgA",
+            "EioKDHBsYXllckRhbWFnZRgPIAEoCzISLmdhbWUuUGxheWVyRGFtYWdlSAAS",
+            "LAoNbW9uc3RlclJvdGF0ZRgQIAEoCzITLmdhbWUuTW9uc3RlclJvdGF0ZUgA",
+            "EjIKEG1vbnN0ZXJIaXRFZmZlY3QYESABKAsyFi5nYW1lLk1vbnN0ZXJIaXRF",
+            "ZmZlY3RIAEIJCgdtZXNzYWdlQgtaCS9NZXNzYWdlc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -79,6 +91,9 @@ namespace Game {
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.PlayerPosition), global::Game.PlayerPosition.Parser, new[]{ "X", "Y", "Z", "Fx", "Fy", "Fz", "PlayerId", "Speed", "RotationY" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SpawnMyPlayer), global::Game.SpawnMyPlayer.Parser, new[]{ "X", "Y", "Z", "RotationY" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SpawnOtherPlayer), global::Game.SpawnOtherPlayer.Parser, new[]{ "PlayerId", "X", "Y", "Z", "RotationY" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.AnimatorSetFloat), global::Game.AnimatorSetFloat.Parser, new[]{ "AnimId", "Condition" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.AnimatorSetBool), global::Game.AnimatorSetBool.Parser, new[]{ "AnimId", "Condition" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.AnimatorSetTrigger), global::Game.AnimatorSetTrigger.Parser, new[]{ "AnimId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.ChatMessage), global::Game.ChatMessage.Parser, new[]{ "Sender", "Content" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.LoginMessage), global::Game.LoginMessage.Parser, new[]{ "PlayerId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.LogoutMessage), global::Game.LogoutMessage.Parser, new[]{ "PlayerId" }, null, null, null, null),
@@ -89,10 +104,12 @@ namespace Game {
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.MonsterProjectile), global::Game.MonsterProjectile.Parser, new[]{ "MonsterId", "StartX", "StartZ", "TargetX", "TargetZ", "ProjectileId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.MeteorStrikePosition), global::Game.MeteorStrikePosition.Parser, new[]{ "X", "Z" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.MeteorStrike), global::Game.MeteorStrike.Parser, new[]{ "MonsterId", "Positions" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.MonsterDamage), global::Game.MonsterDamage.Parser, new[]{ "MonsterId", "Damage", "CurrentHp" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.MonsterDamage), global::Game.MonsterDamage.Parser, new[]{ "MonsterId", "Damage", "CurrentHp", "HitPointX", "HitPointY", "HitPointZ", "HitNormalX", "HitNormalY", "HitNormalZ", "HitEffectType" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.PlayerDamage), global::Game.PlayerDamage.Parser, new[]{ "PlayerId", "Damage", "AttackType", "HitPointX", "HitPointY", "HitPointZ" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.MonsterRotate), global::Game.MonsterRotate.Parser, new[]{ "MonsterId", "Rotation", "Duration" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.GameMessage), global::Game.GameMessage.Parser, new[]{ "PlayerPosition", "Chat", "Login", "SpawnMyPlayer", "SpawnOtherPlayer", "Logout", "PathTest", "SpawnMonster", "MoveMonster", "MonsterTarget", "MonsterAttack", "MonsterProjectile", "MeteorStrike", "MonsterDamage", "PlayerDamage", "MonsterRotate" }, new[]{ "Message" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.Point3D), global::Game.Point3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.MonsterHitEffect), global::Game.MonsterHitEffect.Parser, new[]{ "MonsterId", "HitPoint", "HitNormal", "HitEffectType" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.GameMessage), global::Game.GameMessage.Parser, new[]{ "PlayerPosition", "Chat", "Login", "SpawnMyPlayer", "SpawnOtherPlayer", "Logout", "PathTest", "SpawnMonster", "MoveMonster", "MonsterTarget", "MonsterAttack", "MonsterProjectile", "MeteorStrike", "MonsterDamage", "PlayerDamage", "MonsterRotate", "MonsterHitEffect" }, new[]{ "Message" }, null, null, null)
           }));
     }
     #endregion
@@ -1708,6 +1725,674 @@ namespace Game {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class AnimatorSetFloat : pb::IMessage<AnimatorSetFloat>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<AnimatorSetFloat> _parser = new pb::MessageParser<AnimatorSetFloat>(() => new AnimatorSetFloat());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<AnimatorSetFloat> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AnimatorSetFloat() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AnimatorSetFloat(AnimatorSetFloat other) : this() {
+      animId_ = other.animId_;
+      condition_ = other.condition_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AnimatorSetFloat Clone() {
+      return new AnimatorSetFloat(this);
+    }
+
+    /// <summary>Field number for the "animId" field.</summary>
+    public const int AnimIdFieldNumber = 1;
+    private string animId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string AnimId {
+      get { return animId_; }
+      set {
+        animId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "condition" field.</summary>
+    public const int ConditionFieldNumber = 2;
+    private float condition_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Condition {
+      get { return condition_; }
+      set {
+        condition_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as AnimatorSetFloat);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(AnimatorSetFloat other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (AnimId != other.AnimId) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Condition, other.Condition)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (AnimId.Length != 0) hash ^= AnimId.GetHashCode();
+      if (Condition != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Condition);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (AnimId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(AnimId);
+      }
+      if (Condition != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Condition);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (AnimId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(AnimId);
+      }
+      if (Condition != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Condition);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (AnimId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AnimId);
+      }
+      if (Condition != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(AnimatorSetFloat other) {
+      if (other == null) {
+        return;
+      }
+      if (other.AnimId.Length != 0) {
+        AnimId = other.AnimId;
+      }
+      if (other.Condition != 0F) {
+        Condition = other.Condition;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            AnimId = input.ReadString();
+            break;
+          }
+          case 21: {
+            Condition = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            AnimId = input.ReadString();
+            break;
+          }
+          case 21: {
+            Condition = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class AnimatorSetBool : pb::IMessage<AnimatorSetBool>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<AnimatorSetBool> _parser = new pb::MessageParser<AnimatorSetBool>(() => new AnimatorSetBool());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<AnimatorSetBool> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AnimatorSetBool() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AnimatorSetBool(AnimatorSetBool other) : this() {
+      animId_ = other.animId_;
+      condition_ = other.condition_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AnimatorSetBool Clone() {
+      return new AnimatorSetBool(this);
+    }
+
+    /// <summary>Field number for the "animId" field.</summary>
+    public const int AnimIdFieldNumber = 1;
+    private string animId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string AnimId {
+      get { return animId_; }
+      set {
+        animId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "condition" field.</summary>
+    public const int ConditionFieldNumber = 2;
+    private bool condition_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Condition {
+      get { return condition_; }
+      set {
+        condition_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as AnimatorSetBool);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(AnimatorSetBool other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (AnimId != other.AnimId) return false;
+      if (Condition != other.Condition) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (AnimId.Length != 0) hash ^= AnimId.GetHashCode();
+      if (Condition != false) hash ^= Condition.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (AnimId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(AnimId);
+      }
+      if (Condition != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(Condition);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (AnimId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(AnimId);
+      }
+      if (Condition != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(Condition);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (AnimId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AnimId);
+      }
+      if (Condition != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(AnimatorSetBool other) {
+      if (other == null) {
+        return;
+      }
+      if (other.AnimId.Length != 0) {
+        AnimId = other.AnimId;
+      }
+      if (other.Condition != false) {
+        Condition = other.Condition;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            AnimId = input.ReadString();
+            break;
+          }
+          case 16: {
+            Condition = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            AnimId = input.ReadString();
+            break;
+          }
+          case 16: {
+            Condition = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class AnimatorSetTrigger : pb::IMessage<AnimatorSetTrigger>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<AnimatorSetTrigger> _parser = new pb::MessageParser<AnimatorSetTrigger>(() => new AnimatorSetTrigger());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<AnimatorSetTrigger> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AnimatorSetTrigger() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AnimatorSetTrigger(AnimatorSetTrigger other) : this() {
+      animId_ = other.animId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AnimatorSetTrigger Clone() {
+      return new AnimatorSetTrigger(this);
+    }
+
+    /// <summary>Field number for the "animId" field.</summary>
+    public const int AnimIdFieldNumber = 1;
+    private string animId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string AnimId {
+      get { return animId_; }
+      set {
+        animId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as AnimatorSetTrigger);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(AnimatorSetTrigger other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (AnimId != other.AnimId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (AnimId.Length != 0) hash ^= AnimId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (AnimId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(AnimId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (AnimId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(AnimId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (AnimId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AnimId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(AnimatorSetTrigger other) {
+      if (other == null) {
+        return;
+      }
+      if (other.AnimId.Length != 0) {
+        AnimId = other.AnimId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            AnimId = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            AnimId = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class ChatMessage : pb::IMessage<ChatMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1722,7 +2407,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1957,7 +2642,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2155,7 +2840,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2353,7 +3038,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2662,7 +3347,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2934,7 +3619,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3206,7 +3891,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3515,7 +4200,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3898,7 +4583,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4133,7 +4818,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4357,7 +5042,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4380,6 +5065,13 @@ namespace Game {
       monsterId_ = other.monsterId_;
       damage_ = other.damage_;
       currentHp_ = other.currentHp_;
+      hitPointX_ = other.hitPointX_;
+      hitPointY_ = other.hitPointY_;
+      hitPointZ_ = other.hitPointZ_;
+      hitNormalX_ = other.hitNormalX_;
+      hitNormalY_ = other.hitNormalY_;
+      hitNormalZ_ = other.hitNormalZ_;
+      hitEffectType_ = other.hitEffectType_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4389,7 +5081,7 @@ namespace Game {
       return new MonsterDamage(this);
     }
 
-    /// <summary>Field number for the "monsterId" field.</summary>
+    /// <summary>Field number for the "monster_id" field.</summary>
     public const int MonsterIdFieldNumber = 1;
     private int monsterId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4413,7 +5105,7 @@ namespace Game {
       }
     }
 
-    /// <summary>Field number for the "currentHp" field.</summary>
+    /// <summary>Field number for the "current_hp" field.</summary>
     public const int CurrentHpFieldNumber = 3;
     private int currentHp_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4422,6 +5114,90 @@ namespace Game {
       get { return currentHp_; }
       set {
         currentHp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_point_x" field.</summary>
+    public const int HitPointXFieldNumber = 4;
+    private float hitPointX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float HitPointX {
+      get { return hitPointX_; }
+      set {
+        hitPointX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_point_y" field.</summary>
+    public const int HitPointYFieldNumber = 5;
+    private float hitPointY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float HitPointY {
+      get { return hitPointY_; }
+      set {
+        hitPointY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_point_z" field.</summary>
+    public const int HitPointZFieldNumber = 6;
+    private float hitPointZ_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float HitPointZ {
+      get { return hitPointZ_; }
+      set {
+        hitPointZ_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_normal_x" field.</summary>
+    public const int HitNormalXFieldNumber = 7;
+    private float hitNormalX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float HitNormalX {
+      get { return hitNormalX_; }
+      set {
+        hitNormalX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_normal_y" field.</summary>
+    public const int HitNormalYFieldNumber = 8;
+    private float hitNormalY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float HitNormalY {
+      get { return hitNormalY_; }
+      set {
+        hitNormalY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_normal_z" field.</summary>
+    public const int HitNormalZFieldNumber = 9;
+    private float hitNormalZ_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float HitNormalZ {
+      get { return hitNormalZ_; }
+      set {
+        hitNormalZ_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_effect_type" field.</summary>
+    public const int HitEffectTypeFieldNumber = 10;
+    private int hitEffectType_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int HitEffectType {
+      get { return hitEffectType_; }
+      set {
+        hitEffectType_ = value;
       }
     }
 
@@ -4443,6 +5219,13 @@ namespace Game {
       if (MonsterId != other.MonsterId) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Damage, other.Damage)) return false;
       if (CurrentHp != other.CurrentHp) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(HitPointX, other.HitPointX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(HitPointY, other.HitPointY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(HitPointZ, other.HitPointZ)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(HitNormalX, other.HitNormalX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(HitNormalY, other.HitNormalY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(HitNormalZ, other.HitNormalZ)) return false;
+      if (HitEffectType != other.HitEffectType) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4453,6 +5236,13 @@ namespace Game {
       if (MonsterId != 0) hash ^= MonsterId.GetHashCode();
       if (Damage != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Damage);
       if (CurrentHp != 0) hash ^= CurrentHp.GetHashCode();
+      if (HitPointX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(HitPointX);
+      if (HitPointY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(HitPointY);
+      if (HitPointZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(HitPointZ);
+      if (HitNormalX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(HitNormalX);
+      if (HitNormalY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(HitNormalY);
+      if (HitNormalZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(HitNormalZ);
+      if (HitEffectType != 0) hash ^= HitEffectType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4483,6 +5273,34 @@ namespace Game {
         output.WriteRawTag(24);
         output.WriteInt32(CurrentHp);
       }
+      if (HitPointX != 0F) {
+        output.WriteRawTag(37);
+        output.WriteFloat(HitPointX);
+      }
+      if (HitPointY != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(HitPointY);
+      }
+      if (HitPointZ != 0F) {
+        output.WriteRawTag(53);
+        output.WriteFloat(HitPointZ);
+      }
+      if (HitNormalX != 0F) {
+        output.WriteRawTag(61);
+        output.WriteFloat(HitNormalX);
+      }
+      if (HitNormalY != 0F) {
+        output.WriteRawTag(69);
+        output.WriteFloat(HitNormalY);
+      }
+      if (HitNormalZ != 0F) {
+        output.WriteRawTag(77);
+        output.WriteFloat(HitNormalZ);
+      }
+      if (HitEffectType != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(HitEffectType);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4505,6 +5323,34 @@ namespace Game {
         output.WriteRawTag(24);
         output.WriteInt32(CurrentHp);
       }
+      if (HitPointX != 0F) {
+        output.WriteRawTag(37);
+        output.WriteFloat(HitPointX);
+      }
+      if (HitPointY != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(HitPointY);
+      }
+      if (HitPointZ != 0F) {
+        output.WriteRawTag(53);
+        output.WriteFloat(HitPointZ);
+      }
+      if (HitNormalX != 0F) {
+        output.WriteRawTag(61);
+        output.WriteFloat(HitNormalX);
+      }
+      if (HitNormalY != 0F) {
+        output.WriteRawTag(69);
+        output.WriteFloat(HitNormalY);
+      }
+      if (HitNormalZ != 0F) {
+        output.WriteRawTag(77);
+        output.WriteFloat(HitNormalZ);
+      }
+      if (HitEffectType != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(HitEffectType);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4523,6 +5369,27 @@ namespace Game {
       }
       if (CurrentHp != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrentHp);
+      }
+      if (HitPointX != 0F) {
+        size += 1 + 4;
+      }
+      if (HitPointY != 0F) {
+        size += 1 + 4;
+      }
+      if (HitPointZ != 0F) {
+        size += 1 + 4;
+      }
+      if (HitNormalX != 0F) {
+        size += 1 + 4;
+      }
+      if (HitNormalY != 0F) {
+        size += 1 + 4;
+      }
+      if (HitNormalZ != 0F) {
+        size += 1 + 4;
+      }
+      if (HitEffectType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(HitEffectType);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4544,6 +5411,27 @@ namespace Game {
       }
       if (other.CurrentHp != 0) {
         CurrentHp = other.CurrentHp;
+      }
+      if (other.HitPointX != 0F) {
+        HitPointX = other.HitPointX;
+      }
+      if (other.HitPointY != 0F) {
+        HitPointY = other.HitPointY;
+      }
+      if (other.HitPointZ != 0F) {
+        HitPointZ = other.HitPointZ;
+      }
+      if (other.HitNormalX != 0F) {
+        HitNormalX = other.HitNormalX;
+      }
+      if (other.HitNormalY != 0F) {
+        HitNormalY = other.HitNormalY;
+      }
+      if (other.HitNormalZ != 0F) {
+        HitNormalZ = other.HitNormalZ;
+      }
+      if (other.HitEffectType != 0) {
+        HitEffectType = other.HitEffectType;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4574,6 +5462,34 @@ namespace Game {
           }
           case 24: {
             CurrentHp = input.ReadInt32();
+            break;
+          }
+          case 37: {
+            HitPointX = input.ReadFloat();
+            break;
+          }
+          case 45: {
+            HitPointY = input.ReadFloat();
+            break;
+          }
+          case 53: {
+            HitPointZ = input.ReadFloat();
+            break;
+          }
+          case 61: {
+            HitNormalX = input.ReadFloat();
+            break;
+          }
+          case 69: {
+            HitNormalY = input.ReadFloat();
+            break;
+          }
+          case 77: {
+            HitNormalZ = input.ReadFloat();
+            break;
+          }
+          case 80: {
+            HitEffectType = input.ReadInt32();
             break;
           }
         }
@@ -4607,6 +5523,34 @@ namespace Game {
             CurrentHp = input.ReadInt32();
             break;
           }
+          case 37: {
+            HitPointX = input.ReadFloat();
+            break;
+          }
+          case 45: {
+            HitPointY = input.ReadFloat();
+            break;
+          }
+          case 53: {
+            HitPointZ = input.ReadFloat();
+            break;
+          }
+          case 61: {
+            HitNormalX = input.ReadFloat();
+            break;
+          }
+          case 69: {
+            HitNormalY = input.ReadFloat();
+            break;
+          }
+          case 77: {
+            HitNormalZ = input.ReadFloat();
+            break;
+          }
+          case 80: {
+            HitEffectType = input.ReadInt32();
+            break;
+          }
         }
       }
     }
@@ -4629,7 +5573,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5012,7 +5956,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5270,6 +6214,605 @@ namespace Game {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class Point3D : pb::IMessage<Point3D>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Point3D> _parser = new pb::MessageParser<Point3D>(() => new Point3D());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<Point3D> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[21]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Point3D() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Point3D(Point3D other) : this() {
+      x_ = other.x_;
+      y_ = other.y_;
+      z_ = other.z_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Point3D Clone() {
+      return new Point3D(this);
+    }
+
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 1;
+    private float x_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float X {
+      get { return x_; }
+      set {
+        x_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 2;
+    private float y_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Y {
+      get { return y_; }
+      set {
+        y_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "z" field.</summary>
+    public const int ZFieldNumber = 3;
+    private float z_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Z {
+      get { return z_; }
+      set {
+        z_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as Point3D);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(Point3D other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
+      if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
+      if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (X != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(X);
+      }
+      if (Y != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Y);
+      }
+      if (Z != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Z);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (X != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(X);
+      }
+      if (Y != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Y);
+      }
+      if (Z != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Z);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (X != 0F) {
+        size += 1 + 4;
+      }
+      if (Y != 0F) {
+        size += 1 + 4;
+      }
+      if (Z != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(Point3D other) {
+      if (other == null) {
+        return;
+      }
+      if (other.X != 0F) {
+        X = other.X;
+      }
+      if (other.Y != 0F) {
+        Y = other.Y;
+      }
+      if (other.Z != 0F) {
+        Z = other.Z;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 13: {
+            X = input.ReadFloat();
+            break;
+          }
+          case 21: {
+            Y = input.ReadFloat();
+            break;
+          }
+          case 29: {
+            Z = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 13: {
+            X = input.ReadFloat();
+            break;
+          }
+          case 21: {
+            Y = input.ReadFloat();
+            break;
+          }
+          case 29: {
+            Z = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class MonsterHitEffect : pb::IMessage<MonsterHitEffect>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<MonsterHitEffect> _parser = new pb::MessageParser<MonsterHitEffect>(() => new MonsterHitEffect());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<MonsterHitEffect> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[22]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public MonsterHitEffect() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public MonsterHitEffect(MonsterHitEffect other) : this() {
+      monsterId_ = other.monsterId_;
+      hitPoint_ = other.hitPoint_ != null ? other.hitPoint_.Clone() : null;
+      hitNormal_ = other.hitNormal_ != null ? other.hitNormal_.Clone() : null;
+      hitEffectType_ = other.hitEffectType_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public MonsterHitEffect Clone() {
+      return new MonsterHitEffect(this);
+    }
+
+    /// <summary>Field number for the "monster_id" field.</summary>
+    public const int MonsterIdFieldNumber = 1;
+    private int monsterId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int MonsterId {
+      get { return monsterId_; }
+      set {
+        monsterId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_point" field.</summary>
+    public const int HitPointFieldNumber = 2;
+    private global::Game.Point3D hitPoint_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Game.Point3D HitPoint {
+      get { return hitPoint_; }
+      set {
+        hitPoint_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_normal" field.</summary>
+    public const int HitNormalFieldNumber = 3;
+    private global::Game.Point3D hitNormal_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Game.Point3D HitNormal {
+      get { return hitNormal_; }
+      set {
+        hitNormal_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hit_effect_type" field.</summary>
+    public const int HitEffectTypeFieldNumber = 4;
+    private int hitEffectType_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int HitEffectType {
+      get { return hitEffectType_; }
+      set {
+        hitEffectType_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as MonsterHitEffect);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(MonsterHitEffect other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MonsterId != other.MonsterId) return false;
+      if (!object.Equals(HitPoint, other.HitPoint)) return false;
+      if (!object.Equals(HitNormal, other.HitNormal)) return false;
+      if (HitEffectType != other.HitEffectType) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MonsterId != 0) hash ^= MonsterId.GetHashCode();
+      if (hitPoint_ != null) hash ^= HitPoint.GetHashCode();
+      if (hitNormal_ != null) hash ^= HitNormal.GetHashCode();
+      if (HitEffectType != 0) hash ^= HitEffectType.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (MonsterId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(MonsterId);
+      }
+      if (hitPoint_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(HitPoint);
+      }
+      if (hitNormal_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(HitNormal);
+      }
+      if (HitEffectType != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(HitEffectType);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (MonsterId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(MonsterId);
+      }
+      if (hitPoint_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(HitPoint);
+      }
+      if (hitNormal_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(HitNormal);
+      }
+      if (HitEffectType != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(HitEffectType);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (MonsterId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MonsterId);
+      }
+      if (hitPoint_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HitPoint);
+      }
+      if (hitNormal_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HitNormal);
+      }
+      if (HitEffectType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(HitEffectType);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(MonsterHitEffect other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MonsterId != 0) {
+        MonsterId = other.MonsterId;
+      }
+      if (other.hitPoint_ != null) {
+        if (hitPoint_ == null) {
+          HitPoint = new global::Game.Point3D();
+        }
+        HitPoint.MergeFrom(other.HitPoint);
+      }
+      if (other.hitNormal_ != null) {
+        if (hitNormal_ == null) {
+          HitNormal = new global::Game.Point3D();
+        }
+        HitNormal.MergeFrom(other.HitNormal);
+      }
+      if (other.HitEffectType != 0) {
+        HitEffectType = other.HitEffectType;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            MonsterId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            if (hitPoint_ == null) {
+              HitPoint = new global::Game.Point3D();
+            }
+            input.ReadMessage(HitPoint);
+            break;
+          }
+          case 26: {
+            if (hitNormal_ == null) {
+              HitNormal = new global::Game.Point3D();
+            }
+            input.ReadMessage(HitNormal);
+            break;
+          }
+          case 32: {
+            HitEffectType = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            MonsterId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            if (hitPoint_ == null) {
+              HitPoint = new global::Game.Point3D();
+            }
+            input.ReadMessage(HitPoint);
+            break;
+          }
+          case 26: {
+            if (hitNormal_ == null) {
+              HitNormal = new global::Game.Point3D();
+            }
+            input.ReadMessage(HitNormal);
+            break;
+          }
+          case 32: {
+            HitEffectType = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class GameMessage : pb::IMessage<GameMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -5284,7 +6827,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Game.GameMessageReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5352,6 +6895,9 @@ namespace Game {
           break;
         case MessageOneofCase.MonsterRotate:
           MonsterRotate = other.MonsterRotate.Clone();
+          break;
+        case MessageOneofCase.MonsterHitEffect:
+          MonsterHitEffect = other.MonsterHitEffect.Clone();
           break;
       }
 
@@ -5556,6 +7102,18 @@ namespace Game {
       }
     }
 
+    /// <summary>Field number for the "monsterHitEffect" field.</summary>
+    public const int MonsterHitEffectFieldNumber = 17;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Game.MonsterHitEffect MonsterHitEffect {
+      get { return messageCase_ == MessageOneofCase.MonsterHitEffect ? (global::Game.MonsterHitEffect) message_ : null; }
+      set {
+        message_ = value;
+        messageCase_ = value == null ? MessageOneofCase.None : MessageOneofCase.MonsterHitEffect;
+      }
+    }
+
     private object message_;
     /// <summary>Enum of possible cases for the "message" oneof.</summary>
     public enum MessageOneofCase {
@@ -5576,6 +7134,7 @@ namespace Game {
       MonsterDamage = 14,
       PlayerDamage = 15,
       MonsterRotate = 16,
+      MonsterHitEffect = 17,
     }
     private MessageOneofCase messageCase_ = MessageOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5622,6 +7181,7 @@ namespace Game {
       if (!object.Equals(MonsterDamage, other.MonsterDamage)) return false;
       if (!object.Equals(PlayerDamage, other.PlayerDamage)) return false;
       if (!object.Equals(MonsterRotate, other.MonsterRotate)) return false;
+      if (!object.Equals(MonsterHitEffect, other.MonsterHitEffect)) return false;
       if (MessageCase != other.MessageCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -5646,6 +7206,7 @@ namespace Game {
       if (messageCase_ == MessageOneofCase.MonsterDamage) hash ^= MonsterDamage.GetHashCode();
       if (messageCase_ == MessageOneofCase.PlayerDamage) hash ^= PlayerDamage.GetHashCode();
       if (messageCase_ == MessageOneofCase.MonsterRotate) hash ^= MonsterRotate.GetHashCode();
+      if (messageCase_ == MessageOneofCase.MonsterHitEffect) hash ^= MonsterHitEffect.GetHashCode();
       hash ^= (int) messageCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -5729,6 +7290,10 @@ namespace Game {
         output.WriteRawTag(130, 1);
         output.WriteMessage(MonsterRotate);
       }
+      if (messageCase_ == MessageOneofCase.MonsterHitEffect) {
+        output.WriteRawTag(138, 1);
+        output.WriteMessage(MonsterHitEffect);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5803,6 +7368,10 @@ namespace Game {
         output.WriteRawTag(130, 1);
         output.WriteMessage(MonsterRotate);
       }
+      if (messageCase_ == MessageOneofCase.MonsterHitEffect) {
+        output.WriteRawTag(138, 1);
+        output.WriteMessage(MonsterHitEffect);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5860,6 +7429,9 @@ namespace Game {
       }
       if (messageCase_ == MessageOneofCase.MonsterRotate) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(MonsterRotate);
+      }
+      if (messageCase_ == MessageOneofCase.MonsterHitEffect) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(MonsterHitEffect);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -5969,6 +7541,12 @@ namespace Game {
             MonsterRotate = new global::Game.MonsterRotate();
           }
           MonsterRotate.MergeFrom(other.MonsterRotate);
+          break;
+        case MessageOneofCase.MonsterHitEffect:
+          if (MonsterHitEffect == null) {
+            MonsterHitEffect = new global::Game.MonsterHitEffect();
+          }
+          MonsterHitEffect.MergeFrom(other.MonsterHitEffect);
           break;
       }
 
@@ -6135,6 +7713,15 @@ namespace Game {
             MonsterRotate = subBuilder;
             break;
           }
+          case 138: {
+            global::Game.MonsterHitEffect subBuilder = new global::Game.MonsterHitEffect();
+            if (messageCase_ == MessageOneofCase.MonsterHitEffect) {
+              subBuilder.MergeFrom(MonsterHitEffect);
+            }
+            input.ReadMessage(subBuilder);
+            MonsterHitEffect = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -6296,6 +7883,15 @@ namespace Game {
             }
             input.ReadMessage(subBuilder);
             MonsterRotate = subBuilder;
+            break;
+          }
+          case 138: {
+            global::Game.MonsterHitEffect subBuilder = new global::Game.MonsterHitEffect();
+            if (messageCase_ == MessageOneofCase.MonsterHitEffect) {
+              subBuilder.MergeFrom(MonsterHitEffect);
+            }
+            input.ReadMessage(subBuilder);
+            MonsterHitEffect = subBuilder;
             break;
           }
         }

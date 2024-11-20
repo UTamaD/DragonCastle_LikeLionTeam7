@@ -28,7 +28,7 @@ func GetMonsterManager() *MonsterManager {
 
 func (mm *MonsterManager) UpdateMonster() {
 
-	ticker := time.NewTicker(100 * time.Millisecond)
+	ticker := time.NewTicker(200 * time.Millisecond)
 	for {
 		select {
 		case <-ticker.C:
@@ -50,24 +50,25 @@ func (mm *MonsterManager) GetMonsters() []*Monster {
 func (mm *MonsterManager) AddMonster(id int32) *Monster {
 	path := make([]common.Point, 0)
 
-	monster := NewMonster(0, 0, 0, 100, path)
+	spawnX := float32(10.0)
+	spawnZ := float32(10.0)
 
+	monster := NewMonster(int(id), spawnX, spawnZ, 100, path)
 	mm.monsters[id] = monster
 	mm.nextID++
 
-	MonsterSapwn := &pb.GameMessage{
+	MonsterSpawn := &pb.GameMessage{
 		Message: &pb.GameMessage_SpawnMonster{
 			SpawnMonster: &pb.SpawnMonster{
-				X:         monster.X,
-				Z:         monster.Z,
+				X:         spawnX,
+				Z:         spawnZ,
 				MonsterId: int32(monster.ID),
 			},
 		},
 	}
 
 	for _, p := range GetPlayerManager().players {
-
-		response := GetNetManager().MakePacket(MonsterSapwn)
+		response := GetNetManager().MakePacket(MonsterSpawn)
 		(*p.Conn).Write(response)
 	}
 

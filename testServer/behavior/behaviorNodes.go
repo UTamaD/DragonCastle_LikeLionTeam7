@@ -16,6 +16,8 @@ type AttackState struct {
 	mutex          sync.Mutex
 	currentAttack  int32
 	lastAttackTime time.Time
+	isWaiting      bool      // Wait 상태 추가
+	waitUntil      time.Time // Wait 종료 시간 추가
 }
 
 const (
@@ -111,17 +113,21 @@ func NewWait(duration time.Duration, resetOnFailure bool, state *AttackState) *W
 }
 
 func (w *Wait) Execute() Status {
+	w.state.mutex.Lock()
+	defer w.state.mutex.Unlock()
+
 	if !w.started {
 		w.startTime = time.Now()
 		w.started = true
+		w.state.isWaiting = true
+		w.state.waitUntil = w.startTime.Add(w.duration)
 		return Running
 	}
 
-	if time.Since(w.startTime) >= w.duration {
+	if time.Now().After(w.state.waitUntil) {
 		w.started = false
-		w.state.mutex.Lock()
+		w.state.isWaiting = false
 		w.state.currentAttack = NoAttack
-		w.state.mutex.Unlock()
 		return Success
 	}
 	return Running
@@ -223,10 +229,17 @@ func (a *Attack) Execute() Status {
 	a.state.mutex.Lock()
 	defer a.state.mutex.Unlock()
 
+	// Wait 중이면 실행하지 않음
+	if a.state.isWaiting {
+		return Failure
+	}
+
+	// 다른 공격이 진행 중이면서 현재 공격과 다른 경우 실행하지 않음
 	if a.state.currentAttack != NoAttack && a.state.currentAttack != a.attackType {
 		return Failure
 	}
 
+	// 쿨다운 체크
 	if time.Since(a.state.lastAttackTime) < a.cooldown {
 		return Running
 	}
@@ -246,8 +259,10 @@ func (a *Attack) Execute() Status {
 		return Failure
 	}
 
+	// 공격 상태 설정
 	a.state.currentAttack = a.attackType
 
+	// 원거리 공격인 경우 투사체 메시지 전송
 	if a.attackType == int32(RangedAttack) {
 		projectileMsg := &pb.GameMessage{
 			Message: &pb.GameMessage_MonsterProjectile{
@@ -264,6 +279,7 @@ func (a *Attack) Execute() Status {
 		a.p.Broadcast(projectileMsg)
 	}
 
+	// 공격 메시지 전송
 	attackMsg := &pb.GameMessage{
 		Message: &pb.GameMessage_MonsterAttack{
 			MonsterAttack: &pb.MonsterAttack{
@@ -274,8 +290,9 @@ func (a *Attack) Execute() Status {
 			},
 		},
 	}
-
 	a.p.Broadcast(attackMsg)
+
+	// 마지막 공격 시간 업데이트
 	a.state.lastAttackTime = time.Now()
 
 	return Success
@@ -438,6 +455,11 @@ func (m *MeteorAttackNode) Execute() Status {
 	m.state.mutex.Lock()
 	defer m.state.mutex.Unlock()
 
+	// Wait 중이면 실행하지 않음
+	if m.state.isWaiting {
+		return Failure
+	}
+
 	if m.monster.IsDead() {
 		return Failure
 	}
@@ -447,10 +469,12 @@ func (m *MeteorAttackNode) Execute() Status {
 		return Failure
 	}
 
+	// 다른 공격이 진행 중이면서 현재 공격과 다른 경우 실행하지 않음
 	if m.state.currentAttack != NoAttack && m.state.currentAttack != int32(MeteorAttack) {
 		return Failure
 	}
 
+	// 쿨다운 체크
 	if time.Since(m.state.lastAttackTime) < m.cooldown {
 		return Running
 	}
@@ -774,4 +798,38 @@ func (a *ActionState) ClearAction() {
 	a.mutex.Lock()
 	defer a.mutex.Unlock()
 	a.currentAction = "none"
+}
+
+type RotationCheckBeforeChase struct {
+	monster   common.IMonster
+	viewAngle float32
+	threshold float32
+}
+
+func NewRotationCheckBeforeChase(monster common.IMonster) *RotationCheckBeforeChase {
+	return &RotationCheckBeforeChase{
+		monster:   monster,
+		viewAngle: 30.0, // 45도 임계값
+		threshold: 0.1,  // 정밀도 임계값
+	}
+}
+
+func (r *RotationCheckBeforeChase) Execute() Status {
+	target := r.monster.GetTarget()
+	if target == nil {
+		return Failure
+	}
+
+	pos := r.monster.GetPosition()
+	currentRotation := r.monster.GetRotation()
+
+	targetAngle := float32(math.Atan2(float64(target.Z-pos.Z), float64(target.X-pos.X)))
+	angleDiff := math.Abs(float64(normalizeAngle(targetAngle-currentRotation))) * 180 / math.Pi
+
+	// 이상 차이나면 애니메이션 회전이 필요
+	if angleDiff > float64(r.viewAngle) {
+		return Success // Success를 반환하여 애니메이션 회전 수행
+	}
+
+	return Failure // Failure를 반환하여 즉시 회전 후 이동
 }
