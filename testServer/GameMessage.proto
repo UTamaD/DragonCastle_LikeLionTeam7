@@ -31,6 +31,7 @@ message SpawnMyPlayer {
   float y = 2;
   float z = 3;
   float rotation_y = 4;
+  int32 playerTemplate = 5;
 }
 
 message SpawnOtherPlayer {
@@ -39,20 +40,35 @@ message SpawnOtherPlayer {
   float y = 3;
   float z = 4;
   float rotation_y = 5;
+  int32 playerTemplate = 6;
+}
+
+message ApplyRootMotion {
+  string playerId = 1;
+  bool rootMosion = 2;
+}
+
+message AnimatorSetInteger {
+  string playerId = 1;
+  string animId = 2;
+  int32 condition = 3;
 }
 
 message AnimatorSetFloat {
-  string animId = 1;
-  float condition = 2;
+  string playerId = 1;
+  string animId = 2;
+  float condition = 3;
 }
 
 message AnimatorSetBool {
-  string animId = 1;
-  bool condition = 2;
+  string playerId = 1;
+  string animId = 2;
+  bool condition = 3;
 }
 
 message AnimatorSetTrigger {
-  string animId = 1;
+  string playerId = 1;
+  string animId = 2;
 }
 
 message ChatMessage {
@@ -61,7 +77,8 @@ message ChatMessage {
 }
 
 message LoginMessage {
-  string playerId = 1;    
+  string playerId = 1; 
+  int32 playerTemplate = 2;   
 }
 
 message LogoutMessage {
@@ -154,5 +171,10 @@ message GameMessage {
     MonsterDamage monsterDamage = 14;
     PlayerDamage playerDamage = 15;
     MonsterRotate monsterRotate = 16;
+    AnimatorSetFloat animatorSetFloat = 17;
+    AnimatorSetBool animatorSetBool = 18;
+    AnimatorSetTrigger animatorSetTrigger = 19;
+    AnimatorSetInteger animatorSetInteger = 20;
+    ApplyRootMotion applyRootMotion = 21;
   }
 } 

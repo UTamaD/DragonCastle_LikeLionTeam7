@@ -8,6 +8,8 @@ public class JumpAttack : SkillBase
     
     public JumpAttack(PlayerController owner) : base(owner)
     {
+        AttackMultiplier = 1.2f;
+        
         _animIDJumpAttack = Animator.StringToHash("JumpAttack");
     }
 
@@ -20,11 +22,15 @@ public class JumpAttack : SkillBase
     {
         Owner.Animator.applyRootMotion = true;
         Owner.Animator.SetBool(_animIDJumpAttack, true);
+        TcpProtobufClient.Instance.SendApplyRootMotion(Owner.Player.PlayerId, true);
+        TcpProtobufClient.Instance.SendAnimatorCondision(Owner.Player.PlayerId,"JumpAttack", true);
     }
 
     public override void Inactive()
     {
         Owner.Animator.applyRootMotion = false;
         Owner.Animator.SetBool(_animIDJumpAttack, false);
+        TcpProtobufClient.Instance.SendApplyRootMotion(Owner.Player.PlayerId, false);
+        TcpProtobufClient.Instance.SendAnimatorCondision(Owner.Player.PlayerId,"JumpAttack", false);
     }
 }

@@ -15,12 +15,13 @@ type Point struct {
 
 // Player represents a single player with some attributes
 type Player struct {
-	ID        int
-	Name      string
-	Age       int
-	Conn      *net.Conn
-	Point     Point
-	RotationY float32
+	ID             int
+	Name           string
+	Age            int
+	Conn           *net.Conn
+	Point          Point
+	RotationY      float32
+	PlayerTemplate int32
 }
 
 var playerManager *PlayerManager
@@ -53,14 +54,15 @@ func (pm *PlayerManager) Broadcast(sg *pb.GameMessage) {
 }
 
 // AddPlayer adds a new player to the manager
-func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player {
+func (pm *PlayerManager) AddPlayer(name string, age int, template int32, conn *net.Conn) *Player {
 	player := Player{
-		ID:        pm.nextID,
-		Name:      name,
-		Age:       age,
-		Conn:      conn,
-		Point:     Point{X: 0, Y: 0, Z: 0},
-		RotationY: 0,
+		ID:             pm.nextID,
+		Name:           name,
+		Age:            age,
+		Conn:           conn,
+		Point:          Point{X: 0, Y: 0, Z: 0},
+		RotationY:      0,
+		PlayerTemplate: template,
 	}
 
 	pm.players[name] = &player
@@ -69,10 +71,11 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 	myPlayerSapwn := &pb.GameMessage{
 		Message: &pb.GameMessage_SpawnMyPlayer{
 			SpawnMyPlayer: &pb.SpawnMyPlayer{
-				X:         player.Point.X,
-				Y:         player.Point.Y,
-				Z:         player.Point.Z,
-				RotationY: player.RotationY,
+				X:              player.Point.X,
+				Y:              player.Point.Y,
+				Z:              player.Point.Z,
+				RotationY:      player.RotationY,
+				PlayerTemplate: player.PlayerTemplate,
 			},
 		},
 	}
@@ -87,11 +90,12 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 	otherPlayerSpawnPacket := &pb.GameMessage{
 		Message: &pb.GameMessage_SpawnOtherPlayer{
 			SpawnOtherPlayer: &pb.SpawnOtherPlayer{
-				PlayerId:  player.Name,
-				X:         player.Point.X,
-				Y:         player.Point.Y,
-				Z:         player.Point.Z,
-				RotationY: player.RotationY,
+				PlayerId:       player.Name,
+				X:              player.Point.X,
+				Y:              player.Point.Y,
+				Z:              player.Point.Z,
+				RotationY:      player.RotationY,
+				PlayerTemplate: player.PlayerTemplate,
 			},
 		},
 	}
@@ -127,11 +131,12 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 		otherPlayerSpawnPacket := &pb.GameMessage{
 			Message: &pb.GameMessage_SpawnOtherPlayer{
 				SpawnOtherPlayer: &pb.SpawnOtherPlayer{
-					PlayerId:  p.Name,
-					X:         p.Point.X,
-					Y:         p.Point.Y,
-					Z:         p.Point.Z,
-					RotationY: player.RotationY,
+					PlayerId:       p.Name,
+					X:              p.Point.X,
+					Y:              p.Point.Y,
+					Z:              p.Point.Z,
+					RotationY:      p.RotationY,
+					PlayerTemplate: p.PlayerTemplate,
 				},
 			},
 		}
@@ -142,6 +147,129 @@ func (pm *PlayerManager) AddPlayer(name string, age int, conn *net.Conn) *Player
 	}
 
 	return &player
+}
+
+func (pm *PlayerManager) SetPlayerApplyRootMotion(playerId string, rootMotion bool) {
+	gameMessage := &pb.GameMessage{
+		Message: &pb.GameMessage_ApplyRootMotion{
+			ApplyRootMotion: &pb.ApplyRootMotion{
+				PlayerId:   playerId,
+				RootMosion: rootMotion,
+			},
+		},
+	}
+
+	response := GetNetManager().MakePacket(gameMessage)
+	if response == nil {
+		return
+	}
+
+	for _, player := range pm.players {
+		if player.Name == playerId {
+			continue
+		}
+
+		(*player.Conn).Write(response)
+	}
+}
+
+func (pm *PlayerManager) SetPlayerAnimatorIntegerCondition(playerId string, animId string, condition int32) {
+	gameMessage := &pb.GameMessage{
+		Message: &pb.GameMessage_AnimatorSetInteger{
+			AnimatorSetInteger: &pb.AnimatorSetInteger{
+				PlayerId:  playerId,
+				AnimId:    animId,
+				Condition: condition,
+			},
+		},
+	}
+
+	response := GetNetManager().MakePacket(gameMessage)
+	if response == nil {
+		return
+	}
+
+	for _, player := range pm.players {
+		if player.Name == playerId {
+			continue
+		}
+
+		(*player.Conn).Write(response)
+	}
+}
+
+func (pm *PlayerManager) SetPlayerAnimatorFloatCondition(playerId string, animId string, condition float32) {
+	gameMessage := &pb.GameMessage{
+		Message: &pb.GameMessage_AnimatorSetFloat{
+			AnimatorSetFloat: &pb.AnimatorSetFloat{
+				PlayerId:  playerId,
+				AnimId:    animId,
+				Condition: condition,
+			},
+		},
+	}
+
+	response := GetNetManager().MakePacket(gameMessage)
+	if response == nil {
+		return
+	}
+
+	for _, player := range pm.players {
+		if player.Name == playerId {
+			continue
+		}
+
+		(*player.Conn).Write(response)
+	}
+}
+
+func (pm *PlayerManager) SetPlayerAnimatorBoolCondition(playerId string, animId string, condition bool) {
+	gameMessage := &pb.GameMessage{
+		Message: &pb.GameMessage_AnimatorSetBool{
+			AnimatorSetBool: &pb.AnimatorSetBool{
+				PlayerId:  playerId,
+				AnimId:    animId,
+				Condition: condition,
+			},
+		},
+	}
+
+	response := GetNetManager().MakePacket(gameMessage)
+	if response == nil {
+		return
+	}
+
+	for _, player := range pm.players {
+		if player.Name == playerId {
+			continue
+		}
+
+		(*player.Conn).Write(response)
+	}
+}
+
+func (pm *PlayerManager) SetPlayerAnimatorTriggerCondition(playerId string, animId string) {
+	gameMessage := &pb.GameMessage{
+		Message: &pb.GameMessage_AnimatorSetTrigger{
+			AnimatorSetTrigger: &pb.AnimatorSetTrigger{
+				PlayerId: playerId,
+				AnimId:   animId,
+			},
+		},
+	}
+
+	response := GetNetManager().MakePacket(gameMessage)
+	if response == nil {
+		return
+	}
+
+	for _, player := range pm.players {
+		if player.Name == playerId {
+			continue
+		}
+
+		(*player.Conn).Write(response)
+	}
 }
 
 func (pm *PlayerManager) MovePlayer(p *pb.GameMessage_PlayerPosition) {

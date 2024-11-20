@@ -17,6 +17,7 @@ public class IFrameState : BaseState
     public override void OnEnterState()
     {
         Owner.Animator.SetTrigger(_animIDIFrame);
+        TcpProtobufClient.Instance.SendAnimatorCondision(Owner.Player.PlayerId,"IFrame");
     }
 
     public override void OnUpdateState()

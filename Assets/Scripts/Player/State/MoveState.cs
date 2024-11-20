@@ -10,7 +10,8 @@ public class MoveState : BaseState
     private readonly int _animIDSpeed;
     
     private float _rotationVelocity;
-    
+    private float _preTagetSpeed;
+
     public MoveState(PlayerController owner) : base(owner)
     {
         if (!Owner)
@@ -52,8 +53,14 @@ public class MoveState : BaseState
         Owner.Controller.Move(targetDirection.normalized * (targetSpeed * Time.deltaTime) +
                              new Vector3(0.0f, Owner._verticalVelocity, 0.0f) * Time.deltaTime);
         
-        Owner.Player.SendPositionToServer(targetDirection.normalized, targetRotation, targetSpeed);
         Owner.Animator.SetFloat(_animIDSpeed, targetSpeed);
+
+        Owner.Player.SendPositionToServer(targetDirection.normalized, targetRotation, targetSpeed);
+        if (Mathf.Approximately(targetSpeed, _preTagetSpeed))
+        {
+            TcpProtobufClient.Instance.SendAnimatorCondision(Owner.Player.PlayerId, "Speed", targetSpeed);
+        }
+        _preTagetSpeed = targetSpeed;
     }
 
     public override void OnLateUpdateState()
@@ -69,5 +76,7 @@ public class MoveState : BaseState
     public override void OnExitState()
     {
         Owner.Animator.SetFloat(_animIDSpeed, 0f);
+        Owner.Player.SendPositionToServer(Vector3.zero, 0f, 0f);
+        TcpProtobufClient.Instance.SendAnimatorCondision(Owner.Player.PlayerId, "Speed", 0f);
     }
 }

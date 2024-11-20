@@ -13,6 +13,8 @@ public class Melee : SkillBase
     
     public Melee(PlayerController owner) : base(owner)
     {
+        AttackMultiplier = 1f;
+            
         _comboCount = 0;
         _reInputTime = 3f;
         
@@ -31,6 +33,9 @@ public class Melee : SkillBase
         Owner.Animator.applyRootMotion = true;
         Owner.Animator.SetBool(_animIDMelee, true);
         Owner.Animator.SetInteger(_animIDCombo, _comboCount);
+        TcpProtobufClient.Instance.SendApplyRootMotion(Owner.Player.PlayerId, true);
+        TcpProtobufClient.Instance.SendAnimatorCondision(Owner.Player.PlayerId,"Melee", true);
+        TcpProtobufClient.Instance.SendAnimatorCondision(Owner.Player.PlayerId,"Combo", _comboCount);
         
         CheckAttackReInput(_reInputTime);
     }
@@ -39,6 +44,8 @@ public class Melee : SkillBase
     {
         Owner.Animator.applyRootMotion = false;
         Owner.Animator.SetBool(_animIDMelee, false);
+        TcpProtobufClient.Instance.SendApplyRootMotion(Owner.Player.PlayerId, false);
+        TcpProtobufClient.Instance.SendAnimatorCondision(Owner.Player.PlayerId, "Melee", false);
     }
 
     private void CheckAttackReInput(float reInputTime)
@@ -63,5 +70,6 @@ public class Melee : SkillBase
 
         _comboCount = 0;
         Owner.Animator.SetInteger(_animIDCombo, 0);
+        TcpProtobufClient.Instance.SendAnimatorCondision(Owner.Player.PlayerId,"Combo", 0);
     }
 }

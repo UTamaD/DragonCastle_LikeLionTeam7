@@ -540,7 +540,7 @@ public class MonsterController : MonoBehaviour
                 .ToArray();
                 
             meteorStrikeController.StartMeteorStrike(positions);
-            }
+        }
     }
     #endregion
 

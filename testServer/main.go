@@ -73,8 +73,9 @@ func processMessage(message *pb.GameMessage, conn *net.Conn) {
 		mg.GetPlayerManager().MovePlayer(msg)
 	case *pb.GameMessage_Login:
 		playerId := msg.Login.PlayerId
+		playerTemplate := msg.Login.PlayerTemplate
 		playerManager := mg.GetPlayerManager()
-		playerManager.AddPlayer(playerId, 0, conn)
+		playerManager.AddPlayer(playerId, 0, playerTemplate, conn)
 	case *pb.GameMessage_Logout:
 		playerId := msg.Logout.PlayerId
 		playerManager := mg.GetPlayerManager()
@@ -87,6 +88,16 @@ func processMessage(message *pb.GameMessage, conn *net.Conn) {
 	case *pb.GameMessage_PlayerDamage:
 		playerManager := mg.GetPlayerManager()
 		playerManager.Broadcast(message)
+	case *pb.GameMessage_ApplyRootMotion:
+		mg.GetPlayerManager().SetPlayerApplyRootMotion(msg.ApplyRootMotion.PlayerId, msg.ApplyRootMotion.RootMosion)
+	case *pb.GameMessage_AnimatorSetInteger:
+		mg.GetPlayerManager().SetPlayerAnimatorIntegerCondition(msg.AnimatorSetInteger.PlayerId, msg.AnimatorSetInteger.AnimId, msg.AnimatorSetInteger.Condition)
+	case *pb.GameMessage_AnimatorSetFloat:
+		mg.GetPlayerManager().SetPlayerAnimatorFloatCondition(msg.AnimatorSetFloat.PlayerId, msg.AnimatorSetFloat.AnimId, msg.AnimatorSetFloat.Condition)
+	case *pb.GameMessage_AnimatorSetBool:
+		mg.GetPlayerManager().SetPlayerAnimatorBoolCondition(msg.AnimatorSetBool.PlayerId, msg.AnimatorSetBool.AnimId, msg.AnimatorSetBool.Condition)
+	case *pb.GameMessage_AnimatorSetTrigger:
+		mg.GetPlayerManager().SetPlayerAnimatorTriggerCondition(msg.AnimatorSetTrigger.PlayerId, msg.AnimatorSetTrigger.AnimId)
 	default:
 		panic(fmt.Sprintf("unexpected messages.isGameMessage_Message: %#v", msg))
 	}
