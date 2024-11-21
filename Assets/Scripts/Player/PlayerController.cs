@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     public LivingEntity LivingEntity { get; private set; }
     public CombatSystem CombatSystem { get; private set; }
     public Player Player { get; private set; }
+    public CameraShakeCinemachine CameraShakeCinemachine { get; private set; }
     public CharacterController Controller  { get; private set; }
     public PlayerInputs Inputs { get; private set; }
     public GameObject MainCamera { get; private set; }
@@ -83,6 +84,7 @@ public class PlayerController : MonoBehaviour
         LivingEntity = GetComponent<LivingEntity>();
         CombatSystem = GetComponent<CombatSystem>();
         Player = GetComponent<Player>();
+        CameraShakeCinemachine = MainCamera.GetComponent<CameraShakeCinemachine>();
         Controller = GetComponent<CharacterController>();
         Inputs = GetComponent<PlayerInputs>();
         Animator = GetComponentInChildren<Animator>();
@@ -244,6 +246,8 @@ public class PlayerController : MonoBehaviour
     {
         if ((StateMachine.CurrentState is IFrameState))
             return;
+        
+        CameraShakeCinemachine.ShakeCamera(2.0f, 0.5f);
         
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         transform.rotation = lookRotation;

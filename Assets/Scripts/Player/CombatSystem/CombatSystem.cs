@@ -54,6 +54,7 @@ public class CombatSystem : MonoBehaviour
             hitNormal = hit.normal
         };
         
+        Owner.CameraShakeCinemachine.ShakeCamera(2.0f, 0.5f);
         monster.TakeDamage(msg);
     }
 

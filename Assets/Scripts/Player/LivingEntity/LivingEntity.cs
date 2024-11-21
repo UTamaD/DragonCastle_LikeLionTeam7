@@ -22,6 +22,14 @@ public class LivingEntity : MonoBehaviour, IDamageable
         Hp = HpMax;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            ApplyDamage(10f, Vector3.zero);
+        }
+    }
+
     public virtual void ChangeHp(float value)
     {
         Hp += value;

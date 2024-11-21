@@ -786,6 +786,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7480322218272236784, guid: fa74bc4ab30df4b4cbf9759ecec47d17,
+        type: 3}
+      propertyPath: virtualCamera
+      value: 
+      objectReference: {fileID: 1531234888}
     - target: {fileID: 8302875664333837887, guid: fa74bc4ab30df4b4cbf9759ecec47d17,
         type: 3}
       propertyPath: m_Name
@@ -1097,6 +1102,7 @@ MonoBehaviour:
   IdField: {fileID: 1638490205}
   PlayerHpBar: {fileID: 1556852252}
   SkillCoolTime: {fileID: 416704900}
+  GameEndPannel: {fileID: 0}
 --- !u!1001 &467482102
 PrefabInstance:
   m_ObjectHideFlags: 0
