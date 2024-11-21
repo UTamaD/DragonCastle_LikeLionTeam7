@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
             case GameMessage.MessageOneofCase.ApplyRootMotion:
                 PlayerSpawner.Instance.OtherPlayerApplyRootMotion(msg.ApplyRootMotion.PlayerId,
                     msg.ApplyRootMotion.RootMosion);
+                break;
             case GameMessage.MessageOneofCase.MonsterHitEffect:
                 HandleMonsterHitEffect(msg.MonsterHitEffect);
                 break;
