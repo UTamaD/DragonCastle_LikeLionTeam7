@@ -22,10 +22,6 @@ public class PlayerController : MonoBehaviour
     [Range(0.0f, 0.3f)]
     public float RotationSmoothTime = 0.12f;
 
-    public AudioClip LandingAudioClip;
-    public AudioClip[] FootstepAudioClips;
-    [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
-
     [Space(10)]
     public float JumpHeight = 1.2f;
     public float Gravity = -15.0f;
@@ -67,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
     // bool 변수
     public bool IsSprint;
+    public bool IsSkillCoolTime = false;
     private bool _isInvincible;
     private bool _isMelee;
     private bool _isCombo;
@@ -206,14 +203,22 @@ public class PlayerController : MonoBehaviour
             state.SetCurSkill(SkillManager.CurrentSkill);
             StateMachine.ChangeState(StateName.Melee);
         }
+        else
+        {
+            SkillManager.CurrentSkill.SetComboCount();
+        }
     }
     
     private void JumpAttack()
     {
         if (!(StateMachine.CurrentState is MoveState))
             return;
+        
+        if (IsSkillCoolTime)
+            return;
 
         SkillManager.SetCurrentSkill(PlayerSkillName.Skill);
+        
         AttackState state = (AttackState)(StateMachine.GetState(StateName.Melee));
         if (state != null && SkillManager.CurrentSkill.IsAvailable())
         {
@@ -235,11 +240,13 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Damaged
-    private void Damaged()
+    private void Damaged(Vector3 dir)
     {
         if ((StateMachine.CurrentState is IFrameState))
             return;
         
+        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        transform.rotation = lookRotation;
         StateMachine.ChangeState(StateName.Damaged);
     }
     

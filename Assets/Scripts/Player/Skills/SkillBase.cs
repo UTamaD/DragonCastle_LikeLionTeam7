@@ -16,6 +16,7 @@ public abstract class SkillBase
     }
 
     public abstract bool IsAvailable();
+    public abstract void SetComboCount();
     public abstract void Active();
     public abstract void Inactive();
 }

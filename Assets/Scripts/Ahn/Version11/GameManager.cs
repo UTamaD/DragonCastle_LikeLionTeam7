@@ -160,7 +160,16 @@ public class GameManager : MonoBehaviour
             if (myPlayer != null)
             {
                 Debug.Log($"Applying {playerDamage.AttackType} damage: {playerDamage.Damage} to player: {myPlayer.PlayerId}");
-                myPlayerCtrl.LivingEntity.ApplyDamage(playerDamage.Damage);
+                Vector3 hitPoint = new Vector3(
+                    playerDamage.HitPointX,
+                    playerDamage.HitPointY,
+                    playerDamage.HitPointZ
+                );
+
+                Vector3 hitNormal = hitPoint - myPlayerCtrl.transform.position;
+                myPlayerCtrl.GetComponent<PlayerEffectManager>().PlayDamaged(hitPoint, hitNormal);
+                hitNormal.y = 0f;
+                myPlayerCtrl.LivingEntity.ApplyDamage(playerDamage.Damage, hitNormal);
             }
         }
         else
@@ -172,11 +181,15 @@ public class GameManager : MonoBehaviour
                     playerDamage.HitPointY,
                     playerDamage.HitPointZ
                 );
+                
+                Vector3 hitNormal = hitPoint - otherPlayer.transform.position;
 
                 if (EffectManager.Instance != null)
                 {
                     // 피격 효과 재생
-                    otherPlayer.LivingEntity.ApplyDamage(playerDamage.Damage);
+                    otherPlayer.GetComponent<PlayerEffectManager>().PlayDamaged(hitPoint, hitNormal);
+                    hitNormal.y = 0f;
+                    otherPlayer.LivingEntity.ApplyDamage(playerDamage.Damage, hitNormal);
                 }
             }
         }

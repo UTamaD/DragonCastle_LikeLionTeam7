@@ -7,35 +7,52 @@ using Random = UnityEngine.Random;
 
 public class AnimationEventHandler : MonoBehaviour
 {
-    private PlayerController Owner;
+    public Transform FootL;
+    public Transform FootR;
+
+    public Transform SkillTr;
+    
+    private PlayerController _owner;
+
+    private PlayerEffectManager _effect;
+    private PlayerSoundManager _sound;
+
+    private CharacterController _controller;
 
     private void Start()
     {
-        Owner = GetComponent<PlayerController>();
+        _owner = GetComponent<PlayerController>();
+        _effect = GetComponent<PlayerEffectManager>();
+        _sound = GetComponent<PlayerSoundManager>();
+        _controller = GetComponent<CharacterController>();
     }
 
-    private void OnFootstep(AnimationEvent animationEvent)
+    private void OnFootstepL(AnimationEvent animationEvent)
     {
-        if (animationEvent.animatorClipInfo.weight > 0.5f)
-        {
-            if (Owner.FootstepAudioClips.Length > 0)
-            {
-                var index = Random.Range(0, Owner.FootstepAudioClips.Length);
-                AudioSource.PlayClipAtPoint(Owner.FootstepAudioClips[index], transform.TransformPoint(Owner.Controller.center), Owner.FootstepAudioVolume);
-            }
-        }
+        _effect.PlayFootStep(FootL.position);
+        _sound.PlayFootStep(animationEvent, transform.TransformPoint(_controller.center));
+    }
+    
+    private void OnFootstepR(AnimationEvent animationEvent)
+    {
+        _effect.PlayFootStep(FootR.position);
+        _sound.PlayFootStep(animationEvent, transform.TransformPoint(_controller.center));
     }
 
     private void OnLand(AnimationEvent animationEvent)
     {
-        if (animationEvent.animatorClipInfo.weight > 0.5f)
-        {
-            AudioSource.PlayClipAtPoint(Owner.LandingAudioClip, transform.TransformPoint(Owner.Controller.center), Owner.FootstepAudioVolume);
-        }
+        //_effect.PlayLand();
+        _sound.PlayLand(animationEvent, transform.TransformPoint(_controller.center));
     }
 
     private void OnDash(AnimationEvent animationEvent)
     {
+        //_effect.PlayDash();
+        _sound.PlayDash(transform.TransformPoint(_controller.center));
+            
+        if (!_owner)
+            return;
+        
         object info = animationEvent.objectReferenceParameter;
         DashInfo dashInfo = info.ConvertTo<DashInfo>();
         if (!dashInfo)
@@ -43,37 +60,56 @@ public class AnimationEventHandler : MonoBehaviour
             Debug.LogWarning("fail to object type cast to " + dashInfo.name);
             return;
         }
+        
+        StartCoroutine(_owner.MoveForDistanceAndTime(dashInfo.dashDis, dashInfo.dashTime));
+    }
 
-        if (!Owner)
-            return;
-        StartCoroutine(Owner.MoveForDistanceAndTime(dashInfo.dashDis, dashInfo.dashTime));
+    private void OnMeleeStart(AnimationEvent animationEvent)
+    {
+        //_effect.PlayMelee();
+        _sound.PlayMelee(transform.TransformPoint(_controller.center), animationEvent.intParameter);
+    }
+    
+    private void OnSkill()
+    {
+        _effect.PlaySkill(SkillTr.position, transform.eulerAngles);
+        _sound.PlaySkill(transform.TransformPoint(_controller.center));
+    }
+
+    public void OnDamaged()
+    {
+        _sound.PlayDamaged(transform.TransformPoint(_controller.center));
     }
     
     private void EndIFrame(AnimationEvent animationEvent)
     {
-        if (!Owner)
+        if (!_owner)
             return;
-        Owner.StateMachine.ChangeState(StateName.Move);
+        
+        _owner.StateMachine.ChangeState(StateName.Move);
     }
     
     private void OnEndMelee()
     {
-        if (!Owner)
+        if (!_owner)
             return;
-        Owner.StateMachine.ChangeState(StateName.Move);
+        
+        _owner.StateMachine.ChangeState(StateName.Move);
     }
 
     private void OnEndDamaged()
     {
-        if (!Owner)
+        if (!_owner)
             return;
-        Owner.StateMachine.ChangeState(StateName.Move);
+        
+        _owner.StateMachine.ChangeState(StateName.Move);
     }
 
     private void OnCreateDamageField(AnimationEvent animationEvent)
     {
-        if (!Owner)
+        if (!_owner)
             return;
+        
         object info = animationEvent.objectReferenceParameter;
         SkillInfo skillInfo = info.ConvertTo<SkillInfo>();
         if (!skillInfo)
@@ -82,6 +118,6 @@ public class AnimationEventHandler : MonoBehaviour
             return;
         }
         
-        Owner.CombatSystem.ActiveDamageField(skillInfo.skillName, skillInfo.dist);
+        _owner.CombatSystem.ActiveDamageField(skillInfo.skillName, skillInfo.dist);
     }
 }

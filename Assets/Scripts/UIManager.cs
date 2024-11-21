@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,24 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+
     public GameObject UICanvas;
+    public GameObject PlayerCanvas;
     public Button[] CharSelectButtons;
     public Button StartButton;  
     public TMPro.TMP_InputField IdField;
 
+    public Image PlayerHpBar;
+    public Image SkillCoolTime;
 
     private int _playerTemplateNum = 0;
-    
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         CharSelectButtons[0].onClick.AddListener(() => SelectPlayerTemplate(0));
@@ -26,6 +37,7 @@ public class UIManager : MonoBehaviour
             SuperManager.Instance.playerId = IdField.text;
             TcpProtobufClient.Instance.SendLoginMessage(IdField.text, _playerTemplateNum);
             UICanvas.SetActive(false);
+            PlayerCanvas.SetActive(true);
         });
     }
 
@@ -44,5 +56,15 @@ public class UIManager : MonoBehaviour
                 CharSelectButtons[i].image.color = Color.white;
             }
         }
+    }
+
+    public void SetHpBar(float hp, float maxHp)
+    {
+        PlayerHpBar.fillAmount = (maxHp - hp) / maxHp;
+    }
+    
+    public void SetCoolTime(float curTime, float coolTime)
+    {
+        SkillCoolTime.fillAmount = (coolTime - curTime) / coolTime;
     }
 }

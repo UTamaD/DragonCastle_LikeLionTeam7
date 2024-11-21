@@ -14,7 +14,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
 
     public bool IsDead { get; protected set; }
 
-    public UnityAction OnDamagedEvent;
+    public UnityAction<Vector3> OnDamagedEvent;
     public UnityAction OnDeathEvent;
 
     private void Start()
@@ -25,24 +25,27 @@ public class LivingEntity : MonoBehaviour, IDamageable
     public virtual void ChangeHp(float value)
     {
         Hp += value;
-        OnHpChanged();
+        UIManager.Instance.SetHpBar(Hp, HpMax);
+
+        if (Hp <= 0)
+            Die();
     }
     
     private void OnHpChanged()
     {
     }
     
-    public virtual void ApplyDamage(float dmgAmount)
+    public virtual void ApplyDamage(float dmgAmount, Vector3 dir)
     {
         ChangeHp(-dmgAmount);
         
-        OnDamagedEvent?.Invoke();
+        OnDamagedEvent?.Invoke(dir);
     }
     
     public virtual void ApplyDamage(DamageMessage dmgMsg)
     {
         ChangeHp(-dmgMsg.amount);
-        OnDamagedEvent?.Invoke();
+        OnDamagedEvent?.Invoke(dmgMsg.hitNormal);
     }
     
     public virtual void Die()

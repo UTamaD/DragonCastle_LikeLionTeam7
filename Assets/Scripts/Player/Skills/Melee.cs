@@ -27,6 +27,11 @@ public class Melee : SkillBase
         return (_comboCount < (Owner.Combo + 1));
     }
 
+    public override void SetComboCount()
+    {
+        _comboCount = 0;
+    }
+
     public override void Active()
     {
         _comboCount++;

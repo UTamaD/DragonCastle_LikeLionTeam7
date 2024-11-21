@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HS_EffectSound : MonoBehaviour
 {
@@ -12,21 +14,21 @@ public class HS_EffectSound : MonoBehaviour
     public float maxVolume = 1f;
     private AudioClip clip;
 
-    private AudioSource soundComponent;
+    public AudioSource soundComponent;
 
     void Start ()
     {
-        soundComponent = GetComponent<AudioSource>();
         clip = soundComponent.clip;
-        if (RandomVolume == true)
-        {
-            soundComponent.volume = Random.Range(minVolume, maxVolume);
-            RepeatSound();
-        }
-        if (Repeating == true)
-        {
-            InvokeRepeating("RepeatSound", StartTime, RepeatTime);
-        }
+        RepeatSound();
+        // if (RandomVolume == true)
+        // {
+        //     soundComponent.volume = Random.Range(minVolume, maxVolume);
+        //     RepeatSound();
+        // }
+        // if (Repeating == true)
+        // {
+        //     InvokeRepeating("RepeatSound", StartTime, RepeatTime);
+        // }
     }
 
     void RepeatSound()

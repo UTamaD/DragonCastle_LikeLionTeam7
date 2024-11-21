@@ -95,7 +95,7 @@ public class OtherPlayer : MonoBehaviour
         Animator.SetTrigger(animId);
     }
     
-    private void Damaged()
+    private void Damaged(Vector3 dir)
     {
         Animator.applyRootMotion = true;
         Animator.SetBool("KnockBack", true);
