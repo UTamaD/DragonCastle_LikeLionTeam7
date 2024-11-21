@@ -887,13 +887,14 @@ MonoBehaviour:
     duration: 0.5
     damageAmount: 10
     damageInterval: 0
-    radius: 1
-    hitEffect: {fileID: 6272820950404168050, guid: 8ab5ca04c9c19f34a9052990e4c4dd4c,
+    radius: 1.25
+    hitEffect: {fileID: 1995831016165032, guid: 6134e0f2fef62824386ee52646afe07e,
       type: 3}
-    hitSound: {fileID: 0}
-    hitEnvironmentEffect: {fileID: 6272820950404168050, guid: 8ab5ca04c9c19f34a9052990e4c4dd4c,
+    hitSound: {fileID: 8300000, guid: 8e8d72443a66bcc45aa5fabe31223f27, type: 3}
+    hitEnvironmentEffect: {fileID: 1995831016165032, guid: 6134e0f2fef62824386ee52646afe07e,
       type: 3}
-    hitEnvironmentSound: {fileID: 0}
+    hitEnvironmentSound: {fileID: 8300000, guid: 8e8d72443a66bcc45aa5fabe31223f27,
+      type: 3}
     checkEnvironmentCollision: 1
     createEffectOnEnvironmentCollision: 1
   targetLayers:
@@ -1460,6 +1461,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  baseMovementSpeed: 15
+  maxMovementSpeed: 20
+  accelerationTime: 0.3
   maxHealth: 100
   attackPoint: {fileID: 6022714755959505748}
   attackEffect:
@@ -1468,9 +1472,14 @@ MonoBehaviour:
     duration: 2
   meteorStrikeController: {fileID: 839455525664881390}
   WingLMeleeDamageField: {fileID: 4938584487576855371}
-  MeleeHitVfx: {fileID: 1995831016165032, guid: 6134e0f2fef62824386ee52646afe07e,
+  MeleeHitVfx: {fileID: 6272820950404168050, guid: 8ab5ca04c9c19f34a9052990e4c4dd4c,
     type: 3}
   MeleeHitSfx: MonsterHit
+  footstepSoundIds:
+  - footstep_1
+  - footstep_2
+  - footstep_3
+  - footstep_4
 --- !u!114 &661204062820336749
 MonoBehaviour:
   m_ObjectHideFlags: 0

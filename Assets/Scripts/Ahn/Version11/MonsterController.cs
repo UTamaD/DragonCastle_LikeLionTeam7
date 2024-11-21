@@ -129,6 +129,18 @@ public class MonsterController : MonoBehaviour
     private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
     private static readonly int MovementSpeed = Animator.StringToHash("MovementSpeed");
     #endregion
+    
+    
+    [SerializeField]
+    private string[] footstepSoundIds = new string[] 
+    { 
+        "footstep_1", 
+        "footstep_2", 
+        "footstep_3", 
+        "footstep_4" 
+    };
+
+
 
     #region Unity Lifecycle Methods
     private void Awake()
@@ -417,10 +429,10 @@ public class MonsterController : MonoBehaviour
         currentHealth -= msg.amount;
         currentHealth = Mathf.Max(0, currentHealth);
 
-        PlayHitSound(msg.hitPoint, msg.type);
-        SpawnHitEffect(msg.hitPoint, msg.hitNormal, msg.type);
+        // 서버에 데미지와 피격 효과 정보 전송
+        TcpProtobufClient.Instance.SendMonsterDamage(monsterId, msg.amount, currentHealth, 
+            msg.hitPoint, msg.hitNormal, msg.type);
         
-        TcpProtobufClient.Instance.SendMonsterDamage(monsterId, msg.amount, currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -463,9 +475,22 @@ public class MonsterController : MonoBehaviour
         }
     }
 
+    public void PlayHitEffect(Vector3 hitPoint, Vector3 hitNormal, DamageType skillType)
+    {
+        PlayHitSound(hitPoint, skillType);
+        SpawnHitEffect(hitPoint, hitNormal, skillType);
+    }
+    
     public void PlaySound(string soundId)
     {
         SoundManager.Instance?.PlaySound(soundId, transform.position);
+    }
+    
+    private void PlayRandomFootstep()
+    {
+        int randomIndex = Random.Range(0, footstepSoundIds.Length);
+        string selectedSoundId = footstepSoundIds[randomIndex];
+        SoundManager.Instance.PlaySound(selectedSoundId, transform.position);
     }
 
     private void PlayHitSound(Vector3 hitPoint, DamageType skillType)
@@ -559,7 +584,7 @@ public class MonsterController : MonoBehaviour
         
         animator.SetBool(IsTurningLeft, false);
         animator.SetBool(IsTurningRight, false);
-        animator.SetFloat("RotationSpeed", 0f);
+        //animator.SetFloat("RotationSpeed", 0f);
     }
     
     private IEnumerator RootMotionRotation(float targetRotationRad, float duration)
@@ -568,12 +593,12 @@ public class MonsterController : MonoBehaviour
         float startRotation = transform.eulerAngles.y;
         targetRotation = targetRotationRad * Mathf.Rad2Deg;
         float rotationDiff = Mathf.Abs(Mathf.DeltaAngle(startRotation, targetRotation));
-    
-        if (rotationDiff >= rotationThreshold)
+
+        if (rotationDiff >= 30f) // 45도 이상일 때만 애니메이션 회전
         {
             yield return HandleLargeRotation(startRotation, rotationDiff);
         }
-        else
+        else // 그 외에는 빠른 회전
         {
             yield return HandleSmallRotation(startRotation, duration);
         }
@@ -586,11 +611,13 @@ public class MonsterController : MonoBehaviour
     private IEnumerator HandleLargeRotation(float startRotation, float rotationDiff)
     {
         EnableRotationRootMotion();
-        
+    
         float angleDiff = Mathf.DeltaAngle(startRotation, targetRotation);
         float normalizedRotation = rotationDiff / 180f;
-        float animationSpeed = Mathf.Lerp(minRotationSpeed, 1f, normalizedRotation) * maxRotationSpeed;
-        
+    
+        // 회전 속도를 0.5~1.5 범위로 유지
+        float animationSpeed = Mathf.Lerp(0.5f, 1.5f, normalizedRotation) * maxRotationSpeed;
+    
         animator.SetBool(IsTurningLeft, angleDiff > 0);
         animator.SetBool(IsTurningRight, angleDiff < 0);
         animator.SetFloat("RotationSpeed", animationSpeed);

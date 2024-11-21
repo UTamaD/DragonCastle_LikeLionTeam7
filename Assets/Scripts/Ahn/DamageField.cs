@@ -78,8 +78,7 @@ public class DamageField : MonoBehaviour
     private void Awake()
     {
         InitializeCollider();
-        // 시작시 콜라이더 비활성화
-        SetColliderState(false);
+
     }
 
     private void OnEnable()

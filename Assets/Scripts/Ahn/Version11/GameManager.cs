@@ -107,10 +107,37 @@ public class GameManager : MonoBehaviour
             case GameMessage.MessageOneofCase.ApplyRootMotion:
                 PlayerSpawner.Instance.OtherPlayerApplyRootMotion(msg.ApplyRootMotion.PlayerId,
                     msg.ApplyRootMotion.RootMosion);
+            case GameMessage.MessageOneofCase.MonsterHitEffect:
+                HandleMonsterHitEffect(msg.MonsterHitEffect);
                 break;
         }
     }
 
+    
+    private void HandleMonsterHitEffect(MonsterHitEffect hitEffect)
+    {
+        if (monsters.TryGetValue(hitEffect.MonsterId, out MonsterController monster))
+        {
+            Vector3 hitPoint = new Vector3(
+                hitEffect.HitPoint.X,
+                hitEffect.HitPoint.Y,
+                hitEffect.HitPoint.Z
+            );
+            Vector3 hitNormal = new Vector3(
+                hitEffect.HitNormal.X,
+                hitEffect.HitNormal.Y,
+                hitEffect.HitNormal.Z
+            );
+   
+            monster.PlayHitEffect(
+                hitPoint,
+                hitNormal,
+                (DamageType)hitEffect.HitEffectType
+            );
+        }
+    }
+    
+    
     private void HandleMonsterRotate(MonsterRotate rotateData)
     {
         if (monsters.TryGetValue(rotateData.MonsterId, out MonsterController monster))
@@ -167,6 +194,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleMoveMonster(MoveMonster moveData)
     {
+        Debug.Log("HandleMoveMonster msg : "+moveData.X+" , " +moveData.Z);
         if (monsters.TryGetValue(moveData.MonsterId, out MonsterController monster))
         {
             monster.UpdatePosition(new Vector3(moveData.X, 0, moveData.Z));

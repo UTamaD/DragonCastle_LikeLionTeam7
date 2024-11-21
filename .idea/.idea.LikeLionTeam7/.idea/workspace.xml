@@ -6,57 +6,34 @@
   <component name="ChangeListManager">
     <list default="true" id="5fccdaff-4ccb-49c6-8529-4b0227ee80c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Attack_Ground01.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Attack_Ground01.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_1.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_1.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_2.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_2.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_3.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_3.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_4.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Combo03_4.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Down02.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Down02.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Player.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/Player.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/avoid_front.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/avoid_front.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/hit_front.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/hit_front.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/rise01.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Player/rise01.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero/Material/Fantasy_Hero_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero/Material/Fantasy_Hero_01.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero/Material/Fantasy_Hero_02.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero/Material/Fantasy_Hero_02.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero/Material/Fantasy_Hero_03.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero/Material/Fantasy_Hero_03.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero/Material/Hair.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero/Material/Hair.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero_02/Materials/Fantasy_Hero_02_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero_02/Materials/Fantasy_Hero_02_01.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero_02/Materials/Fantasy_Hero_02_02.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero_02/Materials/Fantasy_Hero_02_02.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/OtherPlayer.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/OtherPlayer.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test_Jeongin_2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test_Jeongin_2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/OtherPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/OtherPlayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/PlayerSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/URun.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/Animations/URun.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/DragonBossController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/DragonBossController.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/DamageField/MeteorCollisionDamageField.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/DamageField/MeteorCollisionDamageField.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Dragon/DragonBoss.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Dragon/DragonBoss.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_Test_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_Test_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/DamageField.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/DamageField.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameMessage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/GameMessage.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/TcpProtobufClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/TcpProtobufClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/CombatSystem/CombatSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/CombatSystem/CombatSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/JumpAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/JumpAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/Melee.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Skills/Melee.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/State/DamagedState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/State/DamagedState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/State/IFrameState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/State/IFrameState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/State/MoveState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/State/MoveState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Balanced.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-Balanced.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Performant.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-Performant.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Edit/Impact.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Edit/Impact.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Edit/PlayerImpact 2.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Edit/PlayerImpact 2.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Map track markers VFX/Demo scene/Standard material.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/RPG VFX Bundle/URP and HDRP patches/HDRP patch.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/RPG VFX Bundle/URP and HDRP patches/URP patch.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/KriptoFX/Realistic Effects Pack v4/Effects/Materials/Effect3/DecalCollision 1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/KriptoFX/Realistic Effects Pack v4/Effects/Materials/Effect3/DecalCollision 1.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testServer/GameMessage.proto" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/GameMessage.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testServer/Manager/PlayerManager.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/Manager/PlayerManager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testServer/Manager/MonsterManager.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/Manager/MonsterManager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testServer/Manager/monster1.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/Manager/monster1.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testServer/Messages/GameMessage.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/Messages/GameMessage.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testServer/behavior/behaviorNodes.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/behavior/behaviorNodes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testServer/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +48,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2baf8514fc0a4c1683fd2faf0e4a53d429c00/4f/34bfb56b/RaycastHit.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e509afeff7384f24a8f0ac30527ff01c1cbe00/3d/21ed2ce0/Gizmos.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e509afeff7384f24a8f0ac30527ff01c1cbe00/52/4d76bb60/Transform.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnimationEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/LivingEntity/DamageMessage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/LivingEntity/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/Skills/Melee.cs" root0="FORCE_HIGHLIGHTING" />
@@ -92,36 +68,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Jeong-in&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Jeong-in",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\m1209\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\m1209\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\m1209\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\ATH\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\ATH\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\ATH\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Build\LikeLionTeam7.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../Ahn\LikeLionTeam7.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="C:\Users\m1209\Documents\GitHub\LikeLionTeam7\Build" />
+      <option name="WORKING_DIRECTORY" value="E:\Unity\Lion\Portfolio\Team7\Ahn" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2023.2.20f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\work\unity\2023.2.20f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\m1209\Documents\GitHub\LikeLionTeam7 -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\m1209\Documents\GitHub\LikeLionTeam7" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -129,7 +105,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2023.2.20f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\work\unity\2023.2.20f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\m1209\Documents\GitHub\LikeLionTeam7 -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\m1209\Documents\GitHub\LikeLionTeam7" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -194,9 +170,7 @@
       <workItem from="1731892257586" duration="5996000" />
       <workItem from="1731990585891" duration="9117000" />
       <workItem from="1732006250449" duration="185000" />
-      <workItem from="1732022061980" duration="8973000" />
-      <workItem from="1732089658084" duration="6377000" />
-      <workItem from="1732108713358" duration="8231000" />
+      <workItem from="1732083601765" duration="8756000" />
     </task>
     <servers />
   </component>

@@ -371,6 +371,31 @@ public class TcpProtobufClient : MonoBehaviour
         SendMessage(message);
     }
     
+    public void SendMonsterDamage(int monsterId, float damage, float currentHp, 
+        Vector3 hitPoint, Vector3 hitNormal, DamageType skillType)
+    {
+        var damageMessage = new MonsterDamage
+        {
+            MonsterId = monsterId,
+            Damage = damage,
+            CurrentHp = (int)currentHp,
+            HitPointX = hitPoint.x,
+            HitPointY = hitPoint.y,
+            HitPointZ = hitPoint.z,
+            HitNormalX = hitNormal.x,
+            HitNormalY = hitNormal.y,
+            HitNormalZ = hitNormal.z,
+            HitEffectType = (int)skillType
+        };
+
+        var message = new GameMessage
+        {
+            MonsterDamage = damageMessage
+        };
+    
+        SendMessage(message);
+    }
+    
     void OnDisable()
     {
         try

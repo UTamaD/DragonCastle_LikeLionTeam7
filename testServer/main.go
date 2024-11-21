@@ -83,7 +83,16 @@ func processMessage(message *pb.GameMessage, conn *net.Conn) {
 	case *pb.GameMessage_MonsterDamage:
 		monsterManager := mg.GetMonsterManager()
 		if monster, exists := monsterManager.GetMonster(msg.MonsterDamage.MonsterId); exists {
-			monster.TakeDamage(int(msg.MonsterDamage.Damage))
+			monster.TakeDamage(
+				int(msg.MonsterDamage.Damage),
+				msg.MonsterDamage.HitPointX,
+				msg.MonsterDamage.HitPointY,
+				msg.MonsterDamage.HitPointZ,
+				msg.MonsterDamage.HitNormalX,
+				msg.MonsterDamage.HitNormalY,
+				msg.MonsterDamage.HitNormalZ,
+				msg.MonsterDamage.HitEffectType,
+			)
 		}
 	case *pb.GameMessage_PlayerDamage:
 		playerManager := mg.GetPlayerManager()
