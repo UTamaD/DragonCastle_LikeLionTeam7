@@ -6,72 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5fccdaff-4ccb-49c6-8529-4b0227ee80c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/DragonBossController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/DragonBossController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Claws L.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Claws L.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Claws R.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Claws R.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Wing L.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Wing L.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Wings R.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/UAttack Wings R.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero_02/Materials/Fantasy_Hero_02_03.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Fantasy_Warriors_Pack/Fantasy_Hero_02/Materials/Fantasy_Hero_02_03.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Dragon/DragonBoss.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Dragon/DragonBoss.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/01 Overworld (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/01 Overworld (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/01 Overworld LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/01 Overworld LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/02 Town 2 (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/02 Town 2 (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/02 Town 2 LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/02 Town 2 LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/03 Cave Dungeon (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/03 Cave Dungeon (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/03 Cave Dungeon LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/03 Cave Dungeon LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/04 Battle Theme (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/04 Battle Theme (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/04 Battle Theme LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/04 Battle Theme LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/05 Bustling Town (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/05 Bustling Town (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/05 Bustling Town LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/05 Bustling Town LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/06 Ice Dungeon (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/06 Ice Dungeon (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/06 Ice Dungeon LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/06 Ice Dungeon LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/07 Happy Theme (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/07 Happy Theme (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/07 Happy Theme LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/07 Happy Theme LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/08 Royal City (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/08 Royal City (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/08 Royal City LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/08 Royal City LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/09 Jungle Dungeon (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/09 Jungle Dungeon (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/09 Jungle Dungeon LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/09 Jungle Dungeon LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/10 Sad Theme (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/10 Sad Theme (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/10 Sad Theme LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/10 Sad Theme LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/11 Lava Dungeon (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/11 Lava Dungeon (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/11 Lava Dungeon LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/11 Lava Dungeon LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/12 Boss Theme (clean intro).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/12 Boss Theme (clean intro).wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/12 Boss Theme LOOP.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/12 Boss Theme LOOP.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG Music Starter Pack/README.txt.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_Test_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_Test_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testServer/Manager/monster1.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/Manager/monster1.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testServer/behavior/behaviorNodes.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/behavior/behaviorNodes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Punch Hit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Punch Hit.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,28 +42,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Jeong-in&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Jeong-in",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\ATH\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\ATH\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\ATH\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\m1209\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\m1209\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\m1209\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../../Ahn\LikeLionTeam7.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build\LikeLionTeam7.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="E:\Unity\Lion\Portfolio\Team7\Ahn" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -132,7 +71,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\work\unity\2023.2.20f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2023.2.20f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\m1209\Documents\GitHub\LikeLionTeam7 -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\m1209\Documents\GitHub\LikeLionTeam7" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -140,7 +79,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\work\unity\2023.2.20f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2023.2.20f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\m1209\Documents\GitHub\LikeLionTeam7 -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\m1209\Documents\GitHub\LikeLionTeam7" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -209,6 +148,7 @@
       <workItem from="1732164499259" duration="111000" />
       <workItem from="1732164622615" duration="8903000" />
       <workItem from="1732188602974" duration="1364000" />
+      <workItem from="1732191755261" duration="719000" />
     </task>
     <servers />
   </component>

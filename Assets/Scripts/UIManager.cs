@@ -20,9 +20,6 @@ public class UIManager : MonoBehaviour
     public GameObject GameEndPannel;
     
     private int _playerTemplateNum = 0;
-
-    public static UIManager Instance { get; private set; }
-    
     
     private void Awake()
     {
@@ -39,9 +36,11 @@ public class UIManager : MonoBehaviour
     
     void Start()
     {
+        UICanvas.SetActive(true);
+        PlayerCanvas.SetActive(false);
+        
         CharSelectButtons[0].onClick.AddListener(() => SelectPlayerTemplate(0));
         CharSelectButtons[1].onClick.AddListener(() => SelectPlayerTemplate(1));
-        
         
         StartButton.onClick.AddListener(() =>
         {
@@ -79,7 +78,7 @@ public class UIManager : MonoBehaviour
 
     public void SetHpBar(float hp, float maxHp)
     {
-        PlayerHpBar.fillAmount = (maxHp - hp) / maxHp;
+        PlayerHpBar.fillAmount = hp / maxHp;
     }
     
     public void SetCoolTime(float curTime, float coolTime)
