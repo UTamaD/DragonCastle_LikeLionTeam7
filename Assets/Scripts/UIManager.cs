@@ -11,13 +11,33 @@ public class UIManager : MonoBehaviour
     public TMPro.TMP_InputField IdField;
 
 
+    public GameObject GameEndPannel;
+    
     private int _playerTemplateNum = 0;
+    
+    
+    public static UIManager Instance { get; private set; }
+    
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     
     void Start()
     {
         CharSelectButtons[0].onClick.AddListener(() => SelectPlayerTemplate(0));
         CharSelectButtons[1].onClick.AddListener(() => SelectPlayerTemplate(1));
-        CharSelectButtons[2].onClick.AddListener(() => SelectPlayerTemplate(2));
+        
         
         StartButton.onClick.AddListener(() =>
         {
@@ -27,6 +47,12 @@ public class UIManager : MonoBehaviour
             TcpProtobufClient.Instance.SendLoginMessage(IdField.text, _playerTemplateNum);
             UICanvas.SetActive(false);
         });
+    }
+
+    public void GameEnd()
+    {
+        UICanvas.SetActive(true);
+        GameEndPannel.SetActive(true);
     }
 
     private void SelectPlayerTemplate(int playerTemplateNum)
