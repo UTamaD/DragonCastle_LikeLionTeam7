@@ -17,18 +17,31 @@ public class UIManager : MonoBehaviour
     public Image PlayerHpBar;
     public Image SkillCoolTime;
 
+    public GameObject GameEndPannel;
+    
     private int _playerTemplateNum = 0;
 
+    public static UIManager Instance { get; private set; }
+    
+    
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-
+    
     void Start()
     {
         CharSelectButtons[0].onClick.AddListener(() => SelectPlayerTemplate(0));
         CharSelectButtons[1].onClick.AddListener(() => SelectPlayerTemplate(1));
-        CharSelectButtons[2].onClick.AddListener(() => SelectPlayerTemplate(2));
+        
         
         StartButton.onClick.AddListener(() =>
         {
@@ -39,6 +52,12 @@ public class UIManager : MonoBehaviour
             UICanvas.SetActive(false);
             PlayerCanvas.SetActive(true);
         });
+    }
+
+    public void GameEnd()
+    {
+        UICanvas.SetActive(true);
+        GameEndPannel.SetActive(true);
     }
 
     private void SelectPlayerTemplate(int playerTemplateNum)

@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Game;
+using Random = UnityEngine.Random;
 
 [System.Serializable]
 public class MonsterAttackEffect
@@ -60,8 +62,10 @@ public class MonsterController : MonoBehaviour
 
     #region Configuration Settings
     [Header("Attack Configs")]
-    public MonsterAttackConfig meleeAttackConfig;
-    public MonsterAttackConfig rangedAttackConfig;
+    public MonsterAttackConfig meleeAttackConfig1;  // 기본 근접 공격
+    public MonsterAttackConfig meleeAttackConfig2;  // 강력한 근접 공격
+    public MonsterAttackConfig meleeAttackConfig3;  // 빠른 근접 공격
+    public MonsterAttackConfig rangedAttackConfig; 
 
     [Header("Projectile Settings")]
     public ProjectileConfig projectileConfig;
@@ -88,7 +92,7 @@ public class MonsterController : MonoBehaviour
     private float currentSpeed;
     
     [Header("Stats")]
-    public float maxHealth = 100f;
+    public float maxHealth = 50f;
     private float currentHealth;
 
     [Header("Combat References")]
@@ -97,8 +101,9 @@ public class MonsterController : MonoBehaviour
     public MeteorStrikeController meteorStrikeController;
 
     [Header("MeleeDamageFields")]
-    [SerializeField] private DamageField WingLMeleeDamageField;
-
+    [SerializeField] private DamageField meleeAttackField1;
+    [SerializeField] private DamageField meleeAttackField2;
+    [SerializeField] private DamageField meleeAttackField3;
     [Header("HitFX")]
     public GameObject MeleeHitVfx;
     public string MeleeHitSfx;
@@ -176,6 +181,9 @@ public class MonsterController : MonoBehaviour
             transform.rotation *= animator.deltaRotation;
         }
     }
+
+  
+
     #endregion
 
     #region Initialization
@@ -329,12 +337,19 @@ public class MonsterController : MonoBehaviour
     private void ExecuteAttack(int attackType)
     {
         MonsterAttackConfig currentConfig = null;
+
         switch (attackType)
         {
-            case 0:
-                currentConfig = meleeAttackConfig;
+            case 0: // MeleeAttackType1
+                currentConfig = meleeAttackConfig1;
                 break;
-            case 1:
+            case 1: // MeleeAttackType2
+                currentConfig = meleeAttackConfig2;
+                break;
+            case 2: // MeleeAttackType3
+                currentConfig = meleeAttackConfig3;
+                break;
+            case 3: // RangedAttackType
                 currentConfig = rangedAttackConfig;
                 break;
         }
@@ -455,7 +470,16 @@ public class MonsterController : MonoBehaviour
         {
             animator.SetTrigger("Die");
         }
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 15f);
+        StartCoroutine(StartEnd());
+
+    }
+
+    IEnumerator StartEnd()
+    {
+
+        yield return new WaitForSeconds(5.0f);
+        UIManager.Instance.GameEnd();
     }
     #endregion
 
@@ -528,9 +552,17 @@ public class MonsterController : MonoBehaviour
     public void OnAttackStart(string AttackType)
     {
         isAttacking = true;
-        if (AttackType == "WingMelee")
+        switch (AttackType)
         {
-            WingLMeleeDamageField?.StartDamageField();
+            case "MeleeAttack1":
+                meleeAttackField1?.StartDamageField();
+                break;
+            case "MeleeAttack2":
+                meleeAttackField2?.StartDamageField();
+                break;
+            case "MeleeAttack3":
+                meleeAttackField3?.StartDamageField();
+                break;
         }
     }
 
@@ -539,8 +571,14 @@ public class MonsterController : MonoBehaviour
         isAttacking = false;
         switch (AttackType)
         {
-            case "WingMelee":
-                WingLMeleeDamageField?.DeactivateDamageField();
+            case "MeleeAttack1":
+                meleeAttackField1?.DeactivateDamageField();
+                break;
+            case "MeleeAttack2":
+                meleeAttackField2?.DeactivateDamageField();
+                break;
+            case "MeleeAttack3":
+                meleeAttackField3?.DeactivateDamageField();
                 break;
             default:
                 if (activeChargingEffect != null)
@@ -594,7 +632,7 @@ public class MonsterController : MonoBehaviour
         targetRotation = targetRotationRad * Mathf.Rad2Deg;
         float rotationDiff = Mathf.Abs(Mathf.DeltaAngle(startRotation, targetRotation));
 
-        if (rotationDiff >= 30f) // 45도 이상일 때만 애니메이션 회전
+        if (rotationDiff >= 25f) // 25도 이상일 때만 애니메이션 회전
         {
             yield return HandleLargeRotation(startRotation, rotationDiff);
         }
@@ -638,7 +676,7 @@ public class MonsterController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / duration;
-            t = t * t * (3f - 2f * t); // Smoothstep interpolation
+            t = t * t * t * (t * (6f * t - 15f) + 10f);
             
             float currentAngle = Mathf.LerpAngle(startRotation, targetRotation, t);
             transform.rotation = Quaternion.Euler(0f, currentAngle, 0f);

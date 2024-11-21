@@ -33581,11 +33581,11 @@ MonoBehaviour:
   Target: {fileID: 0}
   CollidesWith:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 264
   EffectsOnCollision:
   - {fileID: 1031498901634068, guid: 0ff49e2dd236f364ab8b6ece0a44d04a, type: 3}
   CollisionOffset: 0.05
-  DestroyTimeDelay: 10
+  DestroyTimeDelay: 5
   CollisionEffectInWorldSpace: 1
   DeactivatedObjectsOnCollision:
   - {fileID: 1034397636293052}
@@ -33596,6 +33596,8 @@ MonoBehaviour:
   - {fileID: 1944946212821128}
   HUE: -1
   CollidedInstances: []
+  damageFieldCollider: {fileID: 8735641590014930875}
+  isCollisionDeactive: 1
 --- !u!114 &6729540624316986276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33615,12 +33617,21 @@ MonoBehaviour:
     duration: 2
     damageAmount: 10
     damageInterval: 0
-    radius: 2
-    hitEffect: {fileID: 0}
+    radius: 1
+    hitEffect: {fileID: 1065640356613950, guid: 1b929b6ead636a643b8ce81d73d8d10f,
+      type: 3}
     hitSound: {fileID: 0}
+    hitEnvironmentEffect: {fileID: 1065640356613950, guid: 1b929b6ead636a643b8ce81d73d8d10f,
+      type: 3}
+    hitEnvironmentSound: {fileID: 0}
+    checkEnvironmentCollision: 1
+    createEffectOnEnvironmentCollision: 1
   targetLayers:
     serializedVersion: 2
     m_Bits: 8
+  environmentLayers:
+    serializedVersion: 2
+    m_Bits: 256
   showDebugGizmos: 1
   gizmoColor: {r: 0, g: 0.43053007, b: 1, a: 0.3}
 --- !u!135 &8735641590014930875

@@ -175,7 +175,7 @@ func CreateMonsterBehaviorTree(monster common.IMonster) behavior.Node {
 	// Define chase sequence with instant rotation for small angle differences
 	chaseWithInstantRotation := behavior.NewSequence(
 		behavior.NewDetectPlayer(monster, 50.0, playerManager, netManager),
-		behavior.NewRotateWithoutAnimation(monster),
+		behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
 		behavior.NewChase(monster, 2.0, playerManager, netManager, actionState),
 	)
 
@@ -194,31 +194,53 @@ func CreateMonsterBehaviorTree(monster common.IMonster) behavior.Node {
 		behavior.NewWait(10*time.Second, false, state),
 	)
 
-	// Combat selector manages different attack patterns
+	// Create melee attack selector with three different attack patterns
+	meleeAttackSelector := behavior.NewMutuallyExclusiveSelector(0.33,
+		[]behavior.Node{
+			// Pattern 1: Standard melee attack - balanced damage and cooldown
+			behavior.NewSequence(
+				behavior.NewDetectPlayer(monster, 4.0, playerManager, netManager),
+				behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
+				behavior.NewMeleeAttack(monster, 4.0, 10, 4*time.Second, playerManager, netManager, state, behavior.MeleeAttackType1),
+				behavior.NewWait(5*time.Second, false, state),
+			),
+			// Pattern 2: Heavy melee attack - high damage, long cooldown
+			behavior.NewSequence(
+				behavior.NewDetectPlayer(monster, 4.0, playerManager, netManager),
+				behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
+				behavior.NewMeleeAttack(monster, 4.0, 15, 6*time.Second, playerManager, netManager, state, behavior.MeleeAttackType2),
+				behavior.NewWait(5*time.Second, false, state),
+			),
+			// Pattern 3: Quick melee attack - low damage, short cooldown
+			behavior.NewSequence(
+				behavior.NewDetectPlayer(monster, 4.0, playerManager, netManager),
+				behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
+				behavior.NewMeleeAttack(monster, 4.0, 7, 3*time.Second, playerManager, netManager, state, behavior.MeleeAttackType3),
+				behavior.NewWait(5*time.Second, false, state),
+			),
+		},
+	)
+
+	// Combat selector manages different attack patterns including melee and ranged attacks
 	combatSelector := behavior.NewSelector(
-		// Melee attack sequence - close range
-		behavior.NewSequence(
-			behavior.NewDetectPlayer(monster, 4.0, playerManager, netManager),
-			behavior.NewRotateWithoutAnimation(monster), // Always use instant rotation for attacks
-			behavior.NewMeleeAttack(monster, 4.0, 10, 4*time.Second, playerManager, netManager, state),
-			behavior.NewWait(1*time.Second, false, state),
-		),
+		// Melee attack patterns with mutual exclusion
+		meleeAttackSelector,
 		// Ranged/Meteor attack selector with mutual exclusion
 		behavior.NewMutuallyExclusiveSelector(0.33,
 			[]behavior.Node{
 				// Ranged attack sequence - medium range
 				behavior.NewSequence(
 					behavior.NewDetectPlayer(monster, 30.0, playerManager, netManager),
-					behavior.NewRotateWithoutAnimation(monster),
+					behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
 					behavior.NewRangedAttack(monster, 30.0, 8, 10*time.Second, playerManager, netManager, state),
-					behavior.NewWait(1*time.Second, false, state),
+					behavior.NewWait(5*time.Second, false, state),
 				),
 				// Meteor attack sequence - long range
 				behavior.NewSequence(
 					behavior.NewDetectPlayer(monster, 40.0, playerManager, netManager),
-					behavior.NewRotateWithoutAnimation(monster),
+					behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
 					behavior.NewMeteorAttack(monster, 40.0, 15, 10*time.Second, playerManager, netManager, state),
-					behavior.NewWait(2*time.Second, false, state),
+					behavior.NewWait(5*time.Second, false, state),
 				),
 			},
 		),

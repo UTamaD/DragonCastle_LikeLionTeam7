@@ -21,8 +21,10 @@ type AttackState struct {
 }
 
 const (
-	NoAttack = iota
-	MeleeAttackType
+	NoAttack         = iota
+	MeleeAttackType1 // 기존 근접 공격
+	MeleeAttackType2 // 새로운 근접 공격 1
+	MeleeAttackType3 // 새로운 근접 공격 2
 	RangedAttackType
 	MeteorAttackType
 )
@@ -220,6 +222,7 @@ func NewAttack(monster common.IMonster, range_ float32, damage int, cooldown tim
 		actionState: NewActionState(),
 	}
 }
+
 func (a *Attack) Execute() Status {
 	if !a.actionState.SetAction(fmt.Sprintf("attack_%d", a.attackType)) {
 		return Failure
@@ -303,9 +306,9 @@ type MeleeAttackNode struct {
 }
 
 func NewMeleeAttack(monster common.IMonster, range_ float32, damage int,
-	cooldown time.Duration, p common.IPlayerManager, n common.INetworkManager, state *AttackState) *MeleeAttackNode {
+	cooldown time.Duration, p common.IPlayerManager, n common.INetworkManager, state *AttackState, attackType int32) *MeleeAttackNode {
 	return &MeleeAttackNode{
-		Attack: NewAttack(monster, range_, damage, cooldown, p, n, int32(MeleeAttack), state),
+		Attack: NewAttack(monster, range_, damage, cooldown, p, n, attackType, state),
 	}
 }
 
@@ -606,7 +609,7 @@ func (r *RotateToTarget) Execute() Status {
 		return Success
 	}
 
-	baseDuration := 1.0
+	baseDuration := 3.0
 	additionalTime := math.Floor(angleDiffDegrees / 90.0)
 	totalDuration := baseDuration + additionalTime
 
@@ -711,11 +714,15 @@ func (p *PatternTracker) Execute() Status {
 
 type RotateWithoutAnimation struct {
 	monster common.IMonster
+	p       common.IPlayerManager
+	n       common.INetworkManager
 }
 
-func NewRotateWithoutAnimation(monster common.IMonster) *RotateWithoutAnimation {
+func NewRotateWithoutAnimation(monster common.IMonster, p common.IPlayerManager, n common.INetworkManager) *RotateWithoutAnimation {
 	return &RotateWithoutAnimation{
 		monster: monster,
+		p:       p,
+		n:       n,
 	}
 }
 
@@ -728,6 +735,19 @@ func (r *RotateWithoutAnimation) Execute() Status {
 	pos := r.monster.GetPosition()
 	targetAngle := float32(math.Atan2(float64(target.Z-pos.Z), float64(target.X-pos.X)))
 	r.monster.SetRotation(targetAngle)
+
+	// Send rotation message to clients
+	// Duration 0 indicates instant rotation without animation
+	rotateMsg := &pb.GameMessage{
+		Message: &pb.GameMessage_MonsterRotate{
+			MonsterRotate: &pb.MonsterRotate{
+				MonsterId: int32(r.monster.GetID()),
+				Rotation:  targetAngle,
+				Duration:  2,
+			},
+		},
+	}
+	r.p.Broadcast(rotateMsg)
 
 	return Success
 }
@@ -809,7 +829,7 @@ type RotationCheckBeforeChase struct {
 func NewRotationCheckBeforeChase(monster common.IMonster) *RotationCheckBeforeChase {
 	return &RotationCheckBeforeChase{
 		monster:   monster,
-		viewAngle: 30.0, // 45도 임계값
+		viewAngle: 25.0, // 임계값
 		threshold: 0.1,  // 정밀도 임계값
 	}
 }

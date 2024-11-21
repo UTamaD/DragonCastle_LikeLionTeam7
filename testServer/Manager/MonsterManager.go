@@ -53,7 +53,7 @@ func (mm *MonsterManager) AddMonster(id int32) *Monster {
 	spawnX := float32(10.0)
 	spawnZ := float32(10.0)
 
-	monster := NewMonster(int(id), spawnX, spawnZ, 100, path)
+	monster := NewMonster(int(id), spawnX, spawnZ, 50, path)
 	mm.monsters[id] = monster
 	mm.nextID++
 
