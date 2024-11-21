@@ -688,7 +688,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 51fc5b2a1e9dca74fa66fcea4419b189, type: 3}
   m_Resource: {fileID: 8300000, guid: 51fc5b2a1e9dca74fa66fcea4419b189, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1538,6 +1538,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7480322218272236784, guid: fa74bc4ab30df4b4cbf9759ecec47d17,
+        type: 3}
+      propertyPath: virtualCamera
+      value: 
+      objectReference: {fileID: 1531234888}
     - target: {fileID: 7816477346425120225, guid: fa74bc4ab30df4b4cbf9759ecec47d17,
         type: 3}
       propertyPath: m_Antialiasing

@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5fccdaff-4ccb-49c6-8529-4b0227ee80c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2/Global Volume Profile.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_Test_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_Test_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Front spikes attack.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Front spikes attack.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/Map track markers VFX/Demo scene/Standard material.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/RPG VFX Bundle/URP and HDRP patches/HDRP patch.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Hovl Studio/RPG VFX Bundle/URP and HDRP patches/URP patch.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/Punch Hit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VFX/Punch Hit.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraShakeCinemachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraShakeCinemachine.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
