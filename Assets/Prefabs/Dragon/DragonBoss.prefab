@@ -1428,7 +1428,7 @@ MonoBehaviour:
       type: 3}
     spawnPoint: {fileID: 6022714755959505748}
     speed: 10
-    maxDistance: 100
+    maxDistance: 50
     fireAnimationTrigger: AttackFireBall
     chargingEffect: {fileID: 141900, guid: fbf1217560c08c44e8870f710b3dddb7, type: 3}
   minRotationSpeed: 0.5

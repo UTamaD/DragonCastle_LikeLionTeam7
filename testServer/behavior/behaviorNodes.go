@@ -606,7 +606,7 @@ func (r *RotateToTarget) Execute() Status {
 		return Success
 	}
 
-	baseDuration := 1.0
+	baseDuration := 3.0
 	additionalTime := math.Floor(angleDiffDegrees / 90.0)
 	totalDuration := baseDuration + additionalTime
 
@@ -711,11 +711,15 @@ func (p *PatternTracker) Execute() Status {
 
 type RotateWithoutAnimation struct {
 	monster common.IMonster
+	p       common.IPlayerManager
+	n       common.INetworkManager
 }
 
-func NewRotateWithoutAnimation(monster common.IMonster) *RotateWithoutAnimation {
+func NewRotateWithoutAnimation(monster common.IMonster, p common.IPlayerManager, n common.INetworkManager) *RotateWithoutAnimation {
 	return &RotateWithoutAnimation{
 		monster: monster,
+		p:       p,
+		n:       n,
 	}
 }
 
@@ -728,6 +732,19 @@ func (r *RotateWithoutAnimation) Execute() Status {
 	pos := r.monster.GetPosition()
 	targetAngle := float32(math.Atan2(float64(target.Z-pos.Z), float64(target.X-pos.X)))
 	r.monster.SetRotation(targetAngle)
+
+	// Send rotation message to clients
+	// Duration 0 indicates instant rotation without animation
+	rotateMsg := &pb.GameMessage{
+		Message: &pb.GameMessage_MonsterRotate{
+			MonsterRotate: &pb.MonsterRotate{
+				MonsterId: int32(r.monster.GetID()),
+				Rotation:  targetAngle,
+				Duration:  2,
+			},
+		},
+	}
+	r.p.Broadcast(rotateMsg)
 
 	return Success
 }
@@ -809,7 +826,7 @@ type RotationCheckBeforeChase struct {
 func NewRotationCheckBeforeChase(monster common.IMonster) *RotationCheckBeforeChase {
 	return &RotationCheckBeforeChase{
 		monster:   monster,
-		viewAngle: 30.0, // 45도 임계값
+		viewAngle: 25.0, // 임계값
 		threshold: 0.1,  // 정밀도 임계값
 	}
 }

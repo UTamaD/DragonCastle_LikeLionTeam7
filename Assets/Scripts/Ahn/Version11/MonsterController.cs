@@ -88,7 +88,7 @@ public class MonsterController : MonoBehaviour
     private float currentSpeed;
     
     [Header("Stats")]
-    public float maxHealth = 100f;
+    public float maxHealth = 50f;
     private float currentHealth;
 
     [Header("Combat References")]
@@ -455,7 +455,7 @@ public class MonsterController : MonoBehaviour
         {
             animator.SetTrigger("Die");
         }
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 10f);
     }
     #endregion
 
@@ -594,7 +594,7 @@ public class MonsterController : MonoBehaviour
         targetRotation = targetRotationRad * Mathf.Rad2Deg;
         float rotationDiff = Mathf.Abs(Mathf.DeltaAngle(startRotation, targetRotation));
 
-        if (rotationDiff >= 30f) // 45도 이상일 때만 애니메이션 회전
+        if (rotationDiff >= 25f) // 25도 이상일 때만 애니메이션 회전
         {
             yield return HandleLargeRotation(startRotation, rotationDiff);
         }
@@ -638,7 +638,7 @@ public class MonsterController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / duration;
-            t = t * t * (3f - 2f * t); // Smoothstep interpolation
+            t = t * t * t * (t * (6f * t - 15f) + 10f);
             
             float currentAngle = Mathf.LerpAngle(startRotation, targetRotation, t);
             transform.rotation = Quaternion.Euler(0f, currentAngle, 0f);

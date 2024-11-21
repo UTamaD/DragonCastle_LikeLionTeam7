@@ -175,7 +175,7 @@ func CreateMonsterBehaviorTree(monster common.IMonster) behavior.Node {
 	// Define chase sequence with instant rotation for small angle differences
 	chaseWithInstantRotation := behavior.NewSequence(
 		behavior.NewDetectPlayer(monster, 50.0, playerManager, netManager),
-		behavior.NewRotateWithoutAnimation(monster),
+		behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
 		behavior.NewChase(monster, 2.0, playerManager, netManager, actionState),
 	)
 
@@ -199,9 +199,9 @@ func CreateMonsterBehaviorTree(monster common.IMonster) behavior.Node {
 		// Melee attack sequence - close range
 		behavior.NewSequence(
 			behavior.NewDetectPlayer(monster, 4.0, playerManager, netManager),
-			behavior.NewRotateWithoutAnimation(monster), // Always use instant rotation for attacks
+			behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
 			behavior.NewMeleeAttack(monster, 4.0, 10, 4*time.Second, playerManager, netManager, state),
-			behavior.NewWait(1*time.Second, false, state),
+			behavior.NewWait(5*time.Second, false, state),
 		),
 		// Ranged/Meteor attack selector with mutual exclusion
 		behavior.NewMutuallyExclusiveSelector(0.33,
@@ -209,16 +209,16 @@ func CreateMonsterBehaviorTree(monster common.IMonster) behavior.Node {
 				// Ranged attack sequence - medium range
 				behavior.NewSequence(
 					behavior.NewDetectPlayer(monster, 30.0, playerManager, netManager),
-					behavior.NewRotateWithoutAnimation(monster),
+					behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
 					behavior.NewRangedAttack(monster, 30.0, 8, 10*time.Second, playerManager, netManager, state),
-					behavior.NewWait(1*time.Second, false, state),
+					behavior.NewWait(5*time.Second, false, state),
 				),
 				// Meteor attack sequence - long range
 				behavior.NewSequence(
 					behavior.NewDetectPlayer(monster, 40.0, playerManager, netManager),
-					behavior.NewRotateWithoutAnimation(monster),
+					behavior.NewRotateWithoutAnimation(monster, playerManager, netManager),
 					behavior.NewMeteorAttack(monster, 40.0, 15, 10*time.Second, playerManager, netManager, state),
-					behavior.NewWait(2*time.Second, false, state),
+					behavior.NewWait(5*time.Second, false, state),
 				),
 			},
 		),

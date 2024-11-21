@@ -47,6 +47,9 @@ public class RFX1_TransformMotion : MonoBehaviour
     public event EventHandler<RFX1_CollisionInfo> CollisionEnter;
     Vector3 randomTimeOffset;
 
+    public Collider damageFieldCollider;
+    public bool isCollisionDeactive = false;
+
     void Start()
     {
         t = transform;
@@ -217,9 +220,27 @@ public class RFX1_TransformMotion : MonoBehaviour
 
     void OnCollisionDeactivateBehaviour(bool active)
     {
+
+    
         foreach (var effect in DeactivatedObjectsOnCollision)
         {
            if(effect!=null) effect.SetActive(active);
+        }
+
+
+        StartCoroutine(damageFieldColliderDisable(active));
+
+
+    }
+
+
+    IEnumerator damageFieldColliderDisable(bool active)
+    {
+        yield return new WaitForSeconds(0.5f);
+        
+        if (isCollisionDeactive && damageFieldCollider!= null && active == false)
+        {
+            damageFieldCollider.enabled = false;
         }
     }
 
