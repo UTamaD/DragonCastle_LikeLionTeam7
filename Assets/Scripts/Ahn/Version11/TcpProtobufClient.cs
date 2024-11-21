@@ -87,6 +87,8 @@ public class TcpProtobufClient : MonoBehaviour
         }
     }
 
+    #region temp
+
     void StartReceiving()
     {
         try
@@ -134,23 +136,6 @@ public class TcpProtobufClient : MonoBehaviour
             isRunning = false;
         }
     }
-
-    public void SendMonsterDamage(int monsterId, float damage, float currentHp)
-    {
-        var damageMessage = new MonsterDamage
-        {
-            MonsterId = monsterId,
-            Damage = damage,
-            CurrentHp = (int)currentHp
-        };
-
-        var message = new GameMessage
-        {
-            MonsterDamage = damageMessage
-        };
-
-        SendMessage(message);
-    }
     
     void OnMessageReceived(IAsyncResult ar)
     {
@@ -170,95 +155,8 @@ public class TcpProtobufClient : MonoBehaviour
             Debug.LogError($"Error receiving message: {e.Message}");
         }
     }
-    
-    public void SendPlayerPosition(string playerId, float x, float y, float z, float vx, float vy, float vz, float speed, float rotationY)
-    {
-        var position = new PlayerPosition
-        {
-            PlayerId = playerId,
-            X = x,
-            Y = y,
-            Z = z,
-            Fx = vx,
-            Fy = vy,
-            Fz = vz,
-            Speed = speed,
-            RotationY = rotationY
-        };
-        var message = new GameMessage
-        {
-            PlayerPosition = position
-        };
-        SendMessage(message);
-    }
-    
-    public void SendPlayerLogout(string playerId)
-    {
-        var msg = new LogoutMessage()
-        {
-            PlayerId = playerId,
-        };
-        var message = new GameMessage
-        {
-            Logout = msg
-        };
-        SendMessage(message);
-    }   
 
-    public void SendChatMessage(string sender, string content)
-    {
-        var chat = new ChatMessage
-        {
-            Sender = sender,
-            Content = content
-        };
-        var message = new GameMessage
-        {
-            Chat = chat
-        };
-        SendMessage(message);
-    }
-    
-    public void SendLoginMessage(string playerId)
-    {
-        var login = new LoginMessage()
-        {
-            PlayerId = playerId
-        };
-        var message = new GameMessage
-        {
-            Login = login
-        };
-        SendMessage(message);
-    }
-
-    public void SendSpawnMonstesZero()
-    {
-        SendSpawnMonster(0, 0, 1);
-    }
-    
-    public void SendSpawnMonster(float x, float z, int monsterId)
-    {
-        var spawnMonster = new SpawnMonster
-        {
-            X = x,
-            Z = z,
-            MonsterId = monsterId
-        };
-    
-        var message = new GameMessage
-        {
-            SpawnMonster = spawnMonster
-        };
-    
-        SendMessage(message);
-    }
-
-    public void SendActionMessage(GameMessage message)
-    {
-        //만약 액션 반환값에 필요한 다른 데이터가 더 있다면 여기서 추가
-        SendMessage(message);
-    }
+    #endregion
     
     private void SendMessage(GameMessage message)
     {
@@ -291,6 +189,166 @@ public class TcpProtobufClient : MonoBehaviour
             // 재연결 시도
             ConnectToServer();
         }
+    }
+    
+    public void SendLoginMessage(string playerId, int playerTemplate)
+    {
+        var login = new LoginMessage()
+        {
+            PlayerId = playerId,
+            PlayerTemplate = playerTemplate
+        };
+        var message = new GameMessage
+        {
+            Login = login
+        };
+        SendMessage(message);
+    }
+    
+    public void SendPlayerLogout(string playerId)
+    {
+        var msg = new LogoutMessage()
+        {
+            PlayerId = playerId,
+        };
+        var message = new GameMessage
+        {
+            Logout = msg
+        };
+        SendMessage(message);
+    }   
+    
+    public void SendPlayerPosition(string playerId, float x, float y, float z, float vx, float vy, float vz, float speed, float rotationY)
+    {
+        var position = new PlayerPosition
+        {
+            PlayerId = playerId,
+            X = x,
+            Y = y,
+            Z = z,
+            Fx = vx,
+            Fy = vy,
+            Fz = vz,
+            Speed = speed,
+            RotationY = rotationY
+        };
+        var message = new GameMessage
+        {
+            PlayerPosition = position
+        };
+        SendMessage(message);
+    }
+
+    public void SendApplyRootMotion(string playerId, bool rootMotion)
+    {
+        var applyRootMotion = new ApplyRootMotion()
+        {
+            PlayerId = playerId,
+            RootMosion = rootMotion,
+        };
+        var message = new GameMessage
+        {
+            ApplyRootMotion = applyRootMotion
+        };
+        SendMessage(message);
+    }
+    
+    public void SendAnimatorCondision(string playerId, string animId, int condition)
+    {
+        var setAnimCondition = new AnimatorSetInteger
+        {
+            PlayerId = playerId,
+            AnimId = animId,
+            Condition = condition
+        };
+        var message = new GameMessage
+        {
+            AnimatorSetInteger = setAnimCondition
+        };
+        SendMessage(message);
+    }
+    
+    public void SendAnimatorCondision(string playerId, string animId, float condition)
+    {
+        var setAnimCondition = new AnimatorSetFloat
+        {
+            PlayerId = playerId,
+            AnimId = animId,
+            Condition = condition
+        };
+        var message = new GameMessage
+        {
+            AnimatorSetFloat = setAnimCondition
+        };
+        SendMessage(message);
+    }
+    
+    public void SendAnimatorCondision(string playerId, string animId, bool condition)
+    {
+        var setAnimCondition = new AnimatorSetBool
+        {
+            PlayerId = playerId,
+            AnimId = animId,
+            Condition = condition
+        };
+        var message = new GameMessage
+        {
+            AnimatorSetBool = setAnimCondition
+        };
+        SendMessage(message);
+    }
+    
+    public void SendAnimatorCondision(string playerId, string animId)
+    {
+        var setAnimCondition = new AnimatorSetTrigger
+        {
+            PlayerId = playerId,
+            AnimId = animId,
+        };
+        var message = new GameMessage
+        {
+            AnimatorSetTrigger = setAnimCondition
+        };
+        SendMessage(message);
+    }
+    
+    public void SendSpawnMonstesZero()
+    {
+        SendSpawnMonster(0, 0, 1);
+    }
+    
+    public void SendSpawnMonster(float x, float z, int monsterId)
+    {
+        var spawnMonster = new SpawnMonster
+        {
+            X = x,
+            Z = z,
+            MonsterId = monsterId
+        };
+    
+        var message = new GameMessage
+        {
+            SpawnMonster = spawnMonster
+        };
+    
+        SendMessage(message);
+    }
+    
+    public void SendMonsterDamage(int monsterId, float damage, float currentHp)
+    {
+        var damageMessage = new MonsterDamage
+        {
+            MonsterId = monsterId,
+            Damage = damage,
+            CurrentHp = (int)currentHp
+        };
+
+        var message = new GameMessage
+        {
+            MonsterDamage = damageMessage
+        };
+
+        SendMessage(message);
     }
     
     public void SendPlayerDamage(string playerId, float damage, int attackType, float hitX, float hitY, float hitZ)
@@ -337,7 +395,6 @@ public class TcpProtobufClient : MonoBehaviour
     
         SendMessage(message);
     }
-    
     
     void OnDisable()
     {

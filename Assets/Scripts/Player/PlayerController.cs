@@ -232,12 +232,6 @@ public class PlayerController : MonoBehaviour
         
         StateMachine.ChangeState(StateName.IFrame);
     }
-    
-    private void EndIFrame(AnimationEvent animationEvent)
-    {
-        StateMachine.ChangeState(StateName.Move);
-    }
-
     #endregion
 
     #region Damaged
@@ -263,12 +257,13 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
     
-    private IEnumerator MoveForDistanceAndTime(float distance, float duration)
+    public IEnumerator MoveForDistanceAndTime(float distance, float duration)
     {
         Vector3 direction = transform.forward;  // 이동 방향
         
         // 일정한 속도로 이동하기 위한 거리
         float speed = distance / duration;
+        Player.SendPositionToServer(direction.normalized, transform.eulerAngles.y, speed);
 
         float elapsedTime = 0f;
         while (elapsedTime < duration)
@@ -281,6 +276,7 @@ public class PlayerController : MonoBehaviour
             elapsedTime += Time.deltaTime; // 경과 시간 증가
             yield return null; // 다음 프레임까지 대기
         }
+        Player.SendPositionToServer(Vector3.zero, 0f, 0f);
     }
 
     #region Debug
@@ -297,66 +293,6 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawSphere(
             new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
             GroundedRadius);
-    }
-
-    #endregion
-
-    #region Animation Event
-
-    private void OnFootstep(AnimationEvent animationEvent)
-    {
-        if (animationEvent.animatorClipInfo.weight > 0.5f)
-        {
-            if (FootstepAudioClips.Length > 0)
-            {
-                var index = Random.Range(0, FootstepAudioClips.Length);
-                AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(Controller.center), FootstepAudioVolume);
-            }
-        }
-    }
-
-    private void OnLand(AnimationEvent animationEvent)
-    {
-        if (animationEvent.animatorClipInfo.weight > 0.5f)
-        {
-            AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(Controller.center), FootstepAudioVolume);
-        }
-    }
-
-    private void OnDash(AnimationEvent animationEvent)
-    {
-        object info = animationEvent.objectReferenceParameter;
-        DashInfo dashInfo = info.ConvertTo<DashInfo>();
-        if (!dashInfo)
-        {
-            Debug.LogWarning("fail to object type cast to " + dashInfo.name);
-            return;
-        }
-
-        StartCoroutine(MoveForDistanceAndTime(dashInfo.dashDis, dashInfo.dashTime));
-    }
-    
-    private void OnEndMelee()
-    {
-        StateMachine.ChangeState(StateName.Move);
-    }
-
-    private void OnEndDamaged()
-    {
-        StateMachine.ChangeState(StateName.Move);
-    }
-
-    private void OnCreateDamageField(AnimationEvent animationEvent)
-    {
-        object info = animationEvent.objectReferenceParameter;
-        SkillInfo skillInfo = info.ConvertTo<SkillInfo>();
-        if (!skillInfo)
-        {
-            Debug.LogWarning("fail to object type cast to " + skillInfo.name);
-            return;
-        }
-        
-        CombatSystem.ActiveDamageField(skillInfo.skillName, skillInfo.dist);
     }
 
     #endregion

@@ -50,16 +50,16 @@ public class GameManager : MonoBehaviour
         switch (msg.MessageCase)
         {
             case GameMessage.MessageOneofCase.PlayerPosition:
-                PlayerSpawner.Instance.OnOtherPlayerPositionUpdate(msg.PlayerPosition);
+                PlayerSpawner.Instance.OtherPlayerPositionUpdate(msg.PlayerPosition);
                 break;
             case GameMessage.MessageOneofCase.SpawnMyPlayer:
                 var mySpawnPos = new Vector3(msg.SpawnMyPlayer.X, msg.SpawnMyPlayer.Y, msg.SpawnMyPlayer.Z);
-                PlayerSpawner.Instance.SpawnMyPlayer(mySpawnPos);
+                PlayerSpawner.Instance.SpawnMyPlayer(msg.SpawnMyPlayer.PlayerTemplate, mySpawnPos);
                 break;
             case GameMessage.MessageOneofCase.SpawnOtherPlayer:
                 var otherSpawnPos = new Vector3(msg.SpawnOtherPlayer.X, msg.SpawnOtherPlayer.Y, msg.SpawnOtherPlayer.Z);
                 var otherSpawnRot = msg.SpawnOtherPlayer.RotationY;
-                PlayerSpawner.Instance.SpawnOtherPlayer(msg.SpawnOtherPlayer.PlayerId, otherSpawnPos, otherSpawnRot);
+                PlayerSpawner.Instance.SpawnOtherPlayer(msg.SpawnOtherPlayer.PlayerId, msg.SpawnOtherPlayer.PlayerTemplate, otherSpawnPos, otherSpawnRot);
                 break;
             case GameMessage.MessageOneofCase.Logout:
                 PlayerSpawner.Instance.DestroyOtherPlayer(msg.Logout.PlayerId);
@@ -81,9 +81,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameMessage.MessageOneofCase.MeteorStrike:
                 if (monsters.TryGetValue(msg.MeteorStrike.MonsterId, out MonsterController monster))
-                {
                     monster.HandleMeteorStrike(msg.MeteorStrike);
-                }
                 break;
             case GameMessage.MessageOneofCase.MonsterDamage:
                 HandleMonsterDamage(msg.MonsterDamage);
@@ -94,6 +92,22 @@ public class GameManager : MonoBehaviour
             case GameMessage.MessageOneofCase.MonsterRotate:
                 HandleMonsterRotate(msg.MonsterRotate);
                 break; 
+            case GameMessage.MessageOneofCase.AnimatorSetInteger:
+                PlayerSpawner.Instance.OtherPlayerAnimatorUpdate(msg.AnimatorSetInteger.PlayerId, msg.AnimatorSetInteger.AnimId, msg.AnimatorSetInteger.Condition);
+                break;
+            case GameMessage.MessageOneofCase.AnimatorSetFloat:
+                PlayerSpawner.Instance.OtherPlayerAnimatorUpdate(msg.AnimatorSetFloat.PlayerId, msg.AnimatorSetFloat.AnimId, msg.AnimatorSetFloat.Condition);
+                break;
+            case GameMessage.MessageOneofCase.AnimatorSetBool:
+                PlayerSpawner.Instance.OtherPlayerAnimatorUpdate(msg.AnimatorSetBool.PlayerId, msg.AnimatorSetBool.AnimId, msg.AnimatorSetBool.Condition);
+                break;        
+            case GameMessage.MessageOneofCase.AnimatorSetTrigger:
+                PlayerSpawner.Instance.OtherPlayerAnimatorUpdate(msg.AnimatorSetTrigger.PlayerId, msg.AnimatorSetTrigger.AnimId);
+                break;   
+            case GameMessage.MessageOneofCase.ApplyRootMotion:
+                PlayerSpawner.Instance.OtherPlayerApplyRootMotion(msg.ApplyRootMotion.PlayerId,
+                    msg.ApplyRootMotion.RootMosion);
+                break;
             case GameMessage.MessageOneofCase.MonsterHitEffect:
                 HandleMonsterHitEffect(msg.MonsterHitEffect);
                 break;

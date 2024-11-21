@@ -15,8 +15,8 @@ public class PlayerSpawner : MonoBehaviour
     private Dictionary<string, OtherPlayer> _otherPlayers = new();
 
     public Transform SpawnPosition;
-    public GameObject MyPlayerTemplate;
-    public GameObject OtherPlayerTemplate;
+    public GameObject[] MyPlayerTemplate;
+    public GameObject[] OtherPlayerTemplate;
 
     public CinemachineVirtualCamera cam;
     
@@ -38,12 +38,12 @@ public class PlayerSpawner : MonoBehaviour
         
     }
 
-    public void SpawnMyPlayer(Vector3 spawnPos)
+    public void SpawnMyPlayer(int template, Vector3 spawnPos)
     {
         if (spawnPos == Vector3.zero)
             spawnPos = SpawnPosition.position;
         
-        GameObject SpawnPlayer = Instantiate(MyPlayerTemplate.gameObject, spawnPos, Quaternion.identity);
+        GameObject SpawnPlayer = Instantiate(MyPlayerTemplate[template].gameObject, spawnPos, Quaternion.identity);
         myPlayer = SpawnPlayer.GetComponent<Player>();
         myPlayerCtrl = SpawnPlayer.GetComponent<PlayerController>();
         cam.Follow = SpawnPlayer.transform.GetChild(0);
@@ -51,9 +51,9 @@ public class PlayerSpawner : MonoBehaviour
         myPlayer.Initialize(SuperManager.Instance.playerId);
     }
 
-    public void SpawnOtherPlayer(string playerId, Vector3 spawnPos, float spawnRot)
+    public void SpawnOtherPlayer(string playerId, int template, Vector3 spawnPos, float spawnRot)
     {
-        GameObject spawnPlayer = Instantiate(OtherPlayerTemplate.gameObject, spawnPos, Quaternion.identity);
+        GameObject spawnPlayer = Instantiate(OtherPlayerTemplate[template].gameObject, spawnPos, Quaternion.identity);
         OtherPlayer otherPlayer = spawnPlayer.GetComponent<OtherPlayer>();
         otherPlayer.transform.position = spawnPos;
         otherPlayer.transform.rotation = Quaternion.Euler(0.0f, spawnRot, 0.0f);
@@ -70,12 +70,52 @@ public class PlayerSpawner : MonoBehaviour
         }
     }
     
-    public void OnOtherPlayerPositionUpdate(PlayerPosition playerPosition)
+    public void OtherPlayerPositionUpdate(PlayerPosition playerPosition)
     {
         if (_otherPlayers.TryGetValue(
                 playerPosition.PlayerId, out OtherPlayer otherPlayer))
         {
             otherPlayer.UpdatePlayerPosition(playerPosition);
+        }
+    }
+
+    public void OtherPlayerApplyRootMotion(string playerId, bool rootMotion)
+    {
+        if(_otherPlayers.TryGetValue(playerId, out OtherPlayer otherPlayer))
+        {
+            otherPlayer.SetAnimatorApplyRootMotion(rootMotion);
+        }
+    }
+
+    public void OtherPlayerAnimatorUpdate(string playerId, string animId, int condition)
+    {
+        if(_otherPlayers.TryGetValue(playerId, out OtherPlayer otherPlayer))
+        {
+            otherPlayer.SetAnimatorCondition(animId, condition);
+        }
+    }
+    
+    public void OtherPlayerAnimatorUpdate(string playerId, string animId, float condition)
+    {
+        if(_otherPlayers.TryGetValue(playerId, out OtherPlayer otherPlayer))
+        {
+            otherPlayer.SetAnimatorCondition(animId, condition);
+        }
+    }
+    
+    public void OtherPlayerAnimatorUpdate(string playerId, string animId, bool condition)
+    {
+        if(_otherPlayers.TryGetValue(playerId, out OtherPlayer otherPlayer))
+        {
+            otherPlayer.SetAnimatorCondition(animId, condition);
+        }
+    }
+    
+    public void OtherPlayerAnimatorUpdate(string playerId, string animId)
+    {
+        if(_otherPlayers.TryGetValue(playerId, out OtherPlayer otherPlayer))
+        {
+            otherPlayer.SetAnimatorCondition(animId);
         }
     }
     

@@ -14,13 +14,13 @@ public class CombatSystem : MonoBehaviour
 {
     public PlayerController Owner { get; private set; }
 
+    public float Atk;
+    public float Def;
+    
     private List<SkillBase> _skills;
-
-    private float _atk;
-    private float _def;
     
     //debug 변수
-    public bool drawGizmo = false;
+    private bool drawGizmo = false;
     
     public void Start()
     {
@@ -49,12 +49,11 @@ public class CombatSystem : MonoBehaviour
         {
             damager = Owner.gameObject,
             type = skill.Type,
-            amount = CalculateDamage(_atk * skill.AttackMultiplier, def),
+            amount = CalculateDamage(Atk * skill.AttackMultiplier, def),
             hitPoint = hit.point,
             hitNormal = hit.normal
         };
-
-        float dmg = CalculateDamage(_atk * skill.AttackMultiplier, def);
+        
         monster.TakeDamage(msg);
     }
 
@@ -91,6 +90,6 @@ public class CombatSystem : MonoBehaviour
     // 최종 방어력 계산
     public float CalculateDefense()
     {
-        return _def;
+        return Def;
     }
 }

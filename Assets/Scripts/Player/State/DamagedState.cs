@@ -24,6 +24,7 @@ public class DamagedState : BaseState
 
     public override void OnEnterState()
     {
+        Owner.Animator.applyRootMotion = true;
         Owner.Animator.SetBool(_animIDKnockBack, true);
         Owner.Animator.SetTrigger(_animIDDamaged);
         ApplyKnockback(Owner.transform.forward);
@@ -65,6 +66,7 @@ public class DamagedState : BaseState
 
     public override void OnExitState()
     {
+        Owner.Animator.applyRootMotion = false;
         Owner.Animator.SetBool(_animIDKnockBack, false);
     }
 }

@@ -16,8 +16,7 @@ public class OtherPlayer : MonoBehaviour
     private float Speed;
     
     private float interpTime = 0.2f;
-    private float checkDistance = 10f;
-    private float checkDistanceTime = 10.0f;
+    private float checkDistance = 1f;
     
     private float rotationY;
     private float _rotationVelocity;
@@ -30,12 +29,14 @@ public class OtherPlayer : MonoBehaviour
         PlayerId = playerId; 
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         LivingEntity = GetComponent<LivingEntity>();
         Animator = GetComponent<Animator>();
+    }
 
+    void Start()
+    {
         LivingEntity.OnDamagedEvent += Damaged;
     }
     
@@ -63,25 +64,51 @@ public class OtherPlayer : MonoBehaviour
         rotationY = p.RotationY;
 
         float distance = (transform.position - Destination).magnitude;
-        if (interpDestinationCoroutine == null &&  distance > checkDistanceTime )
+        if (interpDestinationCoroutine == null &&  distance > checkDistance )
         {
             interpDestinationCoroutine = StartCoroutine(InterpDestination());
         }
     }
-    
-    void UpdateRotation()
+
+    public void SetAnimatorApplyRootMotion(bool rootMotion)
     {
-       // float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationY, 
-       //     ref _rotationVelocity, PlayerController.RotationSmoothTime);
-       
-       if(rotationY != 0)
-        transform.rotation = Quaternion.Euler(0, rotationY, 0);
+        Animator.applyRootMotion = rootMotion;
+    }
+
+    public void SetAnimatorCondition(string animId, int condition)
+    {
+        Animator.SetInteger(animId, condition);
+    }
+    
+    public void SetAnimatorCondition(string animId, float condition)
+    {
+        Animator.SetFloat(animId, condition);
+    }
+    
+    public void SetAnimatorCondition(string animId, bool condition)
+    {
+        Animator.SetBool(animId, condition);
+    }
+    
+    public void SetAnimatorCondition(string animId)
+    {
+        Animator.SetTrigger(animId);
     }
     
     private void Damaged()
     {
+        Animator.applyRootMotion = true;
         Animator.SetBool("KnockBack", true);
         Animator.SetTrigger("Damaged");
+    }
+    
+    private void UpdateRotation()
+    {
+        // float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationY, 
+        //     ref _rotationVelocity, PlayerController.RotationSmoothTime);
+       
+        if(rotationY != 0)
+            transform.rotation = Quaternion.Euler(0, rotationY, 0);
     }
     
     IEnumerator InterpDestination()
