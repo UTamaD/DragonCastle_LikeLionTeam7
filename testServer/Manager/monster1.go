@@ -226,7 +226,7 @@ func CreateMonsterBehaviorTree(monster common.IMonster) behavior.Node {
 		// Melee attack patterns with mutual exclusion
 		meleeAttackSelector,
 		// Ranged/Meteor attack selector with mutual exclusion
-		behavior.NewMutuallyExclusiveSelector(0.33,
+		behavior.NewMutuallyExclusiveSelector(0.5,
 			[]behavior.Node{
 				// Ranged attack sequence - medium range
 				behavior.NewSequence(

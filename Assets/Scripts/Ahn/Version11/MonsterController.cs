@@ -343,14 +343,14 @@ public class MonsterController : MonoBehaviour
             case 0: // MeleeAttackType1
                 currentConfig = meleeAttackConfig1;
                 break;
-            case 1: // MeleeAttackType2
+            case 1: // RangedAttackType
+                currentConfig = rangedAttackConfig;
+                break;
+            case 3: // MeleeAttackType2
                 currentConfig = meleeAttackConfig2;
                 break;
-            case 2: // MeleeAttackType3
+            case 4: // MeleeAttackType3
                 currentConfig = meleeAttackConfig3;
-                break;
-            case 3: // RangedAttackType
-                currentConfig = rangedAttackConfig;
                 break;
         }
 

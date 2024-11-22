@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5fccdaff-4ccb-49c6-8529-4b0227ee80c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LikeLionTeam7/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_SampleScene_2/Global Volume Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Dragon/DragonBossController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Dragon/DragonBossController.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ahn_Test_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ahn_Test_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraShakeCinemachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraShakeCinemachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ahn/Version11/MonsterController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testServer/Manager/monster1.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/Manager/monster1.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testServer/behavior/behaviorNodes.go" beforeDir="false" afterPath="$PROJECT_DIR$/testServer/behavior/behaviorNodes.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

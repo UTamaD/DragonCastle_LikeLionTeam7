@@ -21,12 +21,12 @@ type AttackState struct {
 }
 
 const (
-	NoAttack         = iota
-	MeleeAttackType1 // 기존 근접 공격
-	MeleeAttackType2 // 새로운 근접 공격 1
-	MeleeAttackType3 // 새로운 근접 공격 2
+	NoAttack = iota
+	MeleeAttackType1
 	RangedAttackType
 	MeteorAttackType
+	MeleeAttackType2 // 새로운 근접 공격 1
+	MeleeAttackType3 // 새로운 근접 공격 2
 )
 
 var globalAttackState = &AttackState{}
