@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/d5420008-1a82-4fad-b313-75e7bdcbf519)# Dragon Castle 
+# Dragon Castle 
 > Go 서버를 활용한 멀티플레이어 Action RPG 게임
 
 ## 📋 프로젝트 소개
