@@ -1,8 +1,9 @@
-# Dragon Castle 
+![image](https://github.com/user-attachments/assets/d5420008-1a82-4fad-b313-75e7bdcbf519)# Dragon Castle 
 > Go 서버를 활용한 멀티플레이어 Action RPG 게임
 
 ## 📋 프로젝트 소개
-![image](https://github.com/user-attachments/assets/cc03f0bc-7aaf-4fbc-a174-a8ccde22456e)
+![image](https://github.com/user-attachments/assets/1a8f1578-2cb2-42ce-9ac8-868d8c02cd8e)
+![image](https://github.com/user-attachments/assets/17eecae8-bec3-44a8-aa58-49486a142698)
 
 Go 서버와 Unity 클라이언트를 활용한 멀티플레이어 Action RPG로
 다수의 플레이어가 접속하여 하나의 거대한 몬스터를 상대하는 게임입니다.
