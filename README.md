@@ -71,6 +71,13 @@ Go 서버와 Unity 클라이언트를 활용한 멀티플레이어 Action RPG로
 - 상태별 다른 가속도와 최대 속도를 도입한 전투 시스템
 - 서버와 클라이언트 간의 위치/회전 동기화
 
+### 6. 그래픽 및 라이팅 시스템
+* URP(Universal Render Pipeline)를 활용한 최적화된 렌더링 구현
+* Post Processing Volume을 통한 HDR, Bloom, Ambient Occlusion 효과 적용
+* 동적 라이팅을 통한 실시간 그림자와 반사 효과 구현
+* Point Light와 Spot Light를 활용한 다채로운 조명 연출
+* 스카이박스와 환경 라이팅의 자연스러운 조화
+
 
 ## 🎥 시연 영상
 [![프로젝트 시연](https://img.youtube.com/vi/UCZfeSfO8VE/0.jpg)](https://youtu.be/UCZfeSfO8VE)
